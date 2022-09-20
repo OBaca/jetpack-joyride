@@ -5,8 +5,8 @@ class Missile():
         self.rect = rect
         self.warning = [WIDTH+60,100]
         self.launch = [WIDTH+60,150]
-
-        self.speed = 10
+        self.homing = False
+        self.speed = 14
         self.warning_cooldown = 2000
         self.launch_cooldown = 500
         self.warning_time = sys.maxsize
@@ -24,7 +24,7 @@ class Missile():
         screen.blit(self.missile_warning_img, (self.warning[0],self.warning[1]))
         screen.blit(self.missile_launch_img, (self.launch[0],self.launch[1]))
         
-    def missile_placement(self, score, player):
+    def missile_movement(self, score, player):
         current_time = pygame.time.get_ticks()
 
         # show warning missile sign
@@ -52,20 +52,48 @@ class Missile():
             self.missile_launch = True
             
         if self.missile_launch:
-            self.shoot_missile()
+            self.shoot_missile(score, player)
         
 
-    def shoot_missile(self):
-        
+    # shoot the missile across the map from right to left to the player last position
+    def shoot_missile(self, score, player):
         self.rect.x -= self.speed
+        
+        # homing missile
+        if self.homing == True:
+            # changing the difficulty of the missile targeting the player
+            missile_difficulty = 100
+            if 50 <= score <= 200:
+                missile_difficulty = 50
+            elif 200 < score <= 500:
+                missile_difficulty = 30
+            elif score > 500:
+                missile_difficulty = 0
+
+            # adding movement to the missile according to the player position
+            if player.rect.y >= self.rect.y and self.rect.x - player.rect.x >= missile_difficulty:
+                self.rect.y += 1
+            elif player.rect.y <= self.rect.y and self.rect.x - player.rect.x >= missile_difficulty:
+                self.rect.y -= 1
+        
+        # reset the missile to the next starting point
         if self.rect.x + self.rect.width < 0:
             self.missile_launch = False
             self.rect.x = WIDTH
+            self.movement = 0
+            self.missile_timing = random.randint(score+10, score+150)
 
-def test(missiles):
+
+def missiles_scenrios(missiles):
     '''
-    The warning image will be seen for 2 secs, then the launch img for 1 sec, and the missile launch across the map
-    to the location of the player
+    scenrios:
+        1. one targeting missile
+        2. 3 missiles spanwed randomly
+        3. 6 missiles from the beginning to the top
+        4. 6 missiles from the top to the beginning
     '''
+    if scenrio == 1:
+        missile.homing = True
+        
 
     pass

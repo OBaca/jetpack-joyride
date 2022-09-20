@@ -46,7 +46,6 @@ def main():
 
     score_speed = 1
     score = 0
-    laser_timing = random.randint(50,120)
     pause_game = False
     silent_music = False
     
@@ -68,7 +67,7 @@ def main():
                 # 1. reset score
                 score = 0
                 score_speed = 1
-                laser_timing = 20
+                reset_lasers(lasers, score)
                 # 2. reset map location
                 map.reset()
                 # 3. reset player location
@@ -103,15 +102,14 @@ def main():
             score = int(score_speed)
             
             
-            laser_timing = lasers_placement(score,lasers,laser_timing,silent_music)
-
-            
-
-
             player.draw(SCREEN, map)
 
+            # place lasers algorithm
+            lasers_placement(score,lasers,silent_music)
+
+            # place missiles algorithem
             missile.draw(SCREEN)
-            missile.missile_placement(score, player)
+            missile.missile_movement(score, player)
 
             draw_obstacles(obstacles,lasers, SCREEN)
             obstacle_placement(obstacles)

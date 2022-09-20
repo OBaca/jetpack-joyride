@@ -8,8 +8,7 @@ class Lasers(object):
         self.turn_off = sys.maxsize
         self.cooldown = 4000
         self.scenrio = 1
-        #self.left_laser = pygame.transform.scale(LASER_LEFT, (self.left_rect.width, self.left_rect.height))
-        #self.right_laser = pygame.transform.scale(LASER_RIGHT, (self.right_rect.width, self.right_rect.height))
+        self.laser_timing = random.randint(50,120)
         self.pre_lasers = pygame.transform.scale(PRE_LASERS, (self.pre_rect.width, self.pre_rect.height))
         self.post_lasers = pygame.transform.scale(POST_LASERS, (self.post_rect.width, self.post_rect.height))
 
@@ -23,7 +22,43 @@ class Lasers(object):
         screen.blit(self.pre_lasers, (self.pre_rect.x,self.pre_rect.y))
         screen.blit(self.post_lasers, (self.post_rect.x,self.post_rect.y))
 
+
+# lasers algorithem to show a warning laser for 4 seconds and then the laser will turn on .
+def lasers_placement(score, lasers, silent_music):
+    current_time = pygame.time.get_ticks()
+    # show the laser warning for 4 seconds
+    if score/lasers[0].laser_timing == 1.0:
+        if silent_music == False:
+            START_OF_LASER.play()
+        lasers_scenrios( lasers,'start-pre-lasers',lasers[0].scenrio)
+        lasers[0].turn_on = pygame.time.get_ticks() + lasers[0].cooldown  
+
+    # turn on the lasers for 4 seconds
+    elif 0 <= current_time - lasers[0].turn_on <= 1000:
+        if silent_music == False:
+            START_OF_LASER.stop()
+            LASER_ON.play()
+        lasers_scenrios( lasers,'start-post-lasers',lasers[0].scenrio)
+        lasers[0].turn_off = pygame.time.get_ticks() + (lasers[0].cooldown)  
+
+    # turn off the lasers and initialize it to spawn randomly
+    elif 0 <= current_time - lasers[0].turn_off <= 1000:
+        if silent_music == False:
+            LASER_ON.stop()
+        lasers_scenrios( lasers,'turn-off-lasers',lasers[0].scenrio)
+            
+        lasers[0].laser_timing = random.randint(score+50, score+200) 
+        lasers[0].scenrio = random.randint(1,4)
         
+
+# reset all the lasers positions
+def reset_lasers(lasers, score):
+    for laser in lasers:
+        laser.reset()
+        laser.laser_timing = random.randint(score+50, score+200) 
+
+
+
 def lasers_scenrios( lasers, action, scenrio):
     '''
     3 scenrios:
@@ -105,30 +140,3 @@ def lasers_scenrios( lasers, action, scenrio):
             lasers[2].post_rect.y = HIDDEN_LASERS_Y
             
 
-# lasers algorithem to show a warning laser for 4 seconds and then the laser will turn on .
-def lasers_placement(score, lasers, laser_timing, silent_music):
-    current_time = pygame.time.get_ticks()
-    # lasers placement
-    if score/laser_timing == 1.0:
-        if silent_music == False:
-            START_OF_LASER.play()
-        lasers_scenrios( lasers,'start-pre-lasers',lasers[0].scenrio)
-        lasers[0].turn_on = pygame.time.get_ticks() + lasers[0].cooldown  
-
-    elif 0 <= current_time - lasers[0].turn_on <= 1000:
-        if silent_music == False:
-            START_OF_LASER.stop()
-            LASER_ON.play()
-        lasers_scenrios( lasers,'start-post-lasers',lasers[0].scenrio)
-        lasers[0].turn_off = pygame.time.get_ticks() + (lasers[0].cooldown)  
-
-    elif 0 <= current_time - lasers[0].turn_off <= 1000:
-        if silent_music == False:
-            LASER_ON.stop()
-        lasers_scenrios( lasers,'turn-off-lasers',lasers[0].scenrio)
-            
-        laser_timing = random.randint(score+50, score+200) 
-        lasers[0].scenrio = random.randint(1,4)
-        
-
-    return laser_timing
