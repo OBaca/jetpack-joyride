@@ -34,8 +34,11 @@ def main():
                 Lasers(pygame.Rect(0, HIDDEN_LASERS_Y, 900, 50), pygame.Rect(0, HIDDEN_LASERS_Y, 900, 50) ),
                 Lasers(pygame.Rect(0, HIDDEN_LASERS_Y, 900, 50), pygame.Rect(0, HIDDEN_LASERS_Y, 900, 50) )
             ]
-
-    missile = Missile(pygame.Rect(WIDTH,player.rect.y, 100, 100))
+    missiles = [
+                Missile(pygame.Rect(WIDTH,player.rect.y, 100, 100)),
+                Missile(pygame.Rect(WIDTH,player.rect.y, 100, 100))
+                ]
+    
 
     resume_button = Button(pygame.Rect(WIDTH//2 - 75, HEIGHT//2 - 120, 150, 100), RESUME_BUTTON)
     retry_button = Button(pygame.Rect(WIDTH//2 - 75, HEIGHT//2, 150, 100), RETRY_BUTTON)
@@ -104,14 +107,15 @@ def main():
             
             player.draw(SCREEN, map)
 
+            draw_obstacles(obstacles,lasers,missiles, SCREEN)
+
             # place lasers algorithm
             lasers_placement(score,lasers,silent_music)
 
             # place missiles algorithem
-            missile.draw(SCREEN)
-            missile.missile_movement(score, player)
+            missile_movement(missiles, score, player)
 
-            draw_obstacles(obstacles,lasers, SCREEN)
+            
             obstacle_placement(obstacles)
             check_hit_obstacles(player, obstacles)
 

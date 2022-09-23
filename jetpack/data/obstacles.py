@@ -67,11 +67,13 @@ def obstacle_placement(obstacles):
                 obstacle.rect.x = random.randint (WIDTH, WIDTH+300)    
             
 
-def draw_obstacles(obstacles,lasers, screen):
+def draw_obstacles(obstacles,lasers,missiles, screen):
     for i in range(len(obstacles)):
         obstacles[i].draw_obstacle(screen)
     for i in range(len(lasers)):   
         lasers[i].draw_laser(screen)
+    for i in range(len(missiles)):
+        missiles[i].draw(screen)
 
 
 def reset_obstacle_pos(obstacles, lasers):
