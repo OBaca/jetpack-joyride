@@ -14,6 +14,7 @@ BLACK = (0,0,0)
 FIX_IMAGE_LIMIT = 50
 HIDDEN_LASERS_Y = -60
 LASER_GAP = 55
+COIN_SIZE = 30
 
 PLAYER_HIT = pygame.USEREVENT + 1
 
@@ -36,3 +37,5 @@ SCORE_FONT = pygame.font.SysFont('comicsans', 40)
 START_OF_LASER = pygame.mixer.Sound(os.path.join('Assets\Sounds', 'startLaser.mp3'))
 LASER_ON = pygame.mixer.Sound(os.path.join('Assets\Sounds', 'laserOn.mp3'))
 GAME_MUSIC = pygame.mixer.Sound(os.path.join('Assets\Sounds', 'remix.mp3'))
+MISSILE_WARNING = pygame.mixer.Sound(os.path.join('Assets\Sounds', 'missile_warning.mp3'))
+MISSILE_LAUNCHED = pygame.mixer.Sound(os.path.join('Assets\Sounds', 'missile_launched.mp3'))

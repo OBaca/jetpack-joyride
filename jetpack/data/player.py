@@ -54,3 +54,9 @@ def check_hit_obstacles(player, obstacles):
     for obstacle in obstacles:
         if player.rect.colliderect(obstacle.rect):
             pygame.event.post(pygame.event.Event(PLAYER_HIT))
+
+def coin_collect(player, coins):
+    for coin in coins:
+        if player.rect.colliderect(coin.rect):
+            coin.show_image = False
+            print("coin collected")

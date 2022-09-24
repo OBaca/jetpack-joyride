@@ -62,7 +62,7 @@ class Missile():
 
 
         
-def missile_movement(missiles, score, player):
+def missile_movement(missiles, score, player, silent_music):
 
     current_time = pygame.time.get_ticks()
     
@@ -88,12 +88,17 @@ def missile_movement(missiles, score, player):
     if 0 <= current_time - missiles[0].warning_time <= 1000:
         missiles_scenrios(missiles, score, player, 'warning-end', 1)
         missiles[0].launch_time = pygame.time.get_ticks() + missiles[0].launch_cooldown
+        if silent_music == False:
+            MISSILE_WARNING.play()
+
     
     # show the second launch missile sign
     if missiles[0].scenrio == 2:
         if 0 <= current_time -  missiles[1].warning_time  <= 1000:
             missiles_scenrios(missiles, score, player, 'warning-end', 2)
             missiles[1].launch_time = pygame.time.get_ticks() + missiles[1].launch_cooldown
+            if silent_music == False:
+                MISSILE_WARNING.play()
 
     # launch the missile
     if 0 <= current_time - missiles[0].launch_time <= 1000:
@@ -105,10 +110,14 @@ def missile_movement(missiles, score, player):
         
             
     if missiles[0].missile_launch:
+        if silent_music == False:
+            MISSILE_LAUNCHED.play()
         missiles[0].shoot_missile(score, player)
         missiles[0].scenrio = random.randint(1,3)
 
     if missiles[1].missile_launch:
+        if silent_music == False:
+            MISSILE_LAUNCHED.play()
         missiles[1].shoot_missile(score, player)
         
         

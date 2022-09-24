@@ -5,6 +5,7 @@ from data.map import *
 from data.lasers import *
 from data.button import *
 from data.missile import *
+from data.coin import *
 
 pygame.init()
 
@@ -13,7 +14,27 @@ pygame.init()
 SCREEN = pygame.display.set_mode((WIDTH,HEIGHT))
 pygame.display.set_caption('Jetpack Joyride')
 
+def update_high_score(high_score, score):
+    if high_score < score:
+        high_score = score
+    with open('high_score.txt','w') as file:
+        file.write(str(high_score))
+    return high_score
 
+def get_high_score():
+    try:
+        high_score = int(read_high_score())
+    except:
+        high_score = 0
+    return high_score
+
+def read_high_score():
+    with open("high_score.txt", 'r') as file:
+        return file.read()
+
+def show_high_score(screen, high_score):
+    high_score_text = SCORE_FONT.render('HIGH SCORE: ' + str(high_score), 1, BLACK)
+    screen.blit(high_score_text, (10,50))
 
 def show_score(screen, score):
     score_text = SCORE_FONT.render('SCORE: ' + str(score), 1, BLACK)
@@ -39,6 +60,12 @@ def main():
                 Missile(pygame.Rect(WIDTH,player.rect.y, 100, 100))
                 ]
     
+    coins = [
+                Coin(300,300), Coin(330,300), Coin(360,300), Coin(390,300), Coin(420,300),
+                Coin(300,330), Coin(330,330), Coin(360,330), Coin(390,330), Coin(420,330),
+                Coin(300,360), Coin(330,360), Coin(360,360), Coin(390,360), Coin(420,360)
+            ]
+    
 
     resume_button = Button(pygame.Rect(WIDTH//2 - 75, HEIGHT//2 - 120, 150, 100), RESUME_BUTTON)
     retry_button = Button(pygame.Rect(WIDTH//2 - 75, HEIGHT//2, 150, 100), RETRY_BUTTON)
@@ -49,6 +76,7 @@ def main():
 
     score_speed = 1
     score = 0
+    high_score = get_high_score()
     pause_game = False
     silent_music = False
     
@@ -107,13 +135,19 @@ def main():
             
             player.draw(SCREEN, map)
 
+            coin_collect(player, coins)
+
+            for coin in coins:
+                coin.draw(SCREEN)
+                coin.update(obstacles[0])
+
             draw_obstacles(obstacles,lasers,missiles, SCREEN)
 
             # place lasers algorithm
             lasers_placement(score,lasers,silent_music)
 
             # place missiles algorithem
-            missile_movement(missiles, score, player)
+            missile_movement(missiles, score, player, silent_music)
 
             
             obstacle_placement(obstacles)
@@ -122,6 +156,9 @@ def main():
             
             # show score
             show_score(SCREEN, score)
+            # show high score
+            high_score = update_high_score(high_score, score)
+            show_high_score(SCREEN, high_score)
 
             increase_speed(map)
 
@@ -141,7 +178,6 @@ def main():
             if event.type == PLAYER_HIT:
                 print('game over')
                 # need to add animation of the player falling over
-                # and make a game over screen ( try again )
                 # showing high score, and current score, and updating the high score
                     
 
