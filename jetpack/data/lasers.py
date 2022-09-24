@@ -8,7 +8,7 @@ class Lasers(object):
         self.turn_off = sys.maxsize
         self.cooldown = 4000
         self.scenrio = 1
-        self.laser_timing = random.randint(50,120)
+        self.laser_timing = 100
         self.pre_lasers = pygame.transform.scale(PRE_LASERS, (self.pre_rect.width, self.pre_rect.height))
         self.post_lasers = pygame.transform.scale(POST_LASERS, (self.post_rect.width, self.post_rect.height))
 
@@ -48,7 +48,7 @@ def lasers_placement(score, lasers, silent_music):
         lasers_scenrios( lasers,'turn-off-lasers',lasers[0].scenrio)
             
         lasers[0].laser_timing = random.randint(score+50, score+200) 
-        lasers[0].scenrio = random.randint(1,4)
+        lasers[0].scenrio = random.randint(1,3)
         
 
 # reset all the lasers positions

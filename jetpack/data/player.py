@@ -9,14 +9,19 @@ class Player(object):
         self.height = height
         '''
         self.reset()
-        #self.collision = (self.x, self.y, self.rect.width, self.rect.height)
+        self.sprites = []
+        self.sprites.append(pygame.transform.scale(pygame.image.load(os.path.join('Assets\jetpackAnimation', 'jetpack1.png')), (self.rect.width+15, self.rect.height+15)))
+        self.sprites.append(pygame.transform.scale(pygame.image.load(os.path.join('Assets\jetpackAnimation', 'jetpack2.png')), (self.rect.width+15, self.rect.height+15)))
+        self.sprites.append(pygame.transform.scale(pygame.image.load(os.path.join('Assets\jetpackAnimation', 'jetpack3.png')), (self.rect.width+15, self.rect.height+15)))
+        self.sprites.append(pygame.transform.scale(pygame.image.load(os.path.join('Assets\jetpackAnimation', 'jetpack4.png')), (self.rect.width+15, self.rect.height+15)))
+        self.current_sprite = 0
 
     
     def reset(self):
         self.rect = pygame.Rect(100,450,60,75)
-        self.vel = 9
+        self.vel = 7
         self.gravity = 8
-        self.image = pygame.transform.scale(pygame.image.load(os.path.join('Assets', 'player.png')), (self.rect.width, self.rect.height))
+        self.image = JETPACK_OFF
     
 
     def draw(self, screen, map):
@@ -26,7 +31,13 @@ class Player(object):
         #pygame.draw.rect(screen, BLACK, self.collision)
         screen.blit(self.image, (self.rect.x,self.rect.y))
 
+    def update_jetpack(self):
+        self.current_sprite += 0.25
+
+        if self.current_sprite >= len(self.sprites):
+            self.current_sprite = 0
         
+        self.image = self.sprites[int(self.current_sprite)]
 
         
     
@@ -40,12 +51,14 @@ class Player(object):
         # space key to launch the launcher
         if pressed_key[pygame.K_SPACE] and self.rect.y > 0:
             self.rect.y -= self.vel
+            self.update_jetpack()
         # insert gravity to the player
         elif self.rect.y + self.rect.height < HEIGHT - FIX_IMAGE_LIMIT:
             self.rect.y += self.gravity
         # player image fix to the screen frame
         elif self.rect.y + self.rect.height + self.vel >= HEIGHT - FIX_IMAGE_LIMIT:
             self.rect.y = HEIGHT - self.rect.height - FIX_IMAGE_LIMIT
+            
         if self.rect.y <= 0:
             self.rect.y = 1
 
@@ -56,7 +69,8 @@ def check_hit_obstacles(player, obstacles):
             pygame.event.post(pygame.event.Event(PLAYER_HIT))
 
 def coin_collect(player, coins):
-    for coin in coins:
-        if player.rect.colliderect(coin.rect):
+    for coin in coins.pattern:
+        if player.rect.colliderect(coin.rect) and coin.show_image:
+            COIN_SOUND.play()
             coin.show_image = False
             print("coin collected")

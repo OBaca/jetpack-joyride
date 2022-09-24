@@ -12,8 +12,8 @@ class Missile():
         self.warning_time = sys.maxsize
         self.launch_time = sys.maxsize
         self.missile_launch = False
-        self.missile_timing = random.randint(50, 150)
-        self.scenrio = random.randint(1,3)
+        self.missile_timing = 70
+        self.scenrio = random.randint(1,2)
 
         self.missile_img = pygame.transform.scale(pygame.image.load(os.path.join('Assets','missile1.png')), (100,80))
         self.missile_warning_img = pygame.transform.scale(pygame.image.load(os.path.join('Assets','rocket_warning.png')), (60,60))
@@ -113,7 +113,7 @@ def missile_movement(missiles, score, player, silent_music):
         if silent_music == False:
             MISSILE_LAUNCHED.play()
         missiles[0].shoot_missile(score, player)
-        missiles[0].scenrio = random.randint(1,3)
+        missiles[0].scenrio = random.randint(1,2)
 
     if missiles[1].missile_launch:
         if silent_music == False:

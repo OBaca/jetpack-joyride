@@ -28,7 +28,7 @@ SPEAKER_ON_BUTTON = pygame.transform.scale(pygame.image.load(os.path.join('Asset
 RESUME_BUTTON = pygame.transform.scale(pygame.image.load(os.path.join('Assets','resume_button.png')), (150,100))
 RETRY_BUTTON = pygame.transform.scale(pygame.image.load(os.path.join('Assets','retry_button.png')), (150,100))
 QUIT_BUTTON = pygame.transform.scale(pygame.image.load(os.path.join('Assets','quit_button.png')), (150,100))
-
+JETPACK_OFF = pygame.transform.scale(pygame.image.load(os.path.join('Assets', 'player.png')), (60, 75))
 
 # fonts
 SCORE_FONT = pygame.font.SysFont('comicsans', 40)
@@ -39,3 +39,4 @@ LASER_ON = pygame.mixer.Sound(os.path.join('Assets\Sounds', 'laserOn.mp3'))
 GAME_MUSIC = pygame.mixer.Sound(os.path.join('Assets\Sounds', 'remix.mp3'))
 MISSILE_WARNING = pygame.mixer.Sound(os.path.join('Assets\Sounds', 'missile_warning.mp3'))
 MISSILE_LAUNCHED = pygame.mixer.Sound(os.path.join('Assets\Sounds', 'missile_launched.mp3'))
+COIN_SOUND = pygame.mixer.Sound(os.path.join('Assets\Sounds', 'coin_sound.mp3'))

@@ -6,6 +6,7 @@ from data.lasers import *
 from data.button import *
 from data.missile import *
 from data.coin import *
+from data.coins import *
 
 pygame.init()
 
@@ -59,13 +60,14 @@ def main():
                 Missile(pygame.Rect(WIDTH,player.rect.y, 100, 100)),
                 Missile(pygame.Rect(WIDTH,player.rect.y, 100, 100))
                 ]
-    
+    '''
     coins = [
                 Coin(300,300), Coin(330,300), Coin(360,300), Coin(390,300), Coin(420,300),
                 Coin(300,330), Coin(330,330), Coin(360,330), Coin(390,330), Coin(420,330),
                 Coin(300,360), Coin(330,360), Coin(360,360), Coin(390,360), Coin(420,360)
             ]
-    
+    '''
+    coins = Coins()
 
     resume_button = Button(pygame.Rect(WIDTH//2 - 75, HEIGHT//2 - 120, 150, 100), RESUME_BUTTON)
     retry_button = Button(pygame.Rect(WIDTH//2 - 75, HEIGHT//2, 150, 100), RETRY_BUTTON)
@@ -105,6 +107,8 @@ def main():
                 player.reset()
                 # 4. reset obstacle positions
                 reset_obstacle_pos(obstacles, lasers)
+                # 5. reset coins system
+                coins.reset()
                 
                 # need to fix reset when you pause the game and try to press on the retry button while lasers ON
                 continue
@@ -135,11 +139,11 @@ def main():
             
             player.draw(SCREEN, map)
 
+            # manage coins system
+            coins.draw(SCREEN)
+            coins.update()
             coin_collect(player, coins)
-
-            for coin in coins:
-                coin.draw(SCREEN)
-                coin.update(obstacles[0])
+    
 
             draw_obstacles(obstacles,lasers,missiles, SCREEN)
 
@@ -173,6 +177,10 @@ def main():
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
                     pause_game = True
+            
+            if event.type == pygame.KEYUP:
+                if event.key == pygame.K_SPACE:
+                    player.image = JETPACK_OFF
                 
 
             if event.type == PLAYER_HIT:
