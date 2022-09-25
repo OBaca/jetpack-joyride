@@ -14,6 +14,8 @@ class Missile():
         self.missile_launch = False
         self.missile_timing = 20 # change to 70
         self.scenrio = random.randint(1,2)
+        self.missile_warning_channel = pygame.mixer.find_channel()
+        self.missile_launched_channel = pygame.mixer.find_channel()
 
         self.missile_img = pygame.transform.scale(pygame.image.load(os.path.join('Assets','missile1.png')), (100,80))
         self.missile_warning_img = pygame.transform.scale(pygame.image.load(os.path.join('Assets','rocket_warning.png')), (60,60))
@@ -73,7 +75,7 @@ class Missile():
         # reset the missile to the next starting point
         if self.rect.x + self.rect.width < 0:
             self.missile_launch = False
-            self.rect.x = WIDTH
+            self.rect.x = WIDTH + 10
             self.movement = 0
             self.missile_timing = random.randint(score+10, score+150)
 
@@ -105,8 +107,12 @@ def missile_movement(missiles, score, player, silent_music):
     if 0 <= current_time - missiles[0].warning_time <= 1000:
         missiles_scenrios(missiles, score, player, 'warning-end', 1)
         missiles[0].launch_time = pygame.time.get_ticks() + missiles[0].launch_cooldown
+
+        # starting the missile warning sound
         if silent_music == False:
-            MISSILE_WARNING.play()
+            if missiles[0].missile_warning_channel.get_busy() == False:
+                missiles[0].missile_warning_channel.play(MISSILE_WARNING)
+            
 
     
     # show the second launch missile sign
@@ -114,8 +120,12 @@ def missile_movement(missiles, score, player, silent_music):
         if 0 <= current_time -  missiles[1].warning_time  <= 1000:
             missiles_scenrios(missiles, score, player, 'warning-end', 2)
             missiles[1].launch_time = pygame.time.get_ticks() + missiles[1].launch_cooldown
+
+            # starting the missile warning sound
             if silent_music == False:
-                MISSILE_WARNING.play()
+                if missiles[1].missile_warning_channel.get_busy() == False:
+                    missiles[1].missile_warning_channel.play(MISSILE_WARNING)
+                
 
     # launch the missile
     if 0 <= current_time - missiles[0].launch_time <= 1000:
@@ -127,15 +137,25 @@ def missile_movement(missiles, score, player, silent_music):
         
             
     if missiles[0].missile_launch:
+        # starting the launch missile sound
         if silent_music == False:
-            MISSILE_LAUNCHED.play()
+            if missiles[0].missile_launched_channel.get_busy() == False:
+                missiles[0].missile_launched_channel.play(MISSILE_LAUNCHED)
+            
         missiles[0].update()
         missiles[0].shoot_missile(score, player)
         missiles[0].scenrio = random.randint(1,2)
 
     if missiles[1].missile_launch:
+        # starting the launch missile sound
+        #'''
         if silent_music == False:
-            MISSILE_LAUNCHED.play()
+            if missiles[1].missile_launched_channel.get_busy() == False:
+                missiles[1].missile_launched_channel.play(MISSILE_LAUNCHED)
+        #'''
+        print(missiles[0].missile_launched_channel)
+        print(missiles[1].missile_launched_channel)
+           
         missiles[1].update()
         missiles[1].shoot_missile(score, player)
         

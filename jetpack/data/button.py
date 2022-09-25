@@ -40,7 +40,7 @@ class Button():
             else:
                 self.image = PLAY_MENU_HOVER_BUTTON
                 self.hover = True
-        if style == 'quit':
+        if style == 'quit_menu':
             if self.hover:
                 self.image = QUIT_MENU_NO_HOVER_BUTTON
                 self.hover = False
@@ -54,5 +54,38 @@ class Button():
             else:
                 self.image = COSTUMES_MENU_HOVER_BUTTON
                 self.hover = True
-
-
+        if style == 'retry':
+            if self.hover:
+                self.image = RETRY_BUTTON
+                self.hover = False
+            else:
+                self.image = RETRY_HOVER_BUTTON
+                self.hover = True
+        if style == 'resume':
+            if self.hover:
+                self.image = RESUME_NO_HOVER_BUTTON
+                self.hover = False
+            else:
+                self.image = RESUME_HOVER_BUTTON
+                self.hover = True
+        if style == 'quit_game':
+            if self.hover:
+                self.image = QUIT_GAME_BUTTON
+                self.hover = False
+            else:
+                self.image = QUIT_GAME_HOVER_BUTTON
+                self.hover = True
+        if style == 'speaker-off':
+            if self.hover:
+                self.image = SPEAKER_OFF_BUTTON
+                self.hover = False
+            else:
+                self.image = SPEAKER_OFF_HOVER_BUTTON
+                self.hover = True
+        if style == 'speaker-on':
+            if self.hover:
+                self.image = SPEAKER_ON_BUTTON
+                self.hover = False
+            else:
+                self.image = SPEAKER_ON_HOVER_BUTTON
+                self.hover = True

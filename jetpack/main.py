@@ -58,15 +58,15 @@ def main():
                 Lasers(pygame.Rect(0, HIDDEN_LASERS_Y, 900, 50), pygame.Rect(0, HIDDEN_LASERS_Y, 900, 50) )
             ]
     missiles = [
-                Missile(pygame.Rect(WIDTH,player.rect.y, 100, 100)),
-                Missile(pygame.Rect(WIDTH,player.rect.y, 100, 100))
+                Missile(pygame.Rect(WIDTH+10,player.rect.y, 100, 100)),
+                Missile(pygame.Rect(WIDTH+10,player.rect.y, 100, 100))
                 ]
     
     coins = Coins()
 
-    resume_button = Button(pygame.Rect(WIDTH//2 - 75, HEIGHT//2 - 120, 150, 100), RESUME_BUTTON)
+    resume_button = Button(pygame.Rect(WIDTH//2 - 75, HEIGHT//2 - 120, 150, 100), RESUME_NO_HOVER_BUTTON)
     retry_button = Button(pygame.Rect(WIDTH//2 - 75, HEIGHT//2, 150, 100), RETRY_BUTTON)
-    quit_button = Button(pygame.Rect(WIDTH//2 - 75, HEIGHT//2 + 120, 150, 100), QUIT_BUTTON)
+    quit_button = Button(pygame.Rect(WIDTH//2 - 75, HEIGHT//2 + 120, 150, 100), QUIT_GAME_BUTTON)
     speaker_off_button = Button(pygame.Rect(WIDTH//2 - 75, HEIGHT//2 - 200, 100, 50), SPEAKER_OFF_BUTTON)
     speaker_on_button = Button(pygame.Rect(WIDTH//2 + 15, HEIGHT//2 - 200, 100, 50), SPEAKER_ON_BUTTON)
 
@@ -87,11 +87,11 @@ def main():
         if pause_game:
             
             # resume button
-            if resume_button.draw_button(SCREEN):
+            if resume_button.draw_button(SCREEN, 'resume'):
                 pause_game = False
 
             # retry button
-            if retry_button.draw_button(SCREEN):
+            if retry_button.draw_button(SCREEN, 'retry'):
                 # 1. reset score
                 score = 0
                 score_speed = 1
@@ -109,14 +109,14 @@ def main():
                 continue
     
             # quit button
-            if quit_button.draw_button(SCREEN):
+            if quit_button.draw_button(SCREEN, 'quit_game'):
                 run = False
             # turn off music and sfx
-            if speaker_off_button.draw_button(SCREEN):
+            if speaker_off_button.draw_button(SCREEN, 'speaker-off'):
                 pygame.mixer.pause()
                 silent_music = True
             # turn on music and sfx
-            if speaker_on_button.draw_button(SCREEN):
+            if speaker_on_button.draw_button(SCREEN, 'speaker-on'):
                 pygame.mixer.unpause()
                 silent_music = False
 
@@ -201,14 +201,21 @@ def main_menu():
     quit_button = Button(pygame.Rect(600,550,MENU_BUTTON_WIDTH,MENU_BUTTON_HEIGHT),  QUIT_MENU_NO_HOVER_BUTTON)
     
     zombies = [Zombie(True, -120), Zombie(False, WIDTH), Zombie(True, -130), Zombie(False, WIDTH+10)]
-
+    
+    
+    music_channel = pygame.mixer.find_channel()
+    music_channel.play(MENU_MUSIC, -1) 
+    
     while True:
+        
+        #MENU_MUSIC.play()
         SCREEN.fill((255,255,255))
         SCREEN.blit(MENU_BG_IMG, (0,0))
         if play_button.draw_button(SCREEN, 'play'):
+            music_channel.pause()
             main()
 
-        if quit_button.draw_button(SCREEN, 'quit'):
+        if quit_button.draw_button(SCREEN, 'quit_menu'):
             pygame.quit()
             sys.exit()
         
@@ -224,6 +231,8 @@ def main_menu():
 
         clock.tick(FPS)
         pygame.display.update()
+
+    
 
 
 main_menu()
