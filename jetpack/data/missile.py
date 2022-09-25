@@ -12,12 +12,22 @@ class Missile():
         self.warning_time = sys.maxsize
         self.launch_time = sys.maxsize
         self.missile_launch = False
-        self.missile_timing = 70
+        self.missile_timing = 20 # change to 70
         self.scenrio = random.randint(1,2)
 
         self.missile_img = pygame.transform.scale(pygame.image.load(os.path.join('Assets','missile1.png')), (100,80))
         self.missile_warning_img = pygame.transform.scale(pygame.image.load(os.path.join('Assets','rocket_warning.png')), (60,60))
         self.missile_launch_img = pygame.transform.scale(pygame.image.load(os.path.join('Assets','warning.png')), (60,60))
+
+        self.smoke_sprites = []
+        self.smoke_sprites.append(pygame.transform.scale(pygame.image.load(os.path.join('Assets\missileSmoke', 'missile1.png')), (self.rect.width+15, self.rect.height+15)))
+        self.smoke_sprites.append(pygame.transform.scale(pygame.image.load(os.path.join('Assets\missileSmoke', 'missile2.png')), (self.rect.width+15, self.rect.height+15)))
+        self.smoke_sprites.append(pygame.transform.scale(pygame.image.load(os.path.join('Assets\missileSmoke', 'missile3.png')), (self.rect.width+15, self.rect.height+15)))
+        self.smoke_sprites.append(pygame.transform.scale(pygame.image.load(os.path.join('Assets\missileSmoke', 'missile4.png')), (self.rect.width+15, self.rect.height+15)))
+        self.smoke_sprites.append(pygame.transform.scale(pygame.image.load(os.path.join('Assets\missileSmoke', 'missile5.png')), (self.rect.width+15, self.rect.height+15)))
+        self.smoke_sprites.append(pygame.transform.scale(pygame.image.load(os.path.join('Assets\missileSmoke', 'missile6.png')), (self.rect.width+15, self.rect.height+15)))
+        self.smoke_sprites.append(pygame.transform.scale(pygame.image.load(os.path.join('Assets\missileSmoke', 'missile7.png')), (self.rect.width+15, self.rect.height+15)))
+        self.current_sprite = 0
 
     def draw(self, screen):
         
@@ -25,6 +35,13 @@ class Missile():
         screen.blit(self.missile_warning_img, (self.warning[0],self.warning[1]))
         screen.blit(self.missile_launch_img, (self.launch[0],self.launch[1]))
 
+    def update(self):
+        self.current_sprite += 0.50
+
+        if self.current_sprite >= len(self.smoke_sprites):
+            self.current_sprite = 0
+        
+        self.missile_img = self.smoke_sprites[int(self.current_sprite)]
 
     # shoot the missile across the map from right to left to the player last position
     def shoot_missile(self, score, player):
@@ -112,12 +129,14 @@ def missile_movement(missiles, score, player, silent_music):
     if missiles[0].missile_launch:
         if silent_music == False:
             MISSILE_LAUNCHED.play()
+        missiles[0].update()
         missiles[0].shoot_missile(score, player)
         missiles[0].scenrio = random.randint(1,2)
 
     if missiles[1].missile_launch:
         if silent_music == False:
             MISSILE_LAUNCHED.play()
+        missiles[1].update()
         missiles[1].shoot_missile(score, player)
         
         

@@ -9,6 +9,7 @@ pygame.mixer.init() # import sound fx
 
 # constants
 WIDTH, HEIGHT = 900, 650
+MENU_BUTTON_WIDTH, MENU_BUTTON_HEIGHT = 200,80
 FPS = 60
 BLACK = (0,0,0)
 FIX_IMAGE_LIMIT = 50
@@ -30,6 +31,16 @@ RETRY_BUTTON = pygame.transform.scale(pygame.image.load(os.path.join('Assets','r
 QUIT_BUTTON = pygame.transform.scale(pygame.image.load(os.path.join('Assets','quit_button.png')), (150,100))
 JETPACK_OFF = pygame.transform.scale(pygame.image.load(os.path.join('Assets', 'player.png')), (60, 75))
 
+QUIT_MENU_NO_HOVER_BUTTON = pygame.transform.scale(pygame.image.load(os.path.join("Assets\\buttons", 'quit_button_no_hover.png')), (MENU_BUTTON_WIDTH, MENU_BUTTON_HEIGHT))
+QUIT_MENU_HOVER_BUTTON = pygame.transform.scale(pygame.image.load(os.path.join('Assets\\buttons', 'quit_button_hover.png')), (MENU_BUTTON_WIDTH,MENU_BUTTON_HEIGHT))
+
+PLAY_MENU_NO_HOVER_BUTTON = pygame.transform.scale(pygame.image.load(os.path.join('Assets\\buttons', 'play_button_no_hover.png')), (MENU_BUTTON_WIDTH,MENU_BUTTON_HEIGHT))
+PLAY_MENU_HOVER_BUTTON = pygame.transform.scale(pygame.image.load(os.path.join('Assets\\buttons', 'play_button_hover.png')), (MENU_BUTTON_WIDTH,MENU_BUTTON_HEIGHT))
+
+COSTUMES_MENU_NO_HOVER_BUTTON = pygame.transform.scale(pygame.image.load(os.path.join('Assets\\buttons', 'costumes_no_hover.png')), (MENU_BUTTON_WIDTH,MENU_BUTTON_HEIGHT))
+COSTUMES_MENU_HOVER_BUTTON = pygame.transform.scale(pygame.image.load(os.path.join('Assets\\buttons', 'costumes_hover2.png')), (MENU_BUTTON_WIDTH,MENU_BUTTON_HEIGHT))
+
+MENU_BG_IMG = pygame.transform.scale(pygame.image.load(os.path.join('Assets', 'main_menu_bg.png')), (WIDTH,HEIGHT))
 # fonts
 SCORE_FONT = pygame.font.SysFont('comicsans', 40)
 

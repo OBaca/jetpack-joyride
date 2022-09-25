@@ -7,6 +7,7 @@ from data.button import *
 from data.missile import *
 from data.coin import *
 from data.coins import *
+from data.zombie import *
 
 pygame.init()
 
@@ -60,13 +61,7 @@ def main():
                 Missile(pygame.Rect(WIDTH,player.rect.y, 100, 100)),
                 Missile(pygame.Rect(WIDTH,player.rect.y, 100, 100))
                 ]
-    '''
-    coins = [
-                Coin(300,300), Coin(330,300), Coin(360,300), Coin(390,300), Coin(420,300),
-                Coin(300,330), Coin(330,330), Coin(360,330), Coin(390,330), Coin(420,330),
-                Coin(300,360), Coin(330,360), Coin(360,360), Coin(390,360), Coin(420,360)
-            ]
-    '''
+    
     coins = Coins()
 
     resume_button = Button(pygame.Rect(WIDTH//2 - 75, HEIGHT//2 - 120, 150, 100), RESUME_BUTTON)
@@ -171,7 +166,8 @@ def main():
         for event in pygame.event.get():
 
             if event.type == pygame.QUIT:
-                run = False
+                pygame.quit()
+                sys.exit()
                 
 
             if event.type == pygame.KEYDOWN:
@@ -195,7 +191,46 @@ def main():
     pygame.quit()
 
 
+
+
+def main_menu():
+    clock = pygame.time.Clock()
+
+    play_button = Button(pygame.Rect(100,550,MENU_BUTTON_WIDTH,MENU_BUTTON_HEIGHT),  PLAY_MENU_NO_HOVER_BUTTON)
+    costumes_button = Button(pygame.Rect(350,550,MENU_BUTTON_WIDTH,MENU_BUTTON_HEIGHT),  COSTUMES_MENU_NO_HOVER_BUTTON)
+    quit_button = Button(pygame.Rect(600,550,MENU_BUTTON_WIDTH,MENU_BUTTON_HEIGHT),  QUIT_MENU_NO_HOVER_BUTTON)
+    
+    zombies = [Zombie(True, -120), Zombie(False, WIDTH), Zombie(True, -130), Zombie(False, WIDTH+10)]
+
+    while True:
+        SCREEN.fill((255,255,255))
+        SCREEN.blit(MENU_BG_IMG, (0,0))
+        if play_button.draw_button(SCREEN, 'play'):
+            main()
+
+        if quit_button.draw_button(SCREEN, 'quit'):
+            pygame.quit()
+            sys.exit()
+        
+        if costumes_button.draw_button(SCREEN, 'costumes'):
+            pass
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+        
+        zombie_spawn_menu(zombies, SCREEN)
+
+        clock.tick(FPS)
+        pygame.display.update()
+
+
+main_menu()
+'''
 if __name__ == "__main__":
     main()
+'''
+
 
 
