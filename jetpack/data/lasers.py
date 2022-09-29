@@ -1,20 +1,24 @@
 from data.constants import *
 
 class Lasers(object):
-    def __init__(self, pre_rect, post_rect):
-        self.pre_rect = pre_rect
-        self.post_rect = post_rect
+    def __init__(self):
+        self.reset()
+        self.pre_lasers = pygame.transform.scale(PRE_LASERS, (self.pre_rect.width, self.pre_rect.height))
+        self.post_lasers = pygame.transform.scale(pygame.image.load(os.path.join('Assets\lasers_animation', 'lasers1.png')), (self.post_rect.width, self.post_rect.height))
+        self.lasers_animation()
+
+    # reset all the variables in the class Lasers
+    def reset(self):
+        self.pre_rect = pygame.Rect(0, HIDDEN_LASERS_Y, 900, 50)
+        self.post_rect = pygame.Rect(0, HIDDEN_LASERS_Y, 900, 50)
         self.turn_on = sys.maxsize
         self.turn_off = sys.maxsize
         self.cooldown = 4000
         self.scenrio = 1
-        self.laser_timing = 100
-        self.pre_lasers = pygame.transform.scale(PRE_LASERS, (self.pre_rect.width, self.pre_rect.height))
-        self.post_lasers = pygame.transform.scale(POST_LASERS, (self.post_rect.width, self.post_rect.height))
+        self.laser_timing = 150
+        self.is_running = False
+        self.current_sprite = 0
 
-    def reset(self):
-        self.turn_on = sys.maxsize
-        self.turn_off = sys.maxsize
 
     def draw_laser(self, screen):
         # if active is True we going to show the turn off lasers
@@ -22,31 +26,65 @@ class Lasers(object):
         screen.blit(self.pre_lasers, (self.pre_rect.x,self.pre_rect.y))
         screen.blit(self.post_lasers, (self.post_rect.x,self.post_rect.y))
 
+    def update_post_lasers(self):
+        self.current_sprite += 0.25
+
+        if self.current_sprite >= len(self.animation_sprite):
+            self.current_sprite = 0
+            
+        self.post_lasers = self.animation_sprite[int(self.current_sprite)]
+
+    def lasers_animation(self):
+        self.animation_sprite = []
+        self.animation_sprite.append(pygame.image.load(os.path.join('Assets\lasers_animation', 'lasers1.png')))
+        self.animation_sprite.append(pygame.image.load(os.path.join('Assets\lasers_animation', 'lasers2.png')))
+        self.animation_sprite.append(pygame.image.load(os.path.join('Assets\lasers_animation', 'lasers3.png')))
+        self.animation_sprite.append(pygame.image.load(os.path.join('Assets\lasers_animation', 'lasers4.png')))
+        self.animation_sprite.append(pygame.image.load(os.path.join('Assets\lasers_animation', 'lasers5.png')))
+        self.animation_sprite.append(pygame.image.load(os.path.join('Assets\lasers_animation', 'lasers6.png')))
+        self.animation_sprite.append(pygame.image.load(os.path.join('Assets\lasers_animation', 'lasers7.png')))
+        self.animation_sprite.append(pygame.image.load(os.path.join('Assets\lasers_animation', 'lasers8.png')))
+        self.animation_sprite.append(pygame.image.load(os.path.join('Assets\lasers_animation', 'lasers9.png')))
+        self.animation_sprite.append(pygame.image.load(os.path.join('Assets\lasers_animation', 'lasers10.png')))
+        self.animation_sprite.append(pygame.image.load(os.path.join('Assets\lasers_animation', 'lasers11.png')))
+        self.animation_sprite.append(pygame.image.load(os.path.join('Assets\lasers_animation', 'lasers12.png')))
+        self.current_sprite = 0
 
 # lasers algorithem to show a warning laser for 4 seconds and then the laser will turn on .
 def lasers_placement(score, lasers, silent_music):
     current_time = pygame.time.get_ticks()
+    if lasers[0].is_running:
+        for laser in lasers:
+            laser.update_post_lasers()
+
     # show the laser warning for 4 seconds
     if score/lasers[0].laser_timing == 1.0:
+        lasers[0].is_running = True
         if silent_music == False:
-            START_OF_LASER.play()
+            pygame.mixer.Channel(2).play(START_OF_LASER)
         lasers_scenrios( lasers,'start-pre-lasers',lasers[0].scenrio)
         lasers[0].turn_on = pygame.time.get_ticks() + lasers[0].cooldown  
+
+    
 
     # turn on the lasers for 4 seconds
     elif 0 <= current_time - lasers[0].turn_on <= 1000:
         if silent_music == False:
             START_OF_LASER.stop()
-            LASER_ON.play()
+            pygame.mixer.Channel(2).play(LASER_ON)
+ 
         lasers_scenrios( lasers,'start-post-lasers',lasers[0].scenrio)
         lasers[0].turn_off = pygame.time.get_ticks() + (lasers[0].cooldown)  
+
+
 
     # turn off the lasers and initialize it to spawn randomly
     elif 0 <= current_time - lasers[0].turn_off <= 1000:
         if silent_music == False:
             LASER_ON.stop()
         lasers_scenrios( lasers,'turn-off-lasers',lasers[0].scenrio)
-            
+        lasers[0].is_running = False
+        # reset the timing of the laser and the scenrio
         lasers[0].laser_timing = random.randint(score+50, score+200) 
         lasers[0].scenrio = random.randint(1,3)
         

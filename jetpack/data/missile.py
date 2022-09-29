@@ -1,38 +1,30 @@
 from .constants import *
 
 class Missile():
-    def __init__(self, rect, warning_cooldown=2000, warning_time=500):
-        self.rect = rect
+    def __init__(self, player_y):
+        self.reset(player_y)
         self.warning = [WIDTH+60,100]
         self.launch = [WIDTH+60,150]
-        self.homing = False
-        self.speed = 14
-        self.warning_cooldown = warning_cooldown
-        self.launch_cooldown = warning_time
-        self.warning_time = sys.maxsize
-        self.launch_time = sys.maxsize
-        self.missile_launch = False
-        self.missile_timing = 20 # change to 70
-        self.scenrio = random.randint(1,2)
         self.missile_warning_channel = pygame.mixer.find_channel()
         self.missile_launched_channel = pygame.mixer.find_channel()
-
         self.missile_img = pygame.transform.scale(pygame.image.load(os.path.join('Assets','missile1.png')), (100,80))
         self.missile_warning_img = pygame.transform.scale(pygame.image.load(os.path.join('Assets','rocket_warning.png')), (60,60))
         self.missile_launch_img = pygame.transform.scale(pygame.image.load(os.path.join('Assets','warning.png')), (60,60))
+        self.missile_animation()
 
-        self.smoke_sprites = []
-        self.smoke_sprites.append(pygame.transform.scale(pygame.image.load(os.path.join('Assets\missileSmoke', 'missile1.png')), (self.rect.width+15, self.rect.height+15)))
-        self.smoke_sprites.append(pygame.transform.scale(pygame.image.load(os.path.join('Assets\missileSmoke', 'missile2.png')), (self.rect.width+15, self.rect.height+15)))
-        self.smoke_sprites.append(pygame.transform.scale(pygame.image.load(os.path.join('Assets\missileSmoke', 'missile3.png')), (self.rect.width+15, self.rect.height+15)))
-        self.smoke_sprites.append(pygame.transform.scale(pygame.image.load(os.path.join('Assets\missileSmoke', 'missile4.png')), (self.rect.width+15, self.rect.height+15)))
-        self.smoke_sprites.append(pygame.transform.scale(pygame.image.load(os.path.join('Assets\missileSmoke', 'missile5.png')), (self.rect.width+15, self.rect.height+15)))
-        self.smoke_sprites.append(pygame.transform.scale(pygame.image.load(os.path.join('Assets\missileSmoke', 'missile6.png')), (self.rect.width+15, self.rect.height+15)))
-        self.smoke_sprites.append(pygame.transform.scale(pygame.image.load(os.path.join('Assets\missileSmoke', 'missile7.png')), (self.rect.width+15, self.rect.height+15)))
-        self.current_sprite = 0
+    def reset(self, player_y, warning_cooldown=2000, warning_time=500):
+        self.rect = pygame.Rect(WIDTH+10,player_y, 100, 100)
+        self.homing = False
+        self.warning_cooldown = warning_cooldown
+        self.launch_cooldown = warning_time
+        self.speed = 14
+        self.warning_time = sys.maxsize
+        self.launch_time = sys.maxsize
+        self.missile_launch = False
+        self.missile_timing = 70
+        self.scenrio = random.randint(1,2)
 
     def draw(self, screen):
-        
         screen.blit(self.missile_img, (self.rect.x,self.rect.y))
         screen.blit(self.missile_warning_img, (self.warning[0],self.warning[1]))
         screen.blit(self.missile_launch_img, (self.launch[0],self.launch[1]))
@@ -80,6 +72,17 @@ class Missile():
             self.missile_timing = random.randint(score+10, score+150)
 
 
+    def missile_animation(self):
+        self.smoke_sprites = []
+        self.smoke_sprites.append(pygame.transform.scale(pygame.image.load(os.path.join('Assets\missileSmoke', 'missile1.png')), (self.rect.width+15, self.rect.height+15)))
+        self.smoke_sprites.append(pygame.transform.scale(pygame.image.load(os.path.join('Assets\missileSmoke', 'missile2.png')), (self.rect.width+15, self.rect.height+15)))
+        self.smoke_sprites.append(pygame.transform.scale(pygame.image.load(os.path.join('Assets\missileSmoke', 'missile3.png')), (self.rect.width+15, self.rect.height+15)))
+        self.smoke_sprites.append(pygame.transform.scale(pygame.image.load(os.path.join('Assets\missileSmoke', 'missile4.png')), (self.rect.width+15, self.rect.height+15)))
+        self.smoke_sprites.append(pygame.transform.scale(pygame.image.load(os.path.join('Assets\missileSmoke', 'missile5.png')), (self.rect.width+15, self.rect.height+15)))
+        self.smoke_sprites.append(pygame.transform.scale(pygame.image.load(os.path.join('Assets\missileSmoke', 'missile6.png')), (self.rect.width+15, self.rect.height+15)))
+        self.smoke_sprites.append(pygame.transform.scale(pygame.image.load(os.path.join('Assets\missileSmoke', 'missile7.png')), (self.rect.width+15, self.rect.height+15)))
+        self.current_sprite = 0
+
         
 def missile_movement(missiles, score, player, silent_music):
 
@@ -110,8 +113,12 @@ def missile_movement(missiles, score, player, silent_music):
 
         # starting the missile warning sound
         if silent_music == False:
-            if missiles[0].missile_warning_channel.get_busy() == False:
-                missiles[0].missile_warning_channel.play(MISSILE_WARNING)
+            pygame.mixer.Channel(3).play(MISSILE_WARNING)
+            #pygame.mixer.Channel(4).play(MISSILE_LAUNCHED)
+            '''
+            #if missiles[0].missile_warning_channel.get_busy() == False:
+                #missiles[0].missile_warning_channel.play(MISSILE_WARNING)
+                '''
             
 
     
@@ -123,36 +130,46 @@ def missile_movement(missiles, score, player, silent_music):
 
             # starting the missile warning sound
             if silent_music == False:
-                if missiles[1].missile_warning_channel.get_busy() == False:
-                    missiles[1].missile_warning_channel.play(MISSILE_WARNING)
+                pygame.mixer.Channel(5).play(MISSILE_WARNING)
+                #pygame.mixer.Channel(6).play(MISSILE_LAUNCHED)
+                '''
+                #if missiles[1].missile_warning_channel.get_busy() == False:
+                    #missiles[1].missile_warning_channel.play(MISSILE_WARNING)
+                    '''
                 
 
     # launch the missile
     if 0 <= current_time - missiles[0].launch_time <= 1000:
+        if silent_music == False:
+            pygame.mixer.Channel(4).play(MISSILE_LAUNCHED)
         missiles_scenrios(missiles, score, player, 'shoot', 1)
 
     if missiles[0].scenrio == 2:
         if 0 <= current_time - missiles[1].launch_time <= 1000:
+            if silent_music == False:
+                pygame.mixer.Channel(6).play(MISSILE_LAUNCHED)
             missiles_scenrios(missiles, score, player, 'shoot', 2)
         
             
     if missiles[0].missile_launch:
+        '''
         # starting the launch missile sound
-        if silent_music == False:
-            if missiles[0].missile_launched_channel.get_busy() == False:
-                missiles[0].missile_launched_channel.play(MISSILE_LAUNCHED)
-            
+        #if silent_music == False:
+            #pygame.mixer.Channel(4).play(MISSILE_LAUNCHED)
+            #if missiles[0].missile_launched_channel.get_busy() == False:
+                #missiles[0].missile_launched_channel.play(MISSILE_LAUNCHED)
+        '''    
         missiles[0].update()
         missiles[0].shoot_missile(score, player)
         missiles[0].scenrio = random.randint(1,2)
 
     if missiles[1].missile_launch:
         # starting the launch missile sound
-        #'''
+        '''
         if silent_music == False:
             if missiles[1].missile_launched_channel.get_busy() == False:
                 missiles[1].missile_launched_channel.play(MISSILE_LAUNCHED)
-        #'''
+        '''
         print(missiles[0].missile_launched_channel)
         print(missiles[1].missile_launched_channel)
            

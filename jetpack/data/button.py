@@ -89,3 +89,62 @@ class Button():
             else:
                 self.image = SPEAKER_ON_HOVER_BUTTON
                 self.hover = True
+        if style == 'left-arrow':
+            if self.hover:
+                self.image = LEFT_ARROW
+                self.hover = False
+            else:
+                self.image = LEFT_ARROW_HOVER
+                self.hover = True
+        if style == 'right-arrow':
+            if self.hover:
+                self.image = RIGHT_ARROW
+                self.hover = False
+            else:
+                self.image = RIGHT_ARROW_HOVER
+                self.hover = True
+        if style == 'buy':
+            if self.hover:
+                self.rect.x = 300
+                self.rect.y = 550
+                self.rect.height = MENU_BUTTON_WIDTH
+                self.rect.width - MENU_BUTTON_WIDTH
+                self.image = BUY_BUTTON
+                self.hover = False
+            else:
+                self.rect.x = 305
+                self.rect.y = 555
+                self.rect.height = MENU_BUTTON_WIDTH - 5
+                self.rect.width - MENU_BUTTON_WIDTH + 5
+                #self.image = BUY_BUTTON_HOVER
+                self.hover = True
+        if style == 'select':
+            if self.hover:
+                self.rect.x = 300
+                self.rect.y = 550
+                self.rect.height = MENU_BUTTON_WIDTH
+                self.rect.width - MENU_BUTTON_WIDTH
+                self.image = SELECT_BUTTON
+                self.hover = False
+            else:
+                self.rect.x = 305
+                self.rect.y = 555
+                self.rect.height = MENU_BUTTON_WIDTH - 5
+                self.rect.width - MENU_BUTTON_WIDTH + 5
+                #self.image = SELECT_BUTTON_HOVER
+                self.hover = True
+        if style == 'main-menu':
+            if self.hover:
+                self.rect.x = 20
+                self.rect.y = 550
+                self.rect.height = MENU_BUTTON_WIDTH
+                self.rect.width - MENU_BUTTON_WIDTH
+                self.image = MAIN_MENU_BUTTON
+                self.hover = False
+            else:
+                self.rect.x = 25
+                self.rect.y = 555
+                self.rect.height = MENU_BUTTON_WIDTH - 5
+                self.rect.width - MENU_BUTTON_WIDTH + 5
+                #self.image = SELECT_BUTTON_HOVER
+                self.hover = True
