@@ -92,6 +92,7 @@ class Player(object):
         # implement movement to the player's jetpack.
         if pygame.time.get_ticks() - start_time < 110:
             self.rect.y -= self.vel
+            self.rect.x += 2
 
 
     ''' This function creates animation to the default male player. '''
