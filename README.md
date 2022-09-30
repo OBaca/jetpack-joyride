@@ -1,6 +1,6 @@
 # Jetpack Joyride
 
-![Project Image]([https://postimg.cc/WqSvq4ps](https://i.postimg.cc/c6G4jKVt/main-menu-bg.png))
+![Project Image](https://i.postimg.cc/c6G4jKVt/main-menu-bg.png)
 
 > 
 
