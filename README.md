@@ -54,9 +54,10 @@ Jetpack Joyride made with python on windows with the code editor VScode as a per
 --
 ### Lasers
 ![Gameplay](https://media.giphy.com/media/avE4abuwGljzip49F2/giphy-downsized.gif)
-> There is three different scenrios, one at the top and one at the bottom
-> two at the top and two at the bottom
-> three at the middle
+> There is three different scenrios: 
+> \n1.one at the top and one at the bottom
+> \n2.two at the top and two at the bottom
+> \n3.three at the middle
 --
 
 [Back To The Top](#Jetpack-Joyride)
