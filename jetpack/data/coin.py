@@ -1,11 +1,15 @@
 from .constants import *
 
 class Coin(pygame.sprite.Sprite):
+    '''
+    This class represent a single coin currency in the game.
+    '''
     def __init__(self, x, y):
         self.coin_animation()
-        
         self.reset( x, y)
 
+    
+    ''' This function reset all the variables of the coin.   '''
     def reset(self, x, y):
         self.current_sprite = 0
         self.image = self.sprites[self.current_sprite]
@@ -13,26 +17,24 @@ class Coin(pygame.sprite.Sprite):
         self.show_image = True
         self.speed = 2
         self.increase_speed = 0
-        
-    def respawn_coin(self,x,y):
-        self.rect.x = x
-        self.rect.y = y
-        self.show_image = True
-        
+
+
+    ''' This function creates an animation for the coin to spin.  '''
     def update(self):
         self.current_sprite += 0.25
-
         if self.current_sprite >= len(self.sprites):
             self.current_sprite = 0
         
         self.image = self.sprites[int(self.current_sprite)]
 
 
+    ''' This function draw a single coin to the screen.  '''
     def draw(self, screen):
         if self.show_image:
             screen.blit(self.image, (self.rect.x,self.rect.y))
 
 
+    ''' This function set the image animation to a single coin.  '''
     def coin_animation(self):
         self.sprites = []
         self.sprites.append(pygame.transform.scale(pygame.image.load(os.path.join('Assets\coins', 'coin1.png')), (COIN_SIZE,COIN_SIZE)))
