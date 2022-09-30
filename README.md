@@ -1,6 +1,6 @@
 # Jetpack Joyride
 
-![Project Image](https://freeimage.host/i/LlPjFn)
+![Project Image](https://freeimage.host/i/LlPjFn](https://postimg.cc/WqSvq4ps)
 
 > 
 
