@@ -45,6 +45,6 @@ Jetpack Joyride made with python on windows with the code editor VScode as a per
 
 ## Gameplay
 
-![Gameplay](https://media.giphy.com/media/DZWAGHMAitdVFODzxb/giphy-downsized-large.gif)
+![Gameplay](https://media.giphy.com/media/DZWAGHMAitdVFODzxb/giphy-downsized-large.gif)(https://media.giphy.com/media/ciIOgnPOS1LGQDiYwt/giphy.gif)
 
 [Back To The Top](#Jetpack-Joyride)
