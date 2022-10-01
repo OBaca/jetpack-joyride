@@ -19,7 +19,7 @@ def get_player_image_game(type):
     if type == 1:
         return JETPACK_OFF_FEMALE
     if type == 2:
-        pass
+        return JETPACK_OFF_SHREK
 
 
 ''' This function manage the game loop. '''
@@ -151,7 +151,7 @@ def game(coins_amount, player, screen):
                 run = False
             
             # draw objects on the screen.
-            player.draw(screen, map)
+            player.draw(screen)
             draw_coins(coins, screen)
             draw_obstacles(zappers,lasers,missiles, screen)
 

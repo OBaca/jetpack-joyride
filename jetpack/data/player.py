@@ -30,10 +30,12 @@ class Player(object):
         if self.type == 1:
             self.default_female_jetpack_animation()
             self.player_girl_hurt_animation()
-
+        if self.type == 2:
+            self.shrek_jetpack_animation()
+            self.shrek_hurt_animation()
 
     ''' This function draw the player to the screen. '''
-    def draw(self, screen, map):
+    def draw(self, screen):
         screen.blit(self.image, (self.rect.x,self.rect.y))
 
 
@@ -113,6 +115,15 @@ class Player(object):
         self.sprites.append(pygame.transform.scale(pygame.image.load(os.path.join('Assets\\girl_animation_jetpack', 'playerGirl5.png')), (self.rect.width+15, self.rect.height+15)))
         
 
+    ''' This function creates animation for the skin shrek. '''
+    def shrek_jetpack_animation(self):
+        self.sprites = []
+        self.sprites.append(pygame.transform.scale(pygame.image.load(os.path.join('Assets\\shrek_animation_jetpack', 'shrek2.png')), (self.rect.width+15, self.rect.height+15)))
+        self.sprites.append(pygame.transform.scale(pygame.image.load(os.path.join('Assets\\shrek_animation_jetpack', 'shrek3.png')), (self.rect.width+15, self.rect.height+15)))
+        self.sprites.append(pygame.transform.scale(pygame.image.load(os.path.join('Assets\\shrek_animation_jetpack', 'shrek4.png')), (self.rect.width+15, self.rect.height+15)))
+        self.sprites.append(pygame.transform.scale(pygame.image.load(os.path.join('Assets\\shrek_animation_jetpack', 'shrek1.png')), (self.rect.width+15, self.rect.height+15)))
+        
+
     ''' This function creates animation to the default male player when he dies. '''
     def player_boy_hurt_animation(self):
         self.death_sprites = []
@@ -152,3 +163,13 @@ class Player(object):
         self.death_sprites.append(pygame.transform.scale(pygame.image.load(os.path.join('Assets\player_girl_hurt', 'playerGirl_hurt11.png')), (self.rect.width+20, self.rect.height+20)))
         self.death_sprites.append(pygame.transform.scale(pygame.image.load(os.path.join('Assets\player_girl_hurt', 'playerGirl_hurt12.png')), (self.rect.width+20, self.rect.height+20)))
         self.death_sprites.append(pygame.transform.scale(pygame.image.load(os.path.join('Assets\player_girl_hurt', 'playerGirl_hurt13.png')), (self.rect.width+20, self.rect.height+20)))
+
+    ''' This function creates animation for the skin shrek when he dies. '''
+    def shrek_hurt_animation(self):
+        self.death_sprites = []
+        self.death_sprites.append(pygame.transform.scale(pygame.image.load(os.path.join('Assets\shrek_hurt', 'shrek1.png')), (self.rect.width+20, self.rect.height+20)))
+        self.death_sprites.append(pygame.transform.scale(pygame.image.load(os.path.join('Assets\shrek_hurt', 'shrek2.png')), (self.rect.width+20, self.rect.height+20)))
+        self.death_sprites.append(pygame.transform.scale(pygame.image.load(os.path.join('Assets\shrek_hurt', 'shrek3.png')), (self.rect.width+20, self.rect.height+20)))
+        self.death_sprites.append(pygame.transform.scale(pygame.image.load(os.path.join('Assets\shrek_hurt', 'shrek4.png')), (self.rect.width+20, self.rect.height+20)))
+        self.death_sprites.append(pygame.transform.scale(pygame.image.load(os.path.join('Assets\shrek_hurt', 'shrek5.png')), (self.rect.width+20, self.rect.height+20)))
+        self.death_sprites.append(pygame.transform.scale(pygame.image.load(os.path.join('Assets\shrek_hurt', 'shrek6.png')), (self.rect.width+20, self.rect.height+20)))
