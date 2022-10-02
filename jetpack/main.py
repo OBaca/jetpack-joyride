@@ -1,6 +1,7 @@
 from data.zombie import *
 from data.game import *
 from data.costumes import *
+from data.button import *
 
 
 # screen settings
