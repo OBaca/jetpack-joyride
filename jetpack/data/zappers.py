@@ -8,6 +8,8 @@ class Zappers(object):
         self.increase_speed = 0
         self.style = style
         self.image = image
+        self.current_vertical_sprite = 0
+        self.current_horizontal_sprite = 0
         self.positions = ['top', 'mid-top','mid-bottom','bottom']
         self.update_animation()
         
@@ -31,12 +33,9 @@ class Zappers(object):
     ''' This function reset the class variables. '''
     def reset(self):
         self.speed = 2
-        if self.style == 'along':
-            self.rect.x = random.randint(WIDTH, WIDTH+200)
-            self.rect.y = random.randint(FIX_IMAGE_LIMIT, HEIGHT-140)
-        if self.style == 'across':
-            self.rect.x = random.randint(WIDTH, WIDTH+200)
-            self.rect.y = random.randint(FIX_IMAGE_LIMIT, HEIGHT- FIX_IMAGE_LIMIT -40)
+        y_spawner = FIX_IMAGE_LIMIT - 40 if self.style == 'across' else 140
+        self.rect.x = random.randint(WIDTH, WIDTH+200)
+        self.rect.y = random.randint(FIX_IMAGE_LIMIT, HEIGHT - y_spawner)
 
 
     ''' This function draws the zapper obstacle to the screen. '''
@@ -46,24 +45,19 @@ class Zappers(object):
 
     ''' This function set the animation for the zappers. '''
     def update_animation(self):
-        self.vertical_sprite = []
-        self.vertical_sprite.append(pygame.image.load(os.path.join('Assets\\zappers_animation', 'vertical_zapper1.png')))
-        self.vertical_sprite.append(pygame.image.load(os.path.join('Assets\\zappers_animation', 'vertical_zapper2.png')))
-        self.vertical_sprite.append(pygame.image.load(os.path.join('Assets\\zappers_animation', 'vertical_zapper3.png')))
-        self.vertical_sprite.append(pygame.image.load(os.path.join('Assets\\zappers_animation', 'vertical_zapper4.png')))
-        self.current_vertical_sprite = 0
+        ZAPPER_VERTICAL_ASSETS = ["vertical_zapper1.png", "vertical_zapper2.png", "vertical_zapper3.png", "vertical_zapper4.png"]
+        ZAPPER_HORIZONTAL_ASSETS = ["horizontal_zapper1.png", "horizontal_zapper2.png", "horizontal_zapper3.png", "horizontal_zapper4.png"]
 
-        self.horizontal_sprite = []
-        self.horizontal_sprite.append(pygame.image.load(os.path.join('Assets\\zappers_animation', 'horizontal_zapper1.png')))
-        self.horizontal_sprite.append(pygame.image.load(os.path.join('Assets\\zappers_animation', 'horizontal_zapper2.png')))
-        self.horizontal_sprite.append(pygame.image.load(os.path.join('Assets\\zappers_animation', 'horizontal_zapper3.png')))
-        self.horizontal_sprite.append(pygame.image.load(os.path.join('Assets\\zappers_animation', 'horizontal_zapper4.png')))
-        self.current_horizontal_sprite = 0
+        def _init_asset(asset_name: str):
+            return pygame.image.load(os.path.join("Assets\zappers_animation", asset_name))
 
+        self.vertical_sprite = [_init_asset(asset_name) for asset_name in ZAPPER_VERTICAL_ASSETS]
+        self.horizontal_sprite = [_init_asset(asset_name) for asset_name in ZAPPER_HORIZONTAL_ASSETS]
 
 ''' This function spawn the different zappers on the screen. '''
 def zappers_placement(zappers, lasers, death, score):
-    position = 'x'   
+    position = 'x' 
+    RESET_X_POSITION = {'top': 10, 'mid-top': 150, 'mid-bottom': 300, 'bottom': 450}
     # setting the zappers speed difficulty
     zappers_speed_timing = 50
     if score >= 300:
@@ -92,20 +86,10 @@ def zappers_placement(zappers, lasers, death, score):
             zapper.positions = [p.replace(position, 'x') for p in zapper.positions]
             
             # reset the zapper positions
-            if position == 'top':
-                zapper.rect.y = 10
-                zapper.rect.x = random.randint (WIDTH, WIDTH+400)
-            if position == 'mid-top':
-                zapper.rect.y = 150
-                zapper.rect.x = random.randint (WIDTH, WIDTH+400)
-            if position == 'mid-bottom':
-                zapper.rect.y = 300
-                zapper.rect.x = random.randint (WIDTH, WIDTH+400)
-            if position == 'bottom':
-                zapper.rect.y = 450
-                zapper.rect.x = random.randint (WIDTH, WIDTH+400)    
-          
-
+            zapper.rect.y = RESET_X_POSITION[position]
+            zapper.rect.x = random.randint (WIDTH, WIDTH+400)
+            
+        
 ''' This function update the animation for the zappers. '''
 def update_zappers(zappers):
     for zapper in zappers:

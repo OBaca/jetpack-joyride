@@ -4,7 +4,6 @@ class Missile():
     ''' This class represent a missile obstacle. '''
     def __init__(self, player_y):
         self.reset(player_y)
-
         self.warning = [WIDTH+60,100]
         self.launch = [WIDTH+60,150]
         # set images
@@ -18,6 +17,7 @@ class Missile():
     ''' This function reset all the missile variables.'''
     def reset(self, player_y, warning_cooldown=2000, warning_time=500):
         self.rect = pygame.Rect(WIDTH+10,player_y, 100, 100)
+        self.current_sprite = 0
         # set the missile to follow the play y position.
         self.homing = False
         # cooldown for the missile warning and launch message.
@@ -85,15 +85,13 @@ class Missile():
 
     ''' This function set the missile animation. '''
     def missile_animation(self):
-        self.smoke_sprites = []
-        self.smoke_sprites.append(pygame.transform.scale(pygame.image.load(os.path.join('Assets\missileSmoke', 'missile1.png')), (self.rect.width+15, self.rect.height+15)))
-        self.smoke_sprites.append(pygame.transform.scale(pygame.image.load(os.path.join('Assets\missileSmoke', 'missile2.png')), (self.rect.width+15, self.rect.height+15)))
-        self.smoke_sprites.append(pygame.transform.scale(pygame.image.load(os.path.join('Assets\missileSmoke', 'missile3.png')), (self.rect.width+15, self.rect.height+15)))
-        self.smoke_sprites.append(pygame.transform.scale(pygame.image.load(os.path.join('Assets\missileSmoke', 'missile4.png')), (self.rect.width+15, self.rect.height+15)))
-        self.smoke_sprites.append(pygame.transform.scale(pygame.image.load(os.path.join('Assets\missileSmoke', 'missile5.png')), (self.rect.width+15, self.rect.height+15)))
-        self.smoke_sprites.append(pygame.transform.scale(pygame.image.load(os.path.join('Assets\missileSmoke', 'missile6.png')), (self.rect.width+15, self.rect.height+15)))
-        self.smoke_sprites.append(pygame.transform.scale(pygame.image.load(os.path.join('Assets\missileSmoke', 'missile7.png')), (self.rect.width+15, self.rect.height+15)))
-        self.current_sprite = 0
+        MISSILE_ASSETS = ["missile1.png", "missile2.png", "missile3.png", "missile4.png", "missile5.png",
+                        "missile6.png", "missile7.png" ]
+
+        def _init_asset(asset_name: str):
+            return pygame.transform.scale(pygame.image.load(os.path.join("Assets\missileSmoke", asset_name)), (self.rect.width+15, self.rect.height+15))
+
+        self.smoke_sprites = [_init_asset(asset_name) for asset_name in MISSILE_ASSETS]
 
         
 ''' This function set the timing to activate the missile warning and launch options. '''

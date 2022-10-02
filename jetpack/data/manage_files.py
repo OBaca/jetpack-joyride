@@ -60,7 +60,5 @@ def buy_skin(skin):
 ''' This function check if the user have the skin given as a paramater. '''
 def check_skins_inventory(skin):
     with open('skins.txt', 'r') as file:
-        if skin in file.read():
-            return True
-        else:
-            return False
+        return True if skin in file.read() else False
+

@@ -8,14 +8,10 @@ class Zombie(object):
         self.current_sprite = 0
         self.image = self.walking_right[self.current_sprite]
         # set the side the player move to.
-        if right:
-            self.increase_x = 1
-        else:
-            self.increase_x = -1
-        
+        self.increase_x = 1 if right else -1
+        # set speed settings
         self.timing_speed = 0
         self.speed = random.choice([0.4,0.7,1])
-
         # if right is True - the Zombie is walking from the left to the right
         self.right = right  
 
@@ -24,11 +20,7 @@ class Zombie(object):
     def update(self):
         sprites = []
         # set the sprite to the side the zombie is walking
-        if self.right:
-            sprites = self.walking_right
-        else:
-            sprites = self.walking_left
-
+        sprites = self.walking_right if self.right else self.walking_left
         
         self.timing_speed += self.speed
         if self.timing_speed > 1:
@@ -57,60 +49,24 @@ class Zombie(object):
         screen.blit(self.image, (self.rect.x,self.rect.y))
 
 
-    ''' This function set the zombie animation (walking left/ walking right). '''
+    ''' This function set the zombie walking animation (walking left/ walking right). '''
     def zombie_walking_animation(self):
-        self.walking_right = []
-        self.walking_right.append(pygame.transform.scale(pygame.image.load(os.path.join('Assets\zombie_walking', '0_Golem_Walking_000.png')), (self.rect.width,self.rect.height)))
-        self.walking_right.append(pygame.transform.scale(pygame.image.load(os.path.join('Assets\zombie_walking', '0_Golem_Walking_001.png')), (self.rect.width,self.rect.height)))
-        self.walking_right.append(pygame.transform.scale(pygame.image.load(os.path.join('Assets\zombie_walking', '0_Golem_Walking_002.png')), (self.rect.width,self.rect.height)))
-        self.walking_right.append(pygame.transform.scale(pygame.image.load(os.path.join('Assets\zombie_walking', '0_Golem_Walking_003.png')), (self.rect.width,self.rect.height)))
-        self.walking_right.append(pygame.transform.scale(pygame.image.load(os.path.join('Assets\zombie_walking', '0_Golem_Walking_004.png')), (self.rect.width,self.rect.height)))
-        self.walking_right.append(pygame.transform.scale(pygame.image.load(os.path.join('Assets\zombie_walking', '0_Golem_Walking_005.png')), (self.rect.width,self.rect.height)))
-        self.walking_right.append(pygame.transform.scale(pygame.image.load(os.path.join('Assets\zombie_walking', '0_Golem_Walking_006.png')), (self.rect.width,self.rect.height)))
-        self.walking_right.append(pygame.transform.scale(pygame.image.load(os.path.join('Assets\zombie_walking', '0_Golem_Walking_007.png')), (self.rect.width,self.rect.height)))
-        self.walking_right.append(pygame.transform.scale(pygame.image.load(os.path.join('Assets\zombie_walking', '0_Golem_Walking_008.png')), (self.rect.width,self.rect.height)))
-        self.walking_right.append(pygame.transform.scale(pygame.image.load(os.path.join('Assets\zombie_walking', '0_Golem_Walking_009.png')), (self.rect.width,self.rect.height)))
-        self.walking_right.append(pygame.transform.scale(pygame.image.load(os.path.join('Assets\zombie_walking', '0_Golem_Walking_010.png')), (self.rect.width,self.rect.height)))
-        self.walking_right.append(pygame.transform.scale(pygame.image.load(os.path.join('Assets\zombie_walking', '0_Golem_Walking_011.png')), (self.rect.width,self.rect.height)))
-        self.walking_right.append(pygame.transform.scale(pygame.image.load(os.path.join('Assets\zombie_walking', '0_Golem_Walking_012.png')), (self.rect.width,self.rect.height)))
-        self.walking_right.append(pygame.transform.scale(pygame.image.load(os.path.join('Assets\zombie_walking', '0_Golem_Walking_013.png')), (self.rect.width,self.rect.height)))
-        self.walking_right.append(pygame.transform.scale(pygame.image.load(os.path.join('Assets\zombie_walking', '0_Golem_Walking_014.png')), (self.rect.width,self.rect.height)))
-        self.walking_right.append(pygame.transform.scale(pygame.image.load(os.path.join('Assets\zombie_walking', '0_Golem_Walking_015.png')), (self.rect.width,self.rect.height)))
-        self.walking_right.append(pygame.transform.scale(pygame.image.load(os.path.join('Assets\zombie_walking', '0_Golem_Walking_016.png')), (self.rect.width,self.rect.height)))
-        self.walking_right.append(pygame.transform.scale(pygame.image.load(os.path.join('Assets\zombie_walking', '0_Golem_Walking_017.png')), (self.rect.width,self.rect.height)))
-        self.walking_right.append(pygame.transform.scale(pygame.image.load(os.path.join('Assets\zombie_walking', '0_Golem_Walking_018.png')), (self.rect.width,self.rect.height)))
-        self.walking_right.append(pygame.transform.scale(pygame.image.load(os.path.join('Assets\zombie_walking', '0_Golem_Walking_019.png')), (self.rect.width,self.rect.height)))
-        self.walking_right.append(pygame.transform.scale(pygame.image.load(os.path.join('Assets\zombie_walking', '0_Golem_Walking_020.png')), (self.rect.width,self.rect.height)))
-        self.walking_right.append(pygame.transform.scale(pygame.image.load(os.path.join('Assets\zombie_walking', '0_Golem_Walking_021.png')), (self.rect.width,self.rect.height)))
-        self.walking_right.append(pygame.transform.scale(pygame.image.load(os.path.join('Assets\zombie_walking', '0_Golem_Walking_022.png')), (self.rect.width,self.rect.height)))
-        self.walking_right.append(pygame.transform.scale(pygame.image.load(os.path.join('Assets\zombie_walking', '0_Golem_Walking_023.png')), (self.rect.width,self.rect.height)))
+        ZOMBIE_WALKING_ASSETS = ["0_Golem_Walking_001.png", "0_Golem_Walking_002.png", "0_Golem_Walking_003.png", "0_Golem_Walking_004.png", "0_Golem_Walking_005.png", "0_Golem_Walking_006.png"
+                                    , "0_Golem_Walking_007.png", "0_Golem_Walking_008.png", "0_Golem_Walking_009.png", "0_Golem_Walking_010.png", "0_Golem_Walking_011.png", "0_Golem_Walking_012.png"
+                                    , "0_Golem_Walking_013.png", "0_Golem_Walking_014.png", "0_Golem_Walking_015.png", "0_Golem_Walking_016.png", "0_Golem_Walking_017.png", "0_Golem_Walking_018.png"
+                                    , "0_Golem_Walking_019.png", "0_Golem_Walking_020.png", "0_Golem_Walking_021.png", "0_Golem_Walking_022.png", "0_Golem_Walking_023.png"]
 
-        self.walking_left = []
-        self.walking_left.append(pygame.transform.flip(pygame.transform.scale(pygame.image.load(os.path.join('Assets\zombie_walking', '0_Golem_Walking_000.png')), (self.rect.width,self.rect.height)), True, False))
-        self.walking_left.append(pygame.transform.flip(pygame.transform.scale(pygame.image.load(os.path.join('Assets\zombie_walking', '0_Golem_Walking_001.png')), (self.rect.width,self.rect.height)), True, False))
-        self.walking_left.append(pygame.transform.flip(pygame.transform.scale(pygame.image.load(os.path.join('Assets\zombie_walking', '0_Golem_Walking_002.png')), (self.rect.width,self.rect.height)), True, False))
-        self.walking_left.append(pygame.transform.flip(pygame.transform.scale(pygame.image.load(os.path.join('Assets\zombie_walking', '0_Golem_Walking_003.png')), (self.rect.width,self.rect.height)), True, False))
-        self.walking_left.append(pygame.transform.flip(pygame.transform.scale(pygame.image.load(os.path.join('Assets\zombie_walking', '0_Golem_Walking_004.png')), (self.rect.width,self.rect.height)), True, False))
-        self.walking_left.append(pygame.transform.flip(pygame.transform.scale(pygame.image.load(os.path.join('Assets\zombie_walking', '0_Golem_Walking_005.png')), (self.rect.width,self.rect.height)), True, False))
-        self.walking_left.append(pygame.transform.flip(pygame.transform.scale(pygame.image.load(os.path.join('Assets\zombie_walking', '0_Golem_Walking_006.png')), (self.rect.width,self.rect.height)), True, False))
-        self.walking_left.append(pygame.transform.flip(pygame.transform.scale(pygame.image.load(os.path.join('Assets\zombie_walking', '0_Golem_Walking_007.png')), (self.rect.width,self.rect.height)), True, False))
-        self.walking_left.append(pygame.transform.flip(pygame.transform.scale(pygame.image.load(os.path.join('Assets\zombie_walking', '0_Golem_Walking_008.png')), (self.rect.width,self.rect.height)), True, False))
-        self.walking_left.append(pygame.transform.flip(pygame.transform.scale(pygame.image.load(os.path.join('Assets\zombie_walking', '0_Golem_Walking_009.png')), (self.rect.width,self.rect.height)), True, False))
-        self.walking_left.append(pygame.transform.flip(pygame.transform.scale(pygame.image.load(os.path.join('Assets\zombie_walking', '0_Golem_Walking_010.png')), (self.rect.width,self.rect.height)), True, False))
-        self.walking_left.append(pygame.transform.flip(pygame.transform.scale(pygame.image.load(os.path.join('Assets\zombie_walking', '0_Golem_Walking_011.png')), (self.rect.width,self.rect.height)), True, False))
-        self.walking_left.append(pygame.transform.flip(pygame.transform.scale(pygame.image.load(os.path.join('Assets\zombie_walking', '0_Golem_Walking_012.png')), (self.rect.width,self.rect.height)), True, False))
-        self.walking_left.append(pygame.transform.flip(pygame.transform.scale(pygame.image.load(os.path.join('Assets\zombie_walking', '0_Golem_Walking_013.png')), (self.rect.width,self.rect.height)), True, False))
-        self.walking_left.append(pygame.transform.flip(pygame.transform.scale(pygame.image.load(os.path.join('Assets\zombie_walking', '0_Golem_Walking_014.png')), (self.rect.width,self.rect.height)), True, False))
-        self.walking_left.append(pygame.transform.flip(pygame.transform.scale(pygame.image.load(os.path.join('Assets\zombie_walking', '0_Golem_Walking_015.png')), (self.rect.width,self.rect.height)), True, False))
-        self.walking_left.append(pygame.transform.flip(pygame.transform.scale(pygame.image.load(os.path.join('Assets\zombie_walking', '0_Golem_Walking_016.png')), (self.rect.width,self.rect.height)), True, False))
-        self.walking_left.append(pygame.transform.flip(pygame.transform.scale(pygame.image.load(os.path.join('Assets\zombie_walking', '0_Golem_Walking_017.png')), (self.rect.width,self.rect.height)), True, False))
-        self.walking_left.append(pygame.transform.flip(pygame.transform.scale(pygame.image.load(os.path.join('Assets\zombie_walking', '0_Golem_Walking_018.png')), (self.rect.width,self.rect.height)), True, False))
-        self.walking_left.append(pygame.transform.flip(pygame.transform.scale(pygame.image.load(os.path.join('Assets\zombie_walking', '0_Golem_Walking_019.png')), (self.rect.width,self.rect.height)), True, False))
-        self.walking_left.append(pygame.transform.flip(pygame.transform.scale(pygame.image.load(os.path.join('Assets\zombie_walking', '0_Golem_Walking_020.png')), (self.rect.width,self.rect.height)), True, False))
-        self.walking_left.append(pygame.transform.flip(pygame.transform.scale(pygame.image.load(os.path.join('Assets\zombie_walking', '0_Golem_Walking_021.png')), (self.rect.width,self.rect.height)), True, False))
-        self.walking_left.append(pygame.transform.flip(pygame.transform.scale(pygame.image.load(os.path.join('Assets\zombie_walking', '0_Golem_Walking_022.png')), (self.rect.width,self.rect.height)), True, False))
-        self.walking_left.append(pygame.transform.flip(pygame.transform.scale(pygame.image.load(os.path.join('Assets\zombie_walking', '0_Golem_Walking_023.png')), (self.rect.width,self.rect.height)), True, False))
-            
+        def _init_asset(asset_name: str, flip):
+            if flip:
+                return pygame.transform.flip(pygame.transform.scale(
+                    pygame.image.load(os.path.join("Assets\zombie_walking", asset_name)),(self.rect.width, self.rect.height)), True, False)
+            else:
+                return pygame.transform.scale(
+                    pygame.image.load(os.path.join("Assets\zombie_walking", asset_name)),(self.rect.width, self.rect.height))
+
+        self.walking_right = [_init_asset(asset_name, False) for asset_name in ZOMBIE_WALKING_ASSETS]
+        self.walking_left = [_init_asset(asset_name, True) for asset_name in ZOMBIE_WALKING_ASSETS]
+        
 
 ''' This function spawn the zombies in the main menu screen. '''
 def zombie_spawn_menu(zombies, screen):

@@ -43,20 +43,14 @@ class Lasers(object):
 
     ''' This function set the image animation for the lasers'''
     def lasers_animation(self):
-        self.animation_sprite = []
-        self.animation_sprite.append(pygame.image.load(os.path.join('Assets\lasers_animation', 'lasers1.png')))
-        self.animation_sprite.append(pygame.image.load(os.path.join('Assets\lasers_animation', 'lasers2.png')))
-        self.animation_sprite.append(pygame.image.load(os.path.join('Assets\lasers_animation', 'lasers3.png')))
-        self.animation_sprite.append(pygame.image.load(os.path.join('Assets\lasers_animation', 'lasers4.png')))
-        self.animation_sprite.append(pygame.image.load(os.path.join('Assets\lasers_animation', 'lasers5.png')))
-        self.animation_sprite.append(pygame.image.load(os.path.join('Assets\lasers_animation', 'lasers6.png')))
-        self.animation_sprite.append(pygame.image.load(os.path.join('Assets\lasers_animation', 'lasers7.png')))
-        self.animation_sprite.append(pygame.image.load(os.path.join('Assets\lasers_animation', 'lasers8.png')))
-        self.animation_sprite.append(pygame.image.load(os.path.join('Assets\lasers_animation', 'lasers9.png')))
-        self.animation_sprite.append(pygame.image.load(os.path.join('Assets\lasers_animation', 'lasers10.png')))
-        self.animation_sprite.append(pygame.image.load(os.path.join('Assets\lasers_animation', 'lasers11.png')))
-        self.animation_sprite.append(pygame.image.load(os.path.join('Assets\lasers_animation', 'lasers12.png')))
-        self.current_sprite = 0
+        LASERS_ASSETS = ["lasers1.png", "lasers2.png", "lasers3.png", "lasers4.png", "lasers5.png",
+                        "lasers6.png", "lasers7.png", "lasers8.png", "lasers9.png", "lasers10.png"
+                        , "lasers11.png", "lasers12.png"]
+
+        def _init_asset(asset_name: str):
+            return pygame.image.load(os.path.join("Assets\lasers_animation", asset_name))
+
+        self.animation_sprite = [_init_asset(asset_name) for asset_name in LASERS_ASSETS]
 
 
 ''' This function set timing for the lasers to turn on and off. '''
@@ -121,18 +115,16 @@ def lasers_scenrios( lasers, action, scenrio):
             lasers[1].pre_rect.y = HEIGHT - 65
 
         if action == 'start-post-lasers':
-            # top lasers
-            lasers[0].pre_rect.y = HIDDEN_LASERS_Y  
+            for laser in lasers:
+                laser.pre_rect.y = HIDDEN_LASERS_Y
+
             lasers[0].post_rect.y = 25
-            # bottom lasers
-            lasers[1].pre_rect.y = HIDDEN_LASERS_Y  
             lasers[1].post_rect.y = HEIGHT - 65
 
         if action == 'turn-off-lasers':
-            # top lasers
-            lasers[0].post_rect.y = HIDDEN_LASERS_Y
-            # bottom lasers
-            lasers[1].post_rect.y = HIDDEN_LASERS_Y
+            for laser in lasers:
+                laser.post_rect.y = HIDDEN_LASERS_Y
+
     
     # Scenrio 2: three at the top and three at the bottom
     if scenrio == 2:
@@ -145,24 +137,19 @@ def lasers_scenrios( lasers, action, scenrio):
             lasers[3].pre_rect.y = HEIGHT - (65 + LASER_GAP)
 
         if action == 'start-post-lasers':
+            for laser in lasers:
+                laser.pre_rect.y = HIDDEN_LASERS_Y
             # top lasers
-            lasers[0].pre_rect.y = HIDDEN_LASERS_Y
-            lasers[2].pre_rect.y = HIDDEN_LASERS_Y
             lasers[0].post_rect.y = 25
             lasers[2].post_rect.y = 25 + LASER_GAP
             # bottom lasers
-            lasers[1].pre_rect.y = HIDDEN_LASERS_Y
-            lasers[3].pre_rect.y = HIDDEN_LASERS_Y
             lasers[1].post_rect.y = HEIGHT - 65
             lasers[3].post_rect.y = HEIGHT - (65 + LASER_GAP)
 
         if action == 'turn-off-lasers':
-            #top lasers
-            lasers[0].post_rect.y = HIDDEN_LASERS_Y
-            lasers[2].post_rect.y = HIDDEN_LASERS_Y
-            #bottom lasers
-            lasers[1].post_rect.y = HIDDEN_LASERS_Y
-            lasers[3].post_rect.y = HIDDEN_LASERS_Y
+            for laser in lasers:
+                laser.post_rect.y = HIDDEN_LASERS_Y
+
 
     # Scenrio 3: three at the middle
     if scenrio == 3:
@@ -172,16 +159,13 @@ def lasers_scenrios( lasers, action, scenrio):
             lasers[2].pre_rect.y = HEIGHT//2 - LASER_GAP
 
         if action == 'start-post-lasers':
-            lasers[0].pre_rect.y = HIDDEN_LASERS_Y
-            lasers[1].pre_rect.y = HIDDEN_LASERS_Y
-            lasers[2].pre_rect.y = HIDDEN_LASERS_Y
+            for laser in lasers:
+                laser.pre_rect.y = HIDDEN_LASERS_Y
 
             lasers[0].post_rect.y = HEIGHT//2 + LASER_GAP   
             lasers[1].post_rect.y = HEIGHT//2
             lasers[2].post_rect.y = HEIGHT//2 - LASER_GAP
 
         if action == 'turn-off-lasers':
-            lasers[0].post_rect.y = HIDDEN_LASERS_Y  
-            lasers[1].post_rect.y = HIDDEN_LASERS_Y
-            lasers[2].post_rect.y = HIDDEN_LASERS_Y
-            
+            for laser in lasers:
+                laser.post_rect.y = HIDDEN_LASERS_Y

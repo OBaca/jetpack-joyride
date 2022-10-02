@@ -36,14 +36,11 @@ class Coin(pygame.sprite.Sprite):
 
     ''' This function set the image animation to a single coin.  '''
     def coin_animation(self):
-        self.sprites = []
-        self.sprites.append(pygame.transform.scale(pygame.image.load(os.path.join('Assets\coins', 'coin1.png')), (COIN_SIZE,COIN_SIZE)))
-        self.sprites.append(pygame.transform.scale(pygame.image.load(os.path.join('Assets\coins', 'coin2.png')), (COIN_SIZE,COIN_SIZE)))
-        self.sprites.append(pygame.transform.scale(pygame.image.load(os.path.join('Assets\coins', 'coin3.png')), (COIN_SIZE,COIN_SIZE)))
-        self.sprites.append(pygame.transform.scale(pygame.image.load(os.path.join('Assets\coins', 'coin4.png')), (COIN_SIZE,COIN_SIZE)))
-        self.sprites.append(pygame.transform.scale(pygame.image.load(os.path.join('Assets\coins', 'coin5.png')), (COIN_SIZE,COIN_SIZE)))
-        self.sprites.append(pygame.transform.scale(pygame.image.load(os.path.join('Assets\coins', 'coin6.png')), (COIN_SIZE,COIN_SIZE)))
-        self.sprites.append(pygame.transform.scale(pygame.image.load(os.path.join('Assets\coins', 'coin7.png')), (COIN_SIZE,COIN_SIZE)))
-        self.sprites.append(pygame.transform.scale(pygame.image.load(os.path.join('Assets\coins', 'coin8.png')), (COIN_SIZE,COIN_SIZE)))
-        self.sprites.append(pygame.transform.scale(pygame.image.load(os.path.join('Assets\coins', 'coin9.png')), (COIN_SIZE,COIN_SIZE)))
-        self.sprites.append(pygame.transform.scale(pygame.image.load(os.path.join('Assets\coins', 'coin10.png')), (COIN_SIZE,COIN_SIZE)))
+        COIN_ASSETS = ["coin1.png", "coin2.png", "coin3.png", "coin4.png", "coin5.png",
+                        "coin6.png", "coin7.png", "coin8.png", "coin9.png", "coin10.png"]
+
+        def _init_asset(asset_name: str):
+            return pygame.transform.scale(
+                pygame.image.load(os.path.join("Assets\coins", asset_name)),(COIN_SIZE, COIN_SIZE))
+
+        self.sprites = [_init_asset(asset_name) for asset_name in COIN_ASSETS]
