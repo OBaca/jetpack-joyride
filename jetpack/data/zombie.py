@@ -1,10 +1,18 @@
 from .constants import *
 
+# animation
+ZOMBIE_WALKING_ASSETS = ["0_Golem_Walking_001.png", "0_Golem_Walking_002.png", "0_Golem_Walking_003.png", "0_Golem_Walking_004.png", "0_Golem_Walking_005.png", "0_Golem_Walking_006.png"
+                                    , "0_Golem_Walking_007.png", "0_Golem_Walking_008.png", "0_Golem_Walking_009.png", "0_Golem_Walking_010.png", "0_Golem_Walking_011.png", "0_Golem_Walking_012.png"
+                                    , "0_Golem_Walking_013.png", "0_Golem_Walking_014.png", "0_Golem_Walking_015.png", "0_Golem_Walking_016.png", "0_Golem_Walking_017.png", "0_Golem_Walking_018.png"
+                                    , "0_Golem_Walking_019.png", "0_Golem_Walking_020.png", "0_Golem_Walking_021.png", "0_Golem_Walking_022.png", "0_Golem_Walking_023.png"]
+
+
+
 class Zombie(object):
     ''' This class represent a zombie in the game. '''
     def __init__(self, right, x):   
         self.rect = pygame.Rect(x,460,100,100)
-        self.zombie_walking_animation()
+        self.zombie_walking_animation(ZOMBIE_WALKING_ASSETS)
         self.current_sprite = 0
         self.image = self.walking_right[self.current_sprite]
         # set the side the player move to.
@@ -50,22 +58,15 @@ class Zombie(object):
 
 
     ''' This function set the zombie walking animation (walking left/ walking right). '''
-    def zombie_walking_animation(self):
-        ZOMBIE_WALKING_ASSETS = ["0_Golem_Walking_001.png", "0_Golem_Walking_002.png", "0_Golem_Walking_003.png", "0_Golem_Walking_004.png", "0_Golem_Walking_005.png", "0_Golem_Walking_006.png"
-                                    , "0_Golem_Walking_007.png", "0_Golem_Walking_008.png", "0_Golem_Walking_009.png", "0_Golem_Walking_010.png", "0_Golem_Walking_011.png", "0_Golem_Walking_012.png"
-                                    , "0_Golem_Walking_013.png", "0_Golem_Walking_014.png", "0_Golem_Walking_015.png", "0_Golem_Walking_016.png", "0_Golem_Walking_017.png", "0_Golem_Walking_018.png"
-                                    , "0_Golem_Walking_019.png", "0_Golem_Walking_020.png", "0_Golem_Walking_021.png", "0_Golem_Walking_022.png", "0_Golem_Walking_023.png"]
-
+    def zombie_walking_animation(self, zombie_walking_animation_assets):
         def _init_asset(asset_name: str, flip):
-            if flip:
-                return pygame.transform.flip(pygame.transform.scale(
-                    pygame.image.load(os.path.join("Assets\zombie_walking", asset_name)),(self.rect.width, self.rect.height)), True, False)
-            else:
-                return pygame.transform.scale(
-                    pygame.image.load(os.path.join("Assets\zombie_walking", asset_name)),(self.rect.width, self.rect.height))
-
-        self.walking_right = [_init_asset(asset_name, False) for asset_name in ZOMBIE_WALKING_ASSETS]
-        self.walking_left = [_init_asset(asset_name, True) for asset_name in ZOMBIE_WALKING_ASSETS]
+            return pygame.transform.scale(
+                pygame.image.load(os.path.join("Assets\zombie_walking", asset_name)),(self.rect.width, self.rect.height))
+        def flip_asset(asset_name):
+            return pygame.transform.flip(asset_name, True, False)
+        
+        self.walking_right = [_init_asset(asset_name) for asset_name in zombie_walking_animation_assets]
+        self.walking_left = [flip_asset(_init_asset(asset_name)) for asset_name in zombie_walking_animation_assets]
         
 
 ''' This function spawn the zombies in the main menu screen. '''
