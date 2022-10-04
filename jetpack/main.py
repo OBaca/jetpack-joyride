@@ -2,7 +2,7 @@ from data.zombie import *
 from data.game import *
 from data.costumes import *
 from data.button import *
-
+from os.path import abspath
 
 # screen settings
 SCREEN = pygame.display.set_mode((WIDTH,HEIGHT))
@@ -27,6 +27,7 @@ def main_menu():
     music_channel = pygame.mixer.find_channel()
     music_replaying = False
     
+
     # main menu loop.
     while True:
         coins_amount = get_coins()
