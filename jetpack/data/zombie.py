@@ -62,11 +62,11 @@ class Zombie(object):
         def _init_asset(asset_name: str, flip):
             return pygame.transform.scale(
                 pygame.image.load(os.path.join("Assets\zombie_walking", asset_name)),(self.rect.width, self.rect.height))
-        def flip_asset(asset_name):
+        def _flip_asset(asset_name):
             return pygame.transform.flip(asset_name, True, False)
         
         self.walking_right = [_init_asset(asset_name) for asset_name in zombie_walking_animation_assets]
-        self.walking_left = [flip_asset(_init_asset(asset_name)) for asset_name in zombie_walking_animation_assets]
+        self.walking_left = [_flip_asset(_init_asset(asset_name)) for asset_name in zombie_walking_animation_assets]
         
 
 ''' This function spawn the zombies in the main menu screen. '''
