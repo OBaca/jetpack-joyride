@@ -27,71 +27,71 @@ ARROW_BUTTON_WH = 50
 
 # images
     # obstacles images
-OBS_IMG1 = pygame.image.load(os.path.join('Assets\zappers_animation', 'vertical_zapper1.png'))
-OBS_IMG2 = pygame.image.load(os.path.join('Assets\zappers_animation', 'horizontal_zapper1.png'))
-PRE_LASERS = pygame.image.load(os.path.join('Assets', 'lasers1.png'))
+OBS_IMG1 = pygame.image.load(os.path.join(os.getcwd() +'\Assets\zappers_animation', 'vertical_zapper1.png'))
+OBS_IMG2 = pygame.image.load(os.path.join(os.getcwd() +'\Assets\zappers_animation', 'horizontal_zapper1.png'))
+PRE_LASERS = pygame.image.load(os.path.join(os.getcwd() +'\Assets', 'lasers1.png'))
     # default pictures for the players
-JETPACK_OFF_MALE = pygame.transform.scale(pygame.image.load(os.path.join('Assets', 'player.png')), (60, 75))
-JETPACK_OFF_FEMALE = pygame.transform.scale(pygame.image.load(os.path.join('Assets\skins', 'playerGirl.png')), (75, 90))
-JETPACK_OFF_SHREK = pygame.transform.scale(pygame.image.load(os.path.join('Assets\skins', 'shrek.png')), (75,90))
+JETPACK_OFF_MALE = pygame.transform.scale(pygame.image.load(os.path.join(os.getcwd() +'\Assets', 'player.png')), (60, 75))
+JETPACK_OFF_FEMALE = pygame.transform.scale(pygame.image.load(os.path.join(os.getcwd() +'\Assets\skins', 'playerGirl.png')), (75, 90))
+JETPACK_OFF_SHREK = pygame.transform.scale(pygame.image.load(os.path.join(os.getcwd() +'\Assets\skins', 'shrek.png')), (75,90))
 
 # backgrounds
-MENU_BG_IMG = pygame.transform.scale(pygame.image.load(os.path.join('Assets', 'main_menu_bg.png')), (WIDTH,HEIGHT))
-COSTUMES_BG_IMG = pygame.transform.scale(pygame.image.load(os.path.join('Assets', 'costumes_bg2.png')), (WIDTH,HEIGHT))
+MENU_BG_IMG = pygame.transform.scale(pygame.image.load(os.path.join(os.getcwd() + '\Assets', 'main_menu_bg.png')), (WIDTH,HEIGHT))
+COSTUMES_BG_IMG = pygame.transform.scale(pygame.image.load(os.path.join(os.getcwd() +'\Assets', 'costumes_bg2.png')), (WIDTH,HEIGHT))
 
 
 # skins to display in the costumes shop
-DEFAULT_MALE = pygame.transform.scale(pygame.image.load(os.path.join('Assets', 'player.png')), (150,200))
-DEFAULT_FEMALE = pygame.transform.scale(pygame.image.load(os.path.join('Assets\skins', 'playerGirl.png')), (150,200))
-SHREK_SKIN = pygame.transform.scale(pygame.image.load(os.path.join('Assets\skins', 'shrek.png')), (250,200))
+DEFAULT_MALE = pygame.transform.scale(pygame.image.load(os.path.join(os.getcwd() +'\Assets', 'player.png')), (150,200))
+DEFAULT_FEMALE = pygame.transform.scale(pygame.image.load(os.path.join(os.getcwd() +'\Assets\skins', 'playerGirl.png')), (150,200))
+SHREK_SKIN = pygame.transform.scale(pygame.image.load(os.path.join(os.getcwd() +'\Assets\skins', 'shrek.png')), (250,200))
 
 
 # buttons images
     # costumes shop buttons
-BUY_BUTTON = pygame.transform.scale(pygame.image.load(os.path.join('Assets\\buttons', 'buy_button_new.png')), (MENU_BUTTON_WIDTH,MENU_BUTTON_HEIGHT))
-SELECT_BUTTON = pygame.transform.scale(pygame.image.load(os.path.join('Assets\\buttons', 'select_button_new.png')), (MENU_BUTTON_WIDTH,MENU_BUTTON_HEIGHT))
-SELECTED_BUTTON = pygame.transform.scale(pygame.image.load(os.path.join('Assets\\buttons', 'skin_selected_button_new.png')), (MENU_BUTTON_WIDTH,MENU_BUTTON_HEIGHT))
-MAIN_MENU_BUTTON = pygame.transform.scale(pygame.image.load(os.path.join('Assets\\buttons', 'main_menu_button.png')), (MENU_BUTTON_WIDTH,MENU_BUTTON_HEIGHT))
-RIGHT_ARROW = pygame.transform.scale(pygame.image.load(os.path.join('Assets', 'right_arrow.png')), (50,50))
-RIGHT_ARROW_HOVER = pygame.transform.scale(pygame.image.load(os.path.join('Assets', 'right_arrow_hover.png')), (50,50))
-LEFT_ARROW = pygame.transform.scale(pygame.image.load(os.path.join('Assets', 'left_arrow.png')), (50,50))
-LEFT_ARROW_HOVER = pygame.transform.scale(pygame.image.load(os.path.join('Assets', 'left_arrow_hover.png')), (50,50))
+BUY_BUTTON = pygame.transform.scale(pygame.image.load(os.path.join(os.getcwd() +'\Assets\\buttons', 'buy_button_new.png')), (MENU_BUTTON_WIDTH,MENU_BUTTON_HEIGHT))
+SELECT_BUTTON = pygame.transform.scale(pygame.image.load(os.path.join(os.getcwd() +'\Assets\\buttons', 'select_button_new.png')), (MENU_BUTTON_WIDTH,MENU_BUTTON_HEIGHT))
+SELECTED_BUTTON = pygame.transform.scale(pygame.image.load(os.path.join(os.getcwd() +'\Assets\\buttons', 'skin_selected_button_new.png')), (MENU_BUTTON_WIDTH,MENU_BUTTON_HEIGHT))
+MAIN_MENU_BUTTON = pygame.transform.scale(pygame.image.load(os.path.join(os.getcwd() +'\Assets\\buttons', 'main_menu_button.png')), (MENU_BUTTON_WIDTH,MENU_BUTTON_HEIGHT))
+RIGHT_ARROW = pygame.transform.scale(pygame.image.load(os.path.join(os.getcwd() +'\Assets', 'right_arrow.png')), (50,50))
+RIGHT_ARROW_HOVER = pygame.transform.scale(pygame.image.load(os.path.join(os.getcwd() +'\Assets', 'right_arrow_hover.png')), (50,50))
+LEFT_ARROW = pygame.transform.scale(pygame.image.load(os.path.join(os.getcwd() +'\Assets', 'left_arrow.png')), (50,50))
+LEFT_ARROW_HOVER = pygame.transform.scale(pygame.image.load(os.path.join(os.getcwd() +'\Assets', 'left_arrow_hover.png')), (50,50))
     # main menu buttons
-QUIT_MENU_NO_HOVER_BUTTON = pygame.transform.scale(pygame.image.load(os.path.join("Assets\\buttons", 'quit_button_no_hover.png')), (MENU_BUTTON_WIDTH, MENU_BUTTON_HEIGHT))
-QUIT_MENU_HOVER_BUTTON = pygame.transform.scale(pygame.image.load(os.path.join('Assets\\buttons', 'quit_button_hover.png')), (MENU_BUTTON_WIDTH,MENU_BUTTON_HEIGHT))
-PLAY_MENU_NO_HOVER_BUTTON = pygame.transform.scale(pygame.image.load(os.path.join('Assets\\buttons', 'play_button_no_hover.png')), (MENU_BUTTON_WIDTH,MENU_BUTTON_HEIGHT))
-PLAY_MENU_HOVER_BUTTON = pygame.transform.scale(pygame.image.load(os.path.join('Assets\\buttons', 'play_button_hover.png')), (MENU_BUTTON_WIDTH,MENU_BUTTON_HEIGHT))
-COSTUMES_MENU_NO_HOVER_BUTTON = pygame.transform.scale(pygame.image.load(os.path.join('Assets\\buttons', 'costumes_no_hover.png')), (MENU_BUTTON_WIDTH,MENU_BUTTON_HEIGHT))
-COSTUMES_MENU_HOVER_BUTTON = pygame.transform.scale(pygame.image.load(os.path.join('Assets\\buttons', 'costumes_hover2.png')), (MENU_BUTTON_WIDTH,MENU_BUTTON_HEIGHT))
+QUIT_MENU_NO_HOVER_BUTTON = pygame.transform.scale(pygame.image.load(os.path.join(os.getcwd() +'\Assets\\buttons', 'quit_button_no_hover.png')), (MENU_BUTTON_WIDTH, MENU_BUTTON_HEIGHT))
+QUIT_MENU_HOVER_BUTTON = pygame.transform.scale(pygame.image.load(os.path.join(os.getcwd() +'\Assets\\buttons', 'quit_button_hover.png')), (MENU_BUTTON_WIDTH,MENU_BUTTON_HEIGHT))
+PLAY_MENU_NO_HOVER_BUTTON = pygame.transform.scale(pygame.image.load(os.path.join(os.getcwd() +'\Assets\\buttons', 'play_button_no_hover.png')), (MENU_BUTTON_WIDTH,MENU_BUTTON_HEIGHT))
+PLAY_MENU_HOVER_BUTTON = pygame.transform.scale(pygame.image.load(os.path.join(os.getcwd() +'\Assets\\buttons', 'play_button_hover.png')), (MENU_BUTTON_WIDTH,MENU_BUTTON_HEIGHT))
+COSTUMES_MENU_NO_HOVER_BUTTON = pygame.transform.scale(pygame.image.load(os.path.join(os.getcwd() +'\Assets\\buttons', 'costumes_no_hover.png')), (MENU_BUTTON_WIDTH,MENU_BUTTON_HEIGHT))
+COSTUMES_MENU_HOVER_BUTTON = pygame.transform.scale(pygame.image.load(os.path.join(os.getcwd() +'\Assets\\buttons', 'costumes_hover2.png')), (MENU_BUTTON_WIDTH,MENU_BUTTON_HEIGHT))
     # game paused buttons
-SPEAKER_OFF_BUTTON = pygame.transform.scale(pygame.image.load(os.path.join('Assets\\buttons', 'speakerOFF_button.png')), (60,60))
-SPEAKER_OFF_HOVER_BUTTON = pygame.transform.scale(pygame.image.load(os.path.join('Assets\\buttons', 'speakerOFF_hover_button.png')), (60,60))
-SPEAKER_ON_BUTTON = pygame.transform.scale(pygame.image.load(os.path.join('Assets\\buttons', 'speakerON_button.png')), (60,60))
-SPEAKER_ON_HOVER_BUTTON = pygame.transform.scale(pygame.image.load(os.path.join('Assets\\buttons', 'speakerON_hover_button.png')), (60,60))
-RESUME_NO_HOVER_BUTTON = pygame.transform.scale(pygame.image.load(os.path.join('Assets\\buttons','resume_button.png')), (150,100))
-RESUME_HOVER_BUTTON =pygame.transform.scale(pygame.image.load(os.path.join('Assets\\buttons','resume_button_hover.png')), (150,100))
-RETRY_BUTTON = pygame.transform.scale(pygame.image.load(os.path.join('Assets\\buttons','retry_button.png')), (150,100))
-RETRY_HOVER_BUTTON = pygame.transform.scale(pygame.image.load(os.path.join('Assets\\buttons','retry_button_hover.png')), (150,100))
-QUIT_GAME_BUTTON = pygame.transform.scale(pygame.image.load(os.path.join('Assets\\buttons','quit_game_button.png')), (150,100))
-QUIT_GAME_HOVER_BUTTON = pygame.transform.scale(pygame.image.load(os.path.join('Assets\\buttons','quit_game_button_hover.png')), (150,100))
+SPEAKER_OFF_BUTTON = pygame.transform.scale(pygame.image.load(os.path.join(os.getcwd() +'\Assets\\buttons', 'speakerOFF_button.png')), (60,60))
+SPEAKER_OFF_HOVER_BUTTON = pygame.transform.scale(pygame.image.load(os.path.join(os.getcwd() +'\Assets\\buttons', 'speakerOFF_hover_button.png')), (60,60))
+SPEAKER_ON_BUTTON = pygame.transform.scale(pygame.image.load(os.path.join(os.getcwd() +'\Assets\\buttons', 'speakerON_button.png')), (60,60))
+SPEAKER_ON_HOVER_BUTTON = pygame.transform.scale(pygame.image.load(os.path.join(os.getcwd() +'\Assets\\buttons', 'speakerON_hover_button.png')), (60,60))
+RESUME_NO_HOVER_BUTTON = pygame.transform.scale(pygame.image.load(os.path.join(os.getcwd() +'\Assets\\buttons','resume_button.png')), (150,100))
+RESUME_HOVER_BUTTON =pygame.transform.scale(pygame.image.load(os.path.join(os.getcwd() +'\Assets\\buttons','resume_button_hover.png')), (150,100))
+RETRY_BUTTON = pygame.transform.scale(pygame.image.load(os.path.join(os.getcwd() +'\Assets\\buttons','retry_button.png')), (150,100))
+RETRY_HOVER_BUTTON = pygame.transform.scale(pygame.image.load(os.path.join(os.getcwd() +'\Assets\\buttons','retry_button_hover.png')), (150,100))
+QUIT_GAME_BUTTON = pygame.transform.scale(pygame.image.load(os.path.join(os.getcwd() +'\Assets\\buttons','quit_game_button.png')), (150,100))
+QUIT_GAME_HOVER_BUTTON = pygame.transform.scale(pygame.image.load(os.path.join(os.getcwd() +'\Assets\\buttons','quit_game_button_hover.png')), (150,100))
 
 
 # fonts / pre-made texts
 SCORE_FONT = pygame.font.SysFont('New Athletic M54', 40)
-GAME_OVER_TEXT = pygame.image.load(os.path.join('Assets', 'game_over_img.png'))
-PRICE1000 = pygame.transform.scale(pygame.image.load(os.path.join('Assets', '1000price.png')), (100,100))
+GAME_OVER_TEXT = pygame.image.load(os.path.join(os.getcwd() +'\Assets', 'game_over_img.png'))
+PRICE1000 = pygame.transform.scale(pygame.image.load(os.path.join(os.getcwd() +'\Assets', '1000price.png')), (100,100))
 
 
 # sound settings
     #obstacles sound fx
-START_OF_LASER = pygame.mixer.Sound(os.path.join('Assets\Sounds', 'startLaser.mp3'))
-LASER_ON = pygame.mixer.Sound(os.path.join('Assets\Sounds', 'laserOn.mp3'))
-MISSILE_WARNING = pygame.mixer.Sound(os.path.join('Assets\Sounds', 'missile_warning.mp3'))
-MISSILE_LAUNCHED = pygame.mixer.Sound(os.path.join('Assets\Sounds', 'missile_launched.mp3'))
+START_OF_LASER = pygame.mixer.Sound(os.path.join(os.getcwd() +'\Assets\Sounds', 'startLaser.mp3'))
+LASER_ON = pygame.mixer.Sound(os.path.join(os.getcwd() +'\Assets\Sounds', 'laserOn.mp3'))
+MISSILE_WARNING = pygame.mixer.Sound(os.path.join(os.getcwd() +'\Assets\Sounds', 'missile_warning.mp3'))
+MISSILE_LAUNCHED = pygame.mixer.Sound(os.path.join(os.getcwd() +'\Assets\Sounds', 'missile_launched.mp3'))
     #extras
-MAN_SCREAM = pygame.mixer.Sound(os.path.join('Assets\Sounds', 'man-scream.mp3'))
-COIN_SOUND = pygame.mixer.Sound(os.path.join('Assets\Sounds', 'coin_sound.mp3'))
+MAN_SCREAM = pygame.mixer.Sound(os.path.join(os.getcwd() +'\Assets\Sounds', 'man-scream.mp3'))
+COIN_SOUND = pygame.mixer.Sound(os.path.join(os.getcwd() +'\Assets\Sounds', 'coin_sound.mp3'))
     #game music
-MENU_MUSIC = pygame.mixer.Sound(os.path.join('Assets\Sounds', 'remix.mp3'))
-GAME_OVER_SOUND = pygame.mixer.Sound(os.path.join('Assets\Sounds', 'game-over-sound.mp3'))
-GAME_MUSIC = pygame.mixer.Sound(os.path.join('Assets\Sounds', 'game_music.mp3'))
+MENU_MUSIC = pygame.mixer.Sound(os.path.join(os.getcwd() +'\Assets\Sounds', 'remix.mp3'))
+GAME_OVER_SOUND = pygame.mixer.Sound(os.path.join(os.getcwd() +'\Assets\Sounds', 'game-over-sound.mp3'))
+GAME_MUSIC = pygame.mixer.Sound(os.path.join(os.getcwd() +'\Assets\Sounds', 'game_music.mp3'))

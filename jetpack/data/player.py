@@ -87,8 +87,10 @@ class Player(object):
 
         # implement movement to the player's jetpack.
         if pygame.time.get_ticks() - start_time < 110:
-            self.rect.y -= self.vel
-            self.rect.x += 2
+            if self.rect.y > 0:
+                self.rect.y -= self.vel
+            if self.rect.x < WIDTH:
+                self.rect.x += 2
 
     ''' set player alive and death animation. '''
     def set_player_animation(self, type):
