@@ -89,7 +89,7 @@ class Player(object):
         if pygame.time.get_ticks() - start_time < 110:
             if self.rect.y > 0:
                 self.rect.y -= self.vel
-            if self.rect.x < WIDTH:
+            if self.rect.x+self.rect.width < WIDTH:
                 self.rect.x += 2
 
     ''' set player alive and death animation. '''
@@ -110,7 +110,7 @@ class Player(object):
 
         def _init_asset(asset_name: str):
             return pygame.transform.scale(
-                pygame.image.load(os.path.join("Assets\\boy_animation_jetpack", asset_name)),(self.rect.width+15, self.rect.height+15))
+                pygame.image.load(os.path.join(os.getcwd() +'\Assets\\boy_animation_jetpack', asset_name)),(self.rect.width+15, self.rect.height+15))
 
         self.sprites = [_init_asset(asset_name) for asset_name in DEFAULT_MALE_ASSETS]
 
@@ -121,7 +121,7 @@ class Player(object):
 
         def _init_asset(asset_name: str):
             return pygame.transform.scale(
-                pygame.image.load(os.path.join("Assets\girl_animation_jetpack", asset_name)),(self.rect.width+15, self.rect.height+15))
+                pygame.image.load(os.path.join(os.getcwd() +'\Assets\girl_animation_jetpack', asset_name)),(self.rect.width+15, self.rect.height+15))
 
         self.sprites = [_init_asset(asset_name) for asset_name in DEFAULT_FEMALE_ASSETS]
 
@@ -132,7 +132,7 @@ class Player(object):
 
         def _init_asset(asset_name: str):
             return pygame.transform.scale(
-                pygame.image.load(os.path.join("Assets\shrek_animation_jetpack", asset_name)),(self.rect.width+15, self.rect.height+15))
+                pygame.image.load(os.path.join(os.getcwd() +'\Assets\shrek_animation_jetpack', asset_name)),(self.rect.width+15, self.rect.height+15))
 
         self.sprites = [_init_asset(asset_name) for asset_name in SHREK_ASSETS]
  
@@ -145,7 +145,7 @@ class Player(object):
 
         def _init_asset(asset_name: str):
             return pygame.transform.scale(
-                pygame.image.load(os.path.join("Assets\player_hurt", asset_name)),(self.rect.width, self.rect.height))
+                pygame.image.load(os.path.join(os.getcwd() +'\Assets\player_hurt', asset_name)),(self.rect.width, self.rect.height))
 
         self.death_sprites = [_init_asset(asset_name) for asset_name in DEFAULT_MALE_HURT_ASSETS]
  
@@ -157,7 +157,7 @@ class Player(object):
                                     , "playerGirl_hurt13.png" ]
         def _init_asset(asset_name: str):
             return pygame.transform.scale(
-                pygame.image.load(os.path.join("Assets\player_girl_hurt", asset_name)),(self.rect.width+20, self.rect.height+20))
+                pygame.image.load(os.path.join(os.getcwd() +'\Assets\player_girl_hurt', asset_name)),(self.rect.width+20, self.rect.height+20))
 
         self.death_sprites = [_init_asset(asset_name) for asset_name in DEFAULT_FEMALE_HURT_ASSETS]
  
@@ -167,6 +167,6 @@ class Player(object):
         SHREK_HURT_ASSETS = ["shrek1.png", "shrek2.png", "shrek3.png", "shrek4.png", "shrek5.png", "shrek6.png" ]
         def _init_asset(asset_name: str):
             return pygame.transform.scale(
-                pygame.image.load(os.path.join("Assets\shrek_hurt", asset_name)),(self.rect.width+20, self.rect.height+20))
+                pygame.image.load(os.path.join(os.getcwd() +'\Assets\shrek_hurt', asset_name)),(self.rect.width+20, self.rect.height+20))
 
         self.death_sprites = [_init_asset(asset_name) for asset_name in SHREK_HURT_ASSETS]
