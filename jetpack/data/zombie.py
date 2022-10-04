@@ -59,7 +59,7 @@ class Zombie(object):
 
     ''' This function set the zombie walking animation (walking left/ walking right). '''
     def zombie_walking_animation(self, zombie_walking_animation_assets):
-        def _init_asset(asset_name: str, flip):
+        def _init_asset(asset_name: str):
             return pygame.transform.scale(
                 pygame.image.load(os.path.join("Assets\zombie_walking", asset_name)),(self.rect.width, self.rect.height))
         def _flip_asset(asset_name):
