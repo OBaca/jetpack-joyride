@@ -89,7 +89,7 @@ class Missile():
                         "missile6.png", "missile7.png" ]
 
         def _init_asset(asset_name: str):
-            return pygame.transform.scale(pygame.image.load(os.path.join("Assets\missileSmoke", asset_name)), (self.rect.width+15, self.rect.height+15))
+            return pygame.transform.scale(pygame.image.load(os.path.join(os.getcwd() +"\Assets\missileSmoke", asset_name)), (self.rect.width+15, self.rect.height+15))
 
         self.smoke_sprites = [_init_asset(asset_name) for asset_name in MISSILE_ASSETS]
 

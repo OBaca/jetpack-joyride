@@ -1,5 +1,9 @@
 from data.constants import *
 
+LASERS_ASSETS = ["lasers1.png", "lasers2.png", "lasers3.png", "lasers4.png", "lasers5.png",
+                        "lasers6.png", "lasers7.png", "lasers8.png", "lasers9.png", "lasers10.png"
+                        , "lasers11.png", "lasers12.png"]
+
 class Lasers(object):
     ''' This class represent a laser obstacle. '''
     def __init__(self):
@@ -43,12 +47,8 @@ class Lasers(object):
 
     ''' This function set the image animation for the lasers'''
     def lasers_animation(self):
-        LASERS_ASSETS = ["lasers1.png", "lasers2.png", "lasers3.png", "lasers4.png", "lasers5.png",
-                        "lasers6.png", "lasers7.png", "lasers8.png", "lasers9.png", "lasers10.png"
-                        , "lasers11.png", "lasers12.png"]
-
         def _init_asset(asset_name: str):
-            return pygame.image.load(os.path.join("Assets\lasers_animation", asset_name))
+            return pygame.image.load(os.path.join(os.getcwd() + "\Assets\lasers_animation", asset_name))
 
         self.animation_sprite = [_init_asset(asset_name) for asset_name in LASERS_ASSETS]
 

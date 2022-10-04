@@ -1,5 +1,9 @@
 from data.constants import *
 
+ZAPPER_VERTICAL_ASSETS = ["vertical_zapper1.png", "vertical_zapper2.png", "vertical_zapper3.png", "vertical_zapper4.png"]
+ZAPPER_HORIZONTAL_ASSETS = ["horizontal_zapper1.png", "horizontal_zapper2.png", "horizontal_zapper3.png", "horizontal_zapper4.png"]
+
+
 class Zappers(object):
     ''' This class represent the zapper obstacle. '''
     def __init__(self, rect, style, image):
@@ -45,11 +49,9 @@ class Zappers(object):
 
     ''' This function set the animation for the zappers. '''
     def update_animation(self):
-        ZAPPER_VERTICAL_ASSETS = ["vertical_zapper1.png", "vertical_zapper2.png", "vertical_zapper3.png", "vertical_zapper4.png"]
-        ZAPPER_HORIZONTAL_ASSETS = ["horizontal_zapper1.png", "horizontal_zapper2.png", "horizontal_zapper3.png", "horizontal_zapper4.png"]
-
+        
         def _init_asset(asset_name: str):
-            return pygame.image.load(os.path.join("Assets\zappers_animation", asset_name))
+            return pygame.image.load(os.path.join(os.getcwd() +"\Assets\zappers_animation", asset_name))
 
         self.vertical_sprite = [_init_asset(asset_name) for asset_name in ZAPPER_VERTICAL_ASSETS]
         self.horizontal_sprite = [_init_asset(asset_name) for asset_name in ZAPPER_HORIZONTAL_ASSETS]

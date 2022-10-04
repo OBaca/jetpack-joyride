@@ -1,5 +1,9 @@
 from .constants import *
 
+COIN_ASSETS = ["coin1.png", "coin2.png", "coin3.png", "coin4.png", "coin5.png",
+                        "coin6.png", "coin7.png", "coin8.png", "coin9.png", "coin10.png"]
+
+
 class Coin(pygame.sprite.Sprite):
     '''
     This class represent a single coin currency in the game.
@@ -36,11 +40,8 @@ class Coin(pygame.sprite.Sprite):
 
     ''' This function set the image animation to a single coin.  '''
     def coin_animation(self):
-        COIN_ASSETS = ["coin1.png", "coin2.png", "coin3.png", "coin4.png", "coin5.png",
-                        "coin6.png", "coin7.png", "coin8.png", "coin9.png", "coin10.png"]
-
         def _init_asset(asset_name: str):
             return pygame.transform.scale(
-                pygame.image.load(os.path.join("Assets\coins", asset_name)),(COIN_SIZE, COIN_SIZE))
+                pygame.image.load(os.path.join(os.getcwd() + "\Assets\coins", asset_name)),(COIN_SIZE, COIN_SIZE))
 
         self.sprites = [_init_asset(asset_name) for asset_name in COIN_ASSETS]
