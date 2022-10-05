@@ -10,7 +10,7 @@ class Lasers(object):
         self.reset()
         # initialize images for the lasers
         self.pre_lasers = pygame.transform.scale(PRE_LASERS, (self.pre_rect.width, self.pre_rect.height))
-        self.post_lasers = pygame.transform.scale(pygame.image.load(os.path.join('Assets\lasers_animation', 'lasers1.png')), (self.post_rect.width, self.post_rect.height))
+        self.post_lasers = pygame.transform.scale(load_image('lasers_animation/lasers1.png'), (self.post_rect.width, self.post_rect.height))
         self.lasers_animation(LASERS_ASSETS)
 
 
@@ -48,7 +48,7 @@ class Lasers(object):
     ''' This function set the image animation for the lasers'''
     def lasers_animation(self, animation_asset):
         def _init_asset(asset_name: str):
-            return pygame.image.load(os.path.join(os.getcwd() + "\Assets\lasers_animation", asset_name))
+            return load_image(os.path.join("lasers_animation", asset_name))
 
         self.animation_sprite = [_init_asset(asset_name) for asset_name in animation_asset]
 

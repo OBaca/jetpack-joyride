@@ -42,6 +42,6 @@ class Coin(pygame.sprite.Sprite):
     def coin_animation(self, coin_animation_asset):
         def _init_asset(asset_name: str):
             return pygame.transform.scale(
-                pygame.image.load(os.path.join(os.getcwd() + "\Assets\coins", asset_name)),(COIN_SIZE, COIN_SIZE))
+                load_image(os.path.join("coins", asset_name)),(COIN_SIZE, COIN_SIZE))
 
         self.sprites = [_init_asset(asset_name) for asset_name in coin_animation_asset]

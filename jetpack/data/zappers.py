@@ -51,7 +51,7 @@ class Zappers(object):
     def update_animation(self, vertical_animation_asset, horizontal_animation_asset):
         
         def _init_asset(asset_name: str):
-            return pygame.image.load(os.path.join(os.getcwd() +"\Assets\zappers_animation", asset_name))
+            return load_image(os.path.join("zappers_animation", asset_name))
 
         self.vertical_sprite = [_init_asset(asset_name) for asset_name in vertical_animation_asset]
         self.horizontal_sprite = [_init_asset(asset_name) for asset_name in horizontal_animation_asset]
@@ -69,7 +69,7 @@ def zappers_placement(zappers, lasers, death, score):
 
     # small vertical and horizontal zappers that are spawned together.
     for zapper in zappers:
-        # increasing the spead of the zappers.
+        # increasing the speed of the zappers.
         if score%zappers_speed_timing == 0:
             zapper.increase_speed += 0.5
             if zapper.increase_speed >= 10:

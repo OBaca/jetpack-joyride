@@ -10,9 +10,9 @@ class Missile():
         self.warning = [WIDTH+60,100]
         self.launch = [WIDTH+60,150]
         # set images
-        self.missile_img = pygame.transform.scale(pygame.image.load(os.path.join('Assets/missile_animation','missile_off.png')), (100,80))
-        self.missile_warning_img = pygame.transform.scale(pygame.image.load(os.path.join('Assets/missile_animation','rocket_warning.png')), (60,60))
-        self.missile_launch_img = pygame.transform.scale(pygame.image.load(os.path.join('Assets/missile_animation','warning.png')), (60,60))
+        self.missile_img = pygame.transform.scale(load_image('missile_animation/missile_off.png'), (100,80))
+        self.missile_warning_img = pygame.transform.scale(load_image('missile_animation/rocket_warning.png'), (60,60))
+        self.missile_launch_img = pygame.transform.scale(load_image('missile_animation/warning.png'), (60,60))
         # set missile animation
         self.missile_animation(MISSILE_ASSETS)
 
@@ -89,7 +89,7 @@ class Missile():
     ''' This function set the missile animation. '''
     def missile_animation(self, missile_animation_asset):
         def _init_asset(asset_name: str):
-            return pygame.transform.scale(pygame.image.load(os.path.join(os.getcwd() +"\Assets\missile_animation", asset_name)), (self.rect.width+15, self.rect.height+15))
+            return pygame.transform.scale(load_image(os.path.join("missile_animation", asset_name)), (self.rect.width+15, self.rect.height+15))
 
         self.smoke_sprites = [_init_asset(asset_name) for asset_name in missile_animation_asset]
 
@@ -163,7 +163,7 @@ def missile_movement(missiles, score, player, silent_music):
         missiles[1].shoot_missile(score, player)
         
         
-''' This function set the missile position accoring to the scenrio given. '''
+''' This function set the missile position according to the scenrio given. '''
 def missiles_scenrios(missiles, player, action, scenrio):
     '''
     scenrios:

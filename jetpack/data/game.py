@@ -204,6 +204,7 @@ def game(coins_amount, player, screen):
                     # set the jetpack "feel" to the game.
                     player.image = get_player_image_game(player.type)
                     start_time = pygame.time.get_ticks()
+                    player.current_vel = 0
                     
             # activate player death music and time.
             if event.type == PLAYER_HIT:

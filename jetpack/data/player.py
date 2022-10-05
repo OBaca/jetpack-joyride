@@ -1,3 +1,4 @@
+from anyio import current_time
 from data.constants import *
 
 # players type
@@ -28,6 +29,9 @@ class Player(object):
         self.type = type
         self.rect = pygame.Rect(100,450,60,75)
         self.vel = 7
+        self.up_vel = 0
+        self.down_vel = 0 
+        self.max_vel = 7
         self.gravity = 8
         self.image = image
         # death sprite index
@@ -73,6 +77,18 @@ class Player(object):
                 return True
 
 
+    ''' This function is increasing speed to the velocity of the player when the player jetpack is on. '''
+    def player_up_velocity(self):
+        self.up_vel += 0.5
+        return min(self.up_vel, self.max_vel)
+    
+
+    ''' This function is increasing speed to the velocity of the player when the player jetpack is off. '''
+    def player_down_velocity(self):
+        self.down_vel += 0.5
+        return min(self.down_vel, self.gravity)
+
+
     ''' This function manage the player movement. '''
     def player_movement(self, pressed_key, start_time):
         # a/d or left/right - the movement of the player to the left or the right.
@@ -83,13 +99,14 @@ class Player(object):
 
         # space/W/up key - to jump and animate jetpack animation.
         if (pressed_key[pygame.K_SPACE] or pressed_key[pygame.K_w] or pressed_key[pygame.K_UP] ) and self.rect.y > 0 and self.death == False:
-            self.rect.y -= self.vel
+            self.rect.y -= self.player_up_velocity()
             self.update_jetpack()
+            self.down_vel = 0
 
         # implement gravity to the player with a jetpack "feel".
-        elif pygame.time.get_ticks() - start_time > 110:
-            if self.rect.y + self.rect.height < HEIGHT - FIX_IMAGE_LIMIT:
-                self.rect.y += self.gravity
+        #elif pygame.time.get_ticks() - start_time > 110:
+        if self.rect.y + self.rect.height < HEIGHT - FIX_IMAGE_LIMIT:
+            self.rect.y += self.player_down_velocity()
 
         # fix the player image to the screen frame
         elif self.rect.y + self.rect.height + self.vel >= HEIGHT - FIX_IMAGE_LIMIT:
@@ -102,8 +119,6 @@ class Player(object):
         if pygame.time.get_ticks() - start_time < 110:
             if self.rect.y > 0:
                 self.rect.y -= self.vel
-            if self.rect.x+self.rect.width < WIDTH:
-                self.rect.x += 2
 
     ''' set player alive and death animation. '''
     def set_player_animation(self, type):
@@ -121,7 +136,7 @@ class Player(object):
     def default_male_jetpack_animation(self, animation_asset):
         def _init_asset(asset_name: str):
             return pygame.transform.scale(
-                pygame.image.load(os.path.join(os.getcwd() +'\Assets\\boy_animation_jetpack', asset_name)),(self.rect.width+15, self.rect.height+15))
+                load_image(os.path.join('boy_animation_jetpack', asset_name)),(self.rect.width+15, self.rect.height+15))
 
         self.sprites = [_init_asset(asset_name) for asset_name in animation_asset]
 
@@ -130,7 +145,7 @@ class Player(object):
     def default_female_jetpack_animation(self, animation_asset):
         def _init_asset(asset_name: str):
             return pygame.transform.scale(
-                pygame.image.load(os.path.join(os.getcwd() +'\Assets\girl_animation_jetpack', asset_name)),(self.rect.width+15, self.rect.height+15))
+                load_image(os.path.join('girl_animation_jetpack', asset_name)),(self.rect.width+15, self.rect.height+15))
 
         self.sprites = [_init_asset(asset_name) for asset_name in animation_asset]
 
@@ -139,7 +154,7 @@ class Player(object):
     def shrek_jetpack_animation(self, animation_asset):
         def _init_asset(asset_name: str):
             return pygame.transform.scale(
-                pygame.image.load(os.path.join(os.getcwd() +'\Assets\shrek_animation_jetpack', asset_name)),(self.rect.width+15, self.rect.height+15))
+                load_image(os.path.join('shrek_animation_jetpack', asset_name)),(self.rect.width+15, self.rect.height+15))
 
         self.sprites = [_init_asset(asset_name) for asset_name in animation_asset]
  
@@ -148,7 +163,7 @@ class Player(object):
     def player_boy_hurt_animation(self, animation_asset):
         def _init_asset(asset_name: str):
             return pygame.transform.scale(
-                pygame.image.load(os.path.join(os.getcwd() +'\Assets\player_hurt', asset_name)),(self.rect.width, self.rect.height))
+                load_image(os.path.join('player_hurt', asset_name)),(self.rect.width, self.rect.height))
 
         self.death_sprites = [_init_asset(asset_name) for asset_name in animation_asset]
  
@@ -157,7 +172,7 @@ class Player(object):
     def player_girl_hurt_animation(self, animation_asset):
         def _init_asset(asset_name: str):
             return pygame.transform.scale(
-                pygame.image.load(os.path.join(os.getcwd() +'\Assets\player_girl_hurt', asset_name)),(self.rect.width+20, self.rect.height+20))
+                load_image(os.path.join('player_girl_hurt', asset_name)),(self.rect.width+20, self.rect.height+20))
 
         self.death_sprites = [_init_asset(asset_name) for asset_name in animation_asset]
  
@@ -166,6 +181,7 @@ class Player(object):
     def shrek_hurt_animation(self, animation_asset):
         def _init_asset(asset_name: str):
             return pygame.transform.scale(
-                pygame.image.load(os.path.join(os.getcwd() +'\Assets\shrek_hurt', asset_name)),(self.rect.width+20, self.rect.height+20))
+                load_image(os.path.join('shrek_hurt', asset_name)),(self.rect.width+20, self.rect.height+20))
 
         self.death_sprites = [_init_asset(asset_name) for asset_name in animation_asset]
+        
