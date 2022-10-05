@@ -2,13 +2,13 @@ from data.constants import *
 
 class Map():
     ''' This class represent the map of the game. '''
-    def __init__(self):
-        self.reset()
+    def __init__(self, background_image):
+        self.reset(background_image)
 
 
     ''' This function reset all the variables of the class Map'''
-    def reset(self):
-        self.image = pygame.transform.scale(pygame.image.load(os.path.join('Assets', 'bg.png')), (WIDTH,HEIGHT))
+    def reset(self, background_image):
+        self.image = background_image
         self.imageX = 0
         self.imageX2 = self.image.get_width()
         self.speed = 1.2

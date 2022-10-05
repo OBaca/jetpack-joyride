@@ -2,6 +2,19 @@ from data.constants import *
 
 # players type
 players_selection = {'default-male-player':0, 'default-female-player':1, 'shrek':2}
+# jetpack animation assets
+DEFAULT_MALE_ASSETS = ["jetpack1.png", "jetpack2.png", "jetpack3.png", "jetpack4.png"]
+DEFAULT_FEMALE_ASSETS = ["playerGirl2.png", "playerGirl3.png", "playerGirl4.png", "playerGirl5.png"]
+SHREK_ASSETS = ["shrek2.png", "shrek3.png", "shrek4.png", "shrek1.png"]
+# death animation assets
+DEFAULT_MALE_HURT_ASSETS = ["playerHurt1.png", "playerHurt2.png", "playerHurt3.png", "playerHurt4.png", "playerHurt5.png", "playerHurt6.png"
+                            , "playerHurt7.png", "playerHurt8.png", "playerHurt9.png", "playerHurt10.png", "playerHurt11.png", "playerHurt12.png"
+                            , "playerHurt13.png", "playerHurt14.png", "playerHurt15.png", "playerHurt16.png", "playerHurt17.png", "playerHurt18.png"]
+DEFAULT_FEMALE_HURT_ASSETS = ["playerGirl_hurt1.png", "playerGirl_hurt2.png", "playerGirl_hurt3.png", "playerGirl_hurt4.png", "playerGirl_hurt5.png", "playerGirl_hurt6.png"
+                            , "playerGirl_hurt7.png", "playerGirl_hurt8.png", "playerGirl_hurt9.png", "playerGirl_hurt10.png", "playerGirl_hurt11.png", "playerGirl_hurt12.png"
+                            , "playerGirl_hurt13.png" ]
+SHREK_HURT_ASSETS =         ["shrek1.png", "shrek2.png", "shrek3.png", "shrek4.png", "shrek5.png", "shrek6.png" ]
+
 
 class Player(object):
     ''' This class represent the player in the game. '''
@@ -62,14 +75,14 @@ class Player(object):
 
     ''' This function manage the player movement. '''
     def player_movement(self, pressed_key, start_time):
-        # a/d -> left/right movement.
-        if pressed_key[pygame.K_a] and self.rect.x > 0 and self.death == False:
+        # a/d or left/right - the movement of the player to the left or the right.
+        if (pressed_key[pygame.K_a] or pressed_key[pygame.K_LEFT]) and self.rect.x > 0 and self.death == False:
             self.rect.x -= self.vel
-        elif pressed_key[pygame.K_d] and self.rect.x + self.rect.width < WIDTH and self.death == False:
+        elif (pressed_key[pygame.K_d] or pressed_key[pygame.K_RIGHT]) and self.rect.x + self.rect.width < WIDTH and self.death == False:
             self.rect.x += self.vel
 
-        # space key to jump and animate jetpack animation.
-        if pressed_key[pygame.K_SPACE] and self.rect.y > 0 and self.death == False:
+        # space/W/up key - to jump and animate jetpack animation.
+        if (pressed_key[pygame.K_SPACE] or pressed_key[pygame.K_w] or pressed_key[pygame.K_UP] ) and self.rect.y > 0 and self.death == False:
             self.rect.y -= self.vel
             self.update_jetpack()
 
@@ -95,78 +108,64 @@ class Player(object):
     ''' set player alive and death animation. '''
     def set_player_animation(self, type):
         if self.type == 0:
-            self.default_male_jetpack_animation()
-            self.player_boy_hurt_animation()
+            self.default_male_jetpack_animation(DEFAULT_MALE_ASSETS)
+            self.player_boy_hurt_animation(DEFAULT_MALE_HURT_ASSETS)
         if self.type == 1:
-            self.default_female_jetpack_animation()
-            self.player_girl_hurt_animation()
+            self.default_female_jetpack_animation(DEFAULT_FEMALE_ASSETS)
+            self.player_girl_hurt_animation(DEFAULT_FEMALE_HURT_ASSETS)
         if self.type == 2:
-            self.shrek_jetpack_animation()
-            self.shrek_hurt_animation()
+            self.shrek_jetpack_animation(SHREK_ASSETS)
+            self.shrek_hurt_animation(SHREK_HURT_ASSETS)
 
     ''' This function creates animation to the default male player. '''
-    def default_male_jetpack_animation(self):
-        DEFAULT_MALE_ASSETS = ["jetpack1.png", "jetpack2.png", "jetpack3.png", "jetpack4.png"]
-
+    def default_male_jetpack_animation(self, animation_asset):
         def _init_asset(asset_name: str):
             return pygame.transform.scale(
                 pygame.image.load(os.path.join(os.getcwd() +'\Assets\\boy_animation_jetpack', asset_name)),(self.rect.width+15, self.rect.height+15))
 
-        self.sprites = [_init_asset(asset_name) for asset_name in DEFAULT_MALE_ASSETS]
+        self.sprites = [_init_asset(asset_name) for asset_name in animation_asset]
 
 
     ''' This function creates animation to the default female player. ''' 
-    def default_female_jetpack_animation(self):
-        DEFAULT_FEMALE_ASSETS = ["playerGirl2.png", "playerGirl3.png", "playerGirl4.png", "playerGirl5.png"]
-
+    def default_female_jetpack_animation(self, animation_asset):
         def _init_asset(asset_name: str):
             return pygame.transform.scale(
                 pygame.image.load(os.path.join(os.getcwd() +'\Assets\girl_animation_jetpack', asset_name)),(self.rect.width+15, self.rect.height+15))
 
-        self.sprites = [_init_asset(asset_name) for asset_name in DEFAULT_FEMALE_ASSETS]
+        self.sprites = [_init_asset(asset_name) for asset_name in animation_asset]
 
 
     ''' This function creates animation for the skin shrek. '''
-    def shrek_jetpack_animation(self):
-        SHREK_ASSETS = ["shrek2.png", "shrek3.png", "shrek4.png", "shrek1.png"]
-
+    def shrek_jetpack_animation(self, animation_asset):
         def _init_asset(asset_name: str):
             return pygame.transform.scale(
                 pygame.image.load(os.path.join(os.getcwd() +'\Assets\shrek_animation_jetpack', asset_name)),(self.rect.width+15, self.rect.height+15))
 
-        self.sprites = [_init_asset(asset_name) for asset_name in SHREK_ASSETS]
+        self.sprites = [_init_asset(asset_name) for asset_name in animation_asset]
  
 
     ''' This function creates animation to the default male player when he dies. '''
-    def player_boy_hurt_animation(self):
-        DEFAULT_MALE_HURT_ASSETS = ["playerHurt1.png", "playerHurt2.png", "playerHurt3.png", "playerHurt4.png", "playerHurt5.png", "playerHurt6.png"
-                                    , "playerHurt7.png", "playerHurt8.png", "playerHurt9.png", "playerHurt10.png", "playerHurt11.png", "playerHurt12.png"
-                                    , "playerHurt13.png", "playerHurt14.png", "playerHurt15.png", "playerHurt16.png", "playerHurt17.png", "playerHurt18.png"]
-
+    def player_boy_hurt_animation(self, animation_asset):
         def _init_asset(asset_name: str):
             return pygame.transform.scale(
                 pygame.image.load(os.path.join(os.getcwd() +'\Assets\player_hurt', asset_name)),(self.rect.width, self.rect.height))
 
-        self.death_sprites = [_init_asset(asset_name) for asset_name in DEFAULT_MALE_HURT_ASSETS]
+        self.death_sprites = [_init_asset(asset_name) for asset_name in animation_asset]
  
 
     ''' This function creates animation to the default female player when she dies. '''
-    def player_girl_hurt_animation(self):
-        DEFAULT_FEMALE_HURT_ASSETS = ["playerGirl_hurt1.png", "playerGirl_hurt2.png", "playerGirl_hurt3.png", "playerGirl_hurt4.png", "playerGirl_hurt5.png", "playerGirl_hurt6.png"
-                                    , "playerGirl_hurt7.png", "playerGirl_hurt8.png", "playerGirl_hurt9.png", "playerGirl_hurt10.png", "playerGirl_hurt11.png", "playerGirl_hurt12.png"
-                                    , "playerGirl_hurt13.png" ]
+    def player_girl_hurt_animation(self, animation_asset):
         def _init_asset(asset_name: str):
             return pygame.transform.scale(
                 pygame.image.load(os.path.join(os.getcwd() +'\Assets\player_girl_hurt', asset_name)),(self.rect.width+20, self.rect.height+20))
 
-        self.death_sprites = [_init_asset(asset_name) for asset_name in DEFAULT_FEMALE_HURT_ASSETS]
+        self.death_sprites = [_init_asset(asset_name) for asset_name in animation_asset]
  
  
     ''' This function creates animation for the skin shrek when he dies. '''
-    def shrek_hurt_animation(self):
-        SHREK_HURT_ASSETS = ["shrek1.png", "shrek2.png", "shrek3.png", "shrek4.png", "shrek5.png", "shrek6.png" ]
+    def shrek_hurt_animation(self, animation_asset):
         def _init_asset(asset_name: str):
             return pygame.transform.scale(
                 pygame.image.load(os.path.join(os.getcwd() +'\Assets\shrek_hurt', asset_name)),(self.rect.width+20, self.rect.height+20))
 
-        self.death_sprites = [_init_asset(asset_name) for asset_name in SHREK_HURT_ASSETS]
+        self.death_sprites = [_init_asset(asset_name) for asset_name in animation_asset]

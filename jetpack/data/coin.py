@@ -9,7 +9,7 @@ class Coin(pygame.sprite.Sprite):
     This class represent a single coin currency in the game.
     '''
     def __init__(self, x, y):
-        self.coin_animation()
+        self.coin_animation(COIN_ASSETS)
         self.reset( x, y)
 
     
@@ -39,9 +39,9 @@ class Coin(pygame.sprite.Sprite):
 
 
     ''' This function set the image animation to a single coin.  '''
-    def coin_animation(self):
+    def coin_animation(self, coin_animation_asset):
         def _init_asset(asset_name: str):
             return pygame.transform.scale(
                 pygame.image.load(os.path.join(os.getcwd() + "\Assets\coins", asset_name)),(COIN_SIZE, COIN_SIZE))
 
-        self.sprites = [_init_asset(asset_name) for asset_name in COIN_ASSETS]
+        self.sprites = [_init_asset(asset_name) for asset_name in coin_animation_asset]

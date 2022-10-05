@@ -22,10 +22,11 @@ def get_player_image_game(type):
         return JETPACK_OFF_SHREK
 
 
+
 ''' This function manage the game loop. '''
 def game(coins_amount, player, screen):
     # map creation.
-    map = Map()
+    map = Map(GAME_BG)
     # obstacle creations
     zappers = []
     zappers.append(Zappers(pygame.Rect(random.randint(WIDTH, WIDTH+200),random.randint(FIX_IMAGE_LIMIT, HEIGHT-140),40,140) ,  'along', OBS_IMG1)) 
@@ -38,11 +39,11 @@ def game(coins_amount, player, screen):
     
     
     # buttons
-    resume_button = Button(pygame.Rect(WIDTH//2 - 75, HEIGHT//2 - 120, 150, 100), RESUME_NO_HOVER_BUTTON)
-    retry_button = Button(pygame.Rect(WIDTH//2 - 75, HEIGHT//2, 150, 100), RETRY_BUTTON)
-    quit_button = Button(pygame.Rect(WIDTH//2 - 75, HEIGHT//2 + 120, 150, 100), QUIT_GAME_BUTTON)
-    speaker_off_button = Button(pygame.Rect(WIDTH//2 - 75, HEIGHT//2 - 200, 100, 50), SPEAKER_OFF_BUTTON)
-    speaker_on_button = Button(pygame.Rect(WIDTH//2 + 15, HEIGHT//2 - 200, 100, 50), SPEAKER_ON_BUTTON)
+    resume_button = Button(pygame.Rect(WIDTH//2 - 75, HEIGHT//2 - 120, 150, 100), RESUME_NO_HOVER_BUTTON, RESUME_HOVER_BUTTON)
+    retry_button = Button(pygame.Rect(WIDTH//2 - 75, HEIGHT//2, 150, 100), RETRY_BUTTON, RETRY_HOVER_BUTTON)
+    quit_button = Button(pygame.Rect(WIDTH//2 - 75, HEIGHT//2 + 120, 150, 100), QUIT_GAME_BUTTON, QUIT_GAME_HOVER_BUTTON)
+    speaker_off_button = Button(pygame.Rect(WIDTH//2 - 75, HEIGHT//2 - 200, 100, 50), SPEAKER_OFF_BUTTON, SPEAKER_OFF_HOVER_BUTTON)
+    speaker_on_button = Button(pygame.Rect(WIDTH//2 + 15, HEIGHT//2 - 200, 100, 50), SPEAKER_ON_BUTTON, SPEAKER_ON_HOVER_BUTTON)
 
     # music volume
     START_OF_LASER.set_volume(0.3)
@@ -79,7 +80,7 @@ def game(coins_amount, player, screen):
             reset_lasers(lasers, score)
 
             # 2. reset map location
-            map.reset()
+            map.reset(GAME_BG)
 
             # 3. reset player location
             player.reset(get_player_image_game(player.type), player.type)
@@ -182,6 +183,8 @@ def game(coins_amount, player, screen):
             current_coin_amount = coin_collect(player, coins, current_coin_amount)
             show_coins(screen, current_coin_amount)
             
+            how_to_play(screen, score)
+
             # increase the map speed.
             map.increase_speed(player.death)
 

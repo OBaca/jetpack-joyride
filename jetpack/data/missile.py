@@ -1,5 +1,8 @@
 from .constants import *
 
+MISSILE_ASSETS = ["missile1.png", "missile2.png", "missile3.png", "missile4.png", "missile5.png",
+                        "missile6.png", "missile7.png" ]
+
 class Missile():
     ''' This class represent a missile obstacle. '''
     def __init__(self, player_y):
@@ -7,11 +10,11 @@ class Missile():
         self.warning = [WIDTH+60,100]
         self.launch = [WIDTH+60,150]
         # set images
-        self.missile_img = pygame.transform.scale(pygame.image.load(os.path.join('Assets','missile1.png')), (100,80))
-        self.missile_warning_img = pygame.transform.scale(pygame.image.load(os.path.join('Assets','rocket_warning.png')), (60,60))
-        self.missile_launch_img = pygame.transform.scale(pygame.image.load(os.path.join('Assets','warning.png')), (60,60))
+        self.missile_img = pygame.transform.scale(pygame.image.load(os.path.join('Assets/missile_animation','missile_off.png')), (100,80))
+        self.missile_warning_img = pygame.transform.scale(pygame.image.load(os.path.join('Assets/missile_animation','rocket_warning.png')), (60,60))
+        self.missile_launch_img = pygame.transform.scale(pygame.image.load(os.path.join('Assets/missile_animation','warning.png')), (60,60))
         # set missile animation
-        self.missile_animation()
+        self.missile_animation(MISSILE_ASSETS)
 
 
     ''' This function reset all the missile variables.'''
@@ -84,14 +87,11 @@ class Missile():
 
 
     ''' This function set the missile animation. '''
-    def missile_animation(self):
-        MISSILE_ASSETS = ["missile1.png", "missile2.png", "missile3.png", "missile4.png", "missile5.png",
-                        "missile6.png", "missile7.png" ]
-
+    def missile_animation(self, missile_animation_asset):
         def _init_asset(asset_name: str):
-            return pygame.transform.scale(pygame.image.load(os.path.join(os.getcwd() +"\Assets\missileSmoke", asset_name)), (self.rect.width+15, self.rect.height+15))
+            return pygame.transform.scale(pygame.image.load(os.path.join(os.getcwd() +"\Assets\missile_animation", asset_name)), (self.rect.width+15, self.rect.height+15))
 
-        self.smoke_sprites = [_init_asset(asset_name) for asset_name in MISSILE_ASSETS]
+        self.smoke_sprites = [_init_asset(asset_name) for asset_name in missile_animation_asset]
 
         
 ''' This function set the timing to activate the missile warning and launch options. '''

@@ -20,11 +20,11 @@ def costumes_menu(player, screen):
     click = False   # to know if we clicked the button.
 
     # buttons settings
-    left_arrow = Button(pygame.Rect(250,450,ARROW_BUTTON_WH,ARROW_BUTTON_WH),  LEFT_ARROW_HOVER)
-    right_arrow = Button(pygame.Rect(500,450,ARROW_BUTTON_WH,ARROW_BUTTON_WH),  RIGHT_ARROW_HOVER)
-    buy_button = Button(pygame.Rect(300,550,MENU_BUTTON_WIDTH, MENU_BUTTON_HEIGHT), BUY_BUTTON)
-    select_button = Button(pygame.Rect(300,550,MENU_BUTTON_WIDTH, MENU_BUTTON_HEIGHT), SELECT_BUTTON)
-    main_menu_button = Button(pygame.Rect(20,550,MENU_BUTTON_WIDTH, MENU_BUTTON_HEIGHT), MAIN_MENU_BUTTON)
+    left_arrow = Button(pygame.Rect(250,450,ARROW_BUTTON_WH,ARROW_BUTTON_WH), LEFT_ARROW  ,LEFT_ARROW_HOVER)
+    right_arrow = Button(pygame.Rect(500,450,ARROW_BUTTON_WH,ARROW_BUTTON_WH), RIGHT_ARROW ,RIGHT_ARROW_HOVER)
+    buy_button = Button(pygame.Rect(300,550,MENU_BUTTON_WIDTH, MENU_BUTTON_HEIGHT), BUY_BUTTON ,BUY_BUTTON)
+    select_button = Button(pygame.Rect(300,550,MENU_BUTTON_WIDTH, MENU_BUTTON_HEIGHT), SELECT_BUTTON, SELECT_BUTTON)
+    main_menu_button = Button(pygame.Rect(20,550,MENU_BUTTON_WIDTH, MENU_BUTTON_HEIGHT), MAIN_MENU_BUTTON, MAIN_MENU_BUTTON)
 
     # players skins dictionary
     players_selection = {'default-male-player':0, 'default-female-player':1, 'shrek':2}

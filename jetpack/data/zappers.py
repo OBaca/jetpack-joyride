@@ -15,7 +15,7 @@ class Zappers(object):
         self.current_vertical_sprite = 0
         self.current_horizontal_sprite = 0
         self.positions = ['top', 'mid-top','mid-bottom','bottom']
-        self.update_animation()
+        self.update_animation(ZAPPER_VERTICAL_ASSETS, ZAPPER_HORIZONTAL_ASSETS)
         
 
     ''' This function creates the animation for the vertical zapper. '''
@@ -48,13 +48,13 @@ class Zappers(object):
 
 
     ''' This function set the animation for the zappers. '''
-    def update_animation(self):
+    def update_animation(self, vertical_animation_asset, horizontal_animation_asset):
         
         def _init_asset(asset_name: str):
             return pygame.image.load(os.path.join(os.getcwd() +"\Assets\zappers_animation", asset_name))
 
-        self.vertical_sprite = [_init_asset(asset_name) for asset_name in ZAPPER_VERTICAL_ASSETS]
-        self.horizontal_sprite = [_init_asset(asset_name) for asset_name in ZAPPER_HORIZONTAL_ASSETS]
+        self.vertical_sprite = [_init_asset(asset_name) for asset_name in vertical_animation_asset]
+        self.horizontal_sprite = [_init_asset(asset_name) for asset_name in horizontal_animation_asset]
 
 ''' This function spawn the different zappers on the screen. '''
 def zappers_placement(zappers, lasers, death, score):

@@ -33,3 +33,9 @@ def show_game_over_text(screen):
 def not_enough_coins_to_buy(screen):
     coin_text = SCORE_FONT.render('Not enough coins' , 1, (202,193,53))
     screen.blit(coin_text, (300,300))
+
+''' This function print a text on the screen to tell the user how to play the game'''
+def how_to_play(screen, score):
+    if score < 40:
+        screen.blit(PRESS_SPACE, (250,160))
+        screen.blit(PRESS_AD, (250,100))
