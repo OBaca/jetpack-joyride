@@ -27,7 +27,7 @@ Jetpack Joyride made with python on windows with the code editor VScode as a per
 ## How To Use
 
 - You need Python and Pygame installed.
-- Open the main.py file and run it.
+- Run main.py
 
 
 [Back To The Top](#Jetpack-Joyride)
