@@ -57,17 +57,11 @@ class Coins():
 def get_pattern( type, x, y):
     coins = []
     if type == 1:  # This pattern contain 5 coins in a row and 3 coins in a col
-        coins = [
-                    Coin(x,y) for i in range (15)
-                ]
+        coins = [ Coin(x,y) for i in range (15) ]
     if type == 2: # This pattern contatin 8 coins in a row and 3 coins in a col
-        coins = [
-                    Coin(x,y) for i in range (24)
-                ]
+        coins = [ Coin(x,y) for i in range (24) ]
     if type == 3: # This pattern creates an hearth shape coins
-        coins = [
-                    Coin(x,y) for i in range (14)
-                ]
+        coins = [ Coin(x,y) for i in range (14) ]
     return coins
 
 
