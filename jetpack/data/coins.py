@@ -14,7 +14,7 @@ class Coins():
         # Resetting the far_right_x of the far right coin.
         if self.type == 1:
             self.far_right_x = self.pattern[0].rect.x + 150
-        if self.type == 2:
+        if self.type == 2 or self.type == 3:
             self.far_right_x = self.pattern[0].rect.x + 240
         # Resetting all the single coins coordinates.
         reset_coin_positions(self)
@@ -58,54 +58,65 @@ def get_pattern( type, x, y):
     coins = []
     if type == 1:  # This pattern contain 5 coins in a row and 3 coins in a col
         coins = [
-                    Coin(x,y),    Coin(x+30,y),    Coin(x+60,y),    Coin(x+90,y),    Coin(x+120,y),
-                    Coin(x,y+30), Coin(x+30,y+30), Coin(x+60,y+30), Coin(x+90,y+30), Coin(x+120,y+30),
-                    Coin(x,y+60), Coin(x+30,y+60), Coin(x+60,y+60), Coin(x+90,y+60), Coin(x+120,y+60)
+                    Coin(x,y) for i in range (15)
                 ]
     if type == 2: # This pattern contatin 8 coins in a row and 3 coins in a col
         coins = [
-                    Coin(x,y),    Coin(x+30,y),    Coin(x+60,y),    Coin(x+90,y),    Coin(x+120,y),    Coin(x+150,y),    Coin(x+180,y),    Coin(x+210,y),
-                    Coin(x,y+30), Coin(x+30,y+30), Coin(x+60,y+30), Coin(x+90,y+30), Coin(x+120,y+30), Coin(x+150,y+30), Coin(x+180,y+30), Coin(x+210,y+30),
-                    Coin(x,y+60), Coin(x+30,y+60), Coin(x+60,y+60), Coin(x+90,y+60), Coin(x+120,y+60), Coin(x+150,y+60), Coin(x+180,y+60), Coin(x+210,y+60)
+                    Coin(x,y) for i in range (24)
+                ]
+    if type == 3: # This pattern creates an hearth shape coins
+        coins = [
+                    Coin(x,y) for i in range (14)
                 ]
     return coins
 
 
 ''' This function reset the coins positions on the screen in a random position. '''
 def reset_coin_positions(coins):
+
+    limit = 0
     if coins.type == 1:
-        count_x = 1
-        count_y = 1
-        x = random.randint(WIDTH+WIDTH//2, WIDTH*2)
-        y = random.choice([150, 350, 500])
+        limit = 6
+    if coins.type == 2:
+        limit = 9
+    
+    count_x = 1
+    count_y = 1
+    x = random.randint(WIDTH+WIDTH//2, WIDTH*3)
+    y = random.choice([150, 350, 500])
+
+    if coins.type == 1 or coins.type == 2:
         for coin in coins.pattern:
             coin.show_image = True
-            if count_x == 6:
+            if count_x == limit:
                 count_x = 1
                 count_y += 1
             coin.rect.x = x + (30*count_x)
             coin.rect.y = y + (30*count_y)
             count_x += 1
     
-    if coins.type == 2:
-        count_x = 1
-        count_y = 1
-        x = random.randint(WIDTH, WIDTH+WIDTH//2)
-        y = random.choice([150, 350, 500])
+    if coins.type == 3:
+        heart_shape_positions = [
+                        (30,0),(60,0),(120,0),(150,0),
+                        (0,30),(90,30),(180,30), 
+                        (0,60),(180,60), 
+                        (30,90),(150,90), 
+                        (60,120),(120,120),
+                        (90,150)
+                    ]
+        i=0
         for coin in coins.pattern:
             coin.show_image = True
-            if count_x == 9:
-                count_x = 1
-                count_y += 1
-            coin.rect.x = x + (30*count_x)
-            coin.rect.y = y + (30*count_y)
-            count_x += 1
+            coin.rect.x = x + heart_shape_positions[i][0]
+            coin.rect.y = y+ heart_shape_positions[i][1]
+            i=i+1
     
     # Reset the far right coin position variable
-    if coins.type == 1:
-        coins.far_right_x = coins.pattern[0].rect.x + 150
-    if coins.type == 2:
-        coins.far_right_x = coins.pattern[0].rect.x + 240
+    far_right_x_reset = 0
+    if coins.type == 1: far_right_x_reset = 150
+    if coins.type == 2: far_right_x_reset = 240
+    if coins.type == 3: far_right_x_reset = 210
+    coins.far_right_x = coins.pattern[0].rect.x + far_right_x_reset
 
 
 ''' This function draw the coins pattern on the screen. '''

@@ -1,12 +1,7 @@
 from .constants import *
 
 # animation
-ZOMBIE_WALKING_ASSETS = ["0_Golem_Walking_001.png", "0_Golem_Walking_002.png", "0_Golem_Walking_003.png", "0_Golem_Walking_004.png", "0_Golem_Walking_005.png", "0_Golem_Walking_006.png"
-                                    , "0_Golem_Walking_007.png", "0_Golem_Walking_008.png", "0_Golem_Walking_009.png", "0_Golem_Walking_010.png", "0_Golem_Walking_011.png", "0_Golem_Walking_012.png"
-                                    , "0_Golem_Walking_013.png", "0_Golem_Walking_014.png", "0_Golem_Walking_015.png", "0_Golem_Walking_016.png", "0_Golem_Walking_017.png", "0_Golem_Walking_018.png"
-                                    , "0_Golem_Walking_019.png", "0_Golem_Walking_020.png", "0_Golem_Walking_021.png", "0_Golem_Walking_022.png", "0_Golem_Walking_023.png"]
-
-
+ZOMBIE_WALKING_ASSETS = [init_animation('0_Golem_Walking_',i) for i in range(0,24)]
 
 class Zombie(object):
     ''' This class represent a zombie in the game. '''

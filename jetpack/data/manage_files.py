@@ -1,4 +1,6 @@
 import os
+from sys import platform
+
 
 ''' This function saves the coin amount the player have to a file. '''
 def update_coins(coins):
@@ -44,22 +46,26 @@ def read_high_score():
     with open("high_score.txt", 'r') as file:
         return file.read()
 
+if platform == "linux" or platform == "linux2":
+    path = 'jetpack/'
+else:
+    path = ''
 
 ''' This function return the skin the user have. '''
 def read_skin():
-    with open('skins.txt', 'r') as file:
+    with open(os.path.join(path,'skins.txt'), 'r') as file:
         return file.read()
 
 
 ''' This function add the new skin to the skins the user have. '''
 def buy_skin(skin):
     skins = read_skin()
-    with open('skins.txt','w') as file:
+    with open(os.path.join(path,'skins.txt'),'w') as file:
         file.write(skins + '\n' + str(skin))
 
 
 ''' This function check if the user have the skin given as a paramater. '''
 def check_skins_inventory(skin):
-    with open('skins.txt', 'r') as file:
+    with open(os.path.join(path,'skins.txt'), 'r') as file:
         return True if skin in file.read() else False
 

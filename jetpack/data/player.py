@@ -3,19 +3,18 @@ from data.constants import *
 
 # players type
 players_selection = {'default-male-player':0, 'default-female-player':1, 'shrek':2}
-# jetpack animation assets
-DEFAULT_MALE_ASSETS = ["jetpack1.png", "jetpack2.png", "jetpack3.png", "jetpack4.png"]
-DEFAULT_FEMALE_ASSETS = ["playerGirl2.png", "playerGirl3.png", "playerGirl4.png", "playerGirl5.png"]
-SHREK_ASSETS = ["shrek2.png", "shrek3.png", "shrek4.png", "shrek1.png"]
-# death animation assets
-DEFAULT_MALE_HURT_ASSETS = ["playerHurt1.png", "playerHurt2.png", "playerHurt3.png", "playerHurt4.png", "playerHurt5.png", "playerHurt6.png"
-                            , "playerHurt7.png", "playerHurt8.png", "playerHurt9.png", "playerHurt10.png", "playerHurt11.png", "playerHurt12.png"
-                            , "playerHurt13.png", "playerHurt14.png", "playerHurt15.png", "playerHurt16.png", "playerHurt17.png", "playerHurt18.png"]
-DEFAULT_FEMALE_HURT_ASSETS = ["playerGirl_hurt1.png", "playerGirl_hurt2.png", "playerGirl_hurt3.png", "playerGirl_hurt4.png", "playerGirl_hurt5.png", "playerGirl_hurt6.png"
-                            , "playerGirl_hurt7.png", "playerGirl_hurt8.png", "playerGirl_hurt9.png", "playerGirl_hurt10.png", "playerGirl_hurt11.png", "playerGirl_hurt12.png"
-                            , "playerGirl_hurt13.png" ]
-SHREK_HURT_ASSETS =         ["shrek1.png", "shrek2.png", "shrek3.png", "shrek4.png", "shrek5.png", "shrek6.png" ]
 
+
+
+# jetpack animation assets
+DEFAULT_MALE_ASSETS = [init_animation('jetpack',i) for i in range(1,5)]
+DEFAULT_FEMALE_ASSETS = [init_animation('playerGirl',i) for i in range(2,6)]
+SHREK_ASSETS = [init_animation('shrek',i) for i in range(1,5)]
+
+# death animation assets
+DEFAULT_MALE_HURT_ASSETS = [init_animation('playerHurt',i) for i in range(1,19)]
+DEFAULT_FEMALE_HURT_ASSETS = [init_animation('playerGirl_hurt',i) for i in range(1,14)]
+SHREK_HURT_ASSETS = [init_animation('shrek',i) for i in range(1,7)]
 
 class Player(object):
     ''' This class represent the player in the game. '''

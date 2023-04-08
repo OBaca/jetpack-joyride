@@ -1,8 +1,7 @@
 from data.constants import *
 
-LASERS_ASSETS = ["lasers1.png", "lasers2.png", "lasers3.png", "lasers4.png", "lasers5.png",
-                        "lasers6.png", "lasers7.png", "lasers8.png", "lasers9.png", "lasers10.png"
-                        , "lasers11.png", "lasers12.png"]
+
+LASERS_ASSETS = [init_animation('lasers',i) for i in range(1,13)]
 
 class Lasers(object):
     ''' This class represent a laser obstacle. '''

@@ -1,7 +1,7 @@
 from .constants import *
 
-MISSILE_ASSETS = ["missile1.png", "missile2.png", "missile3.png", "missile4.png", "missile5.png",
-                        "missile6.png", "missile7.png" ]
+
+MISSILE_ASSETS = [init_animation('missile',i) for i in range(1,8)]
 
 class Missile():
     ''' This class represent a missile obstacle. '''
