@@ -4,8 +4,7 @@ from data.constants import *
 # players type
 players_selection = {'default-male-player':0, 'default-female-player':1, 'shrek':2}
 
-def init_animation(name, num):
-    return str(name + str(num) + '.png')
+
 
 # jetpack animation assets
 DEFAULT_MALE_ASSETS = [init_animation('jetpack',i) for i in range(1,5)]

@@ -1,8 +1,8 @@
 from data.constants import *
 
-ZAPPER_VERTICAL_ASSETS = ["vertical_zapper1.png", "vertical_zapper2.png", "vertical_zapper3.png", "vertical_zapper4.png"]
-ZAPPER_HORIZONTAL_ASSETS = ["horizontal_zapper1.png", "horizontal_zapper2.png", "horizontal_zapper3.png", "horizontal_zapper4.png"]
 
+ZAPPER_VERTICAL_ASSETS = [init_animation('vertical_zapper',i) for i in range(1,5)]
+ZAPPER_HORIZONTAL_ASSETS = [init_animation('horizontal_zapper',i) for i in range(1,5)]
 
 class Zappers(object):
     ''' This class represent the zapper obstacle. '''

@@ -38,11 +38,13 @@ assets_dir_path = os.path.join(dir_path, "../Assets")
 def load_image(file_name):
     return pygame.image.load(os.path.join(assets_dir_path, file_name ))
 
-
 ''' This function load a sound. '''
 def load_sound(file_name):
     return pygame.mixer.Sound(os.path.join(assets_dir_path ,file_name))
 
+''' This function load an image animation. '''
+def init_animation(name, num):
+    return str(name + str(num) + '.png')
 
 # images
     # obstacles images

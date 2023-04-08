@@ -34,8 +34,11 @@ def game(coins_amount, player, screen):
     lasers = [Lasers(), Lasers(), Lasers(), Lasers()]
     missiles = [Missile(player.rect.y), Missile(player.rect.y)]
     # coins creations
-    coins = [Coins(1, get_pattern(1, WIDTH, 350)), 
-                Coins(2, get_pattern(2, random.randint(WIDTH, WIDTH+40) , random.choice([150, 350, 500])))]
+    coins = [
+                Coins(1, get_pattern(1, WIDTH, 350)), 
+                Coins(2, get_pattern(2, random.randint(WIDTH, WIDTH+40) , random.choice([150, 350, 500]))),
+                Coins(3, get_pattern(3, random.randint(WIDTH, WIDTH+40) , random.choice([150, 350, 500])))
+            ]
     
     
     # buttons

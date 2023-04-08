@@ -1,8 +1,7 @@
 from .constants import *
 
-COIN_ASSETS = ["coin1.png", "coin2.png", "coin3.png", "coin4.png", "coin5.png",
-                        "coin6.png", "coin7.png", "coin8.png", "coin9.png", "coin10.png"]
 
+COIN_ASSETS = [init_animation('coin',i) for i in range(1,11)]
 
 class Coin(pygame.sprite.Sprite):
     '''
