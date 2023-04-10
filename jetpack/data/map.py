@@ -1,5 +1,7 @@
 from data.constants import *
 
+BG_ANIMATION = [init_animation('map', i) for i in range(1,15)]
+
 class Map():
     ''' This class represent the map of the game. '''
     def __init__(self, background_image):
