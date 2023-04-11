@@ -90,6 +90,7 @@ def reset_coin_positions(coins):
             count_x += 1
     
     if coins.type == 3:
+        y = random.choice([200, 350, 450])
         heart_shape_positions = [
                         (30,0),(60,0),(120,0),(150,0),
                         (0,30),(90,30),(180,30), 

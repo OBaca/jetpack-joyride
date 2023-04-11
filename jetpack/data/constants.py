@@ -58,7 +58,7 @@ JETPACK_OFF_SHREK = pygame.transform.scale(load_image('skins/shrek.png'), (75,90
     # backgrounds
 MENU_BG_IMG = pygame.transform.scale(load_image('backgrounds/main_menu_bg.png'), (WIDTH,HEIGHT))
 COSTUMES_BG_IMG = pygame.transform.scale(load_image('backgrounds/costumes_bg2.png'), (WIDTH,HEIGHT))
-GAME_BG = pygame.transform.scale(load_image('backgrounds/bg.png'), (WIDTH,HEIGHT))
+GAME_BG = pygame.transform.scale(load_image('backgrounds/bg/map1.png'), (2048,650)) #2000
     # skins to display in the costumes shop
 DEFAULT_MALE = pygame.transform.scale(load_image('boy_animation_jetpack/player.png'), (150,200))
 DEFAULT_FEMALE = pygame.transform.scale(load_image('skins/playerGirl.png'), (150,200))

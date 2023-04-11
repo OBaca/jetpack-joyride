@@ -22,7 +22,7 @@ def main_menu():
     player = Player(JETPACK_OFF_MALE, 0) 
     zombies = [Zombie(True, -120), Zombie(False, WIDTH), Zombie(True, -130), Zombie(False, WIDTH+10)]
     
-    # music settings.
+    # music settings. 
     pygame.mixer.music.set_volume(0.4)
     music_channel = pygame.mixer.find_channel()
     music_replaying = False
