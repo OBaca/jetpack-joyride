@@ -1,5 +1,7 @@
 from data.constants import *
 
+NUMBERS_NAME = [init_animation('',i) for i in range(0,10)]
+
 ''' This function show on the screen the high score. '''
 def show_high_score(screen, high_score):
     high_score_text = SCORE_FONT.render('HIGH SCORE: ' + str(high_score), 1, BLACK)
@@ -10,6 +12,18 @@ def show_high_score(screen, high_score):
 def show_score(screen, score):
     score_text = SCORE_FONT.render('SCORE: ' + str(score), 1, (202,193,53))
     screen.blit(score_text, (10,10))
+
+def show_score_temp(screen, score):
+    numbers = []
+    for num in NUMBERS_NAME:
+        numbers.append(load_image(os.path.join("texts/numbers/", num)))
+    score_str = str(score)
+    score_surf = pygame.Surface((len(score_str) * numbers[0].get_width(), numbers[0].get_height()), pygame.SRCALPHA)
+    for i, digit in enumerate(score_str):
+        score_surf.blit(numbers[int(digit)], (i * numbers[0].get_width(), 0))
+
+    screen.blit(score_surf, (10, 10))
+    screen.blit(M_TEXT, ((len(score_str)*M_TEXT.get_width())+3,10))
 
 
 ''' This function show on the screen the current game coin amount. '''

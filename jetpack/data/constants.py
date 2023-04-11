@@ -63,6 +63,8 @@ GAME_BG = pygame.transform.scale(load_image('backgrounds/bg/map1.png'), (2048,65
 DEFAULT_MALE = pygame.transform.scale(load_image('boy_animation_jetpack/player.png'), (150,200))
 DEFAULT_FEMALE = pygame.transform.scale(load_image('skins/playerGirl.png'), (150,200))
 SHREK_SKIN = pygame.transform.scale(load_image('skins/shrek.png'), (250,200))
+    # text font
+M_TEXT = load_image('texts/ingame_text/M.png')
 
 
 # buttons images
