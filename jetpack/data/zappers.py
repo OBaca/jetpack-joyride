@@ -37,7 +37,7 @@ class Zappers(object):
     ''' This function reset the class variables. '''
     def reset(self):
         self.speed = 2
-        y_spawner = FIX_IMAGE_LIMIT - 40 if self.style == 'across' else 140
+        y_spawner = FIX_IMAGE_LIMIT - 40 if self.style == 'vertical' else 140
         self.rect.x = random.randint(WIDTH, WIDTH+200)
         self.rect.y = random.randint(FIX_IMAGE_LIMIT, HEIGHT - y_spawner)
 
@@ -59,7 +59,7 @@ class Zappers(object):
 ''' This function spawn the different zappers on the screen. '''
 def zappers_placement(zappers, lasers, death, score):
     position = 'x' 
-    RESET_X_POSITION = {'top': 10, 'mid-top': 150, 'mid-bottom': 300, 'bottom': 450}
+    RESET_Y_POSITION = {'top': 10, 'mid-top': 150, 'mid-bottom': 300, 'bottom': 450}
     # setting the zappers speed difficulty
     zappers_speed_timing = 50
     if score >= 300:
@@ -81,21 +81,21 @@ def zappers_placement(zappers, lasers, death, score):
             zapper.rect.x -= zapper.speed
             
         # check if the lasers is running so we won't place zapper with a laser.
-        if zapper.rect.x + zapper.rect.width <0 and lasers[0].is_running == False:
+        if zapper.rect.x + zapper.rect.width + 5 <0 and lasers[0].is_running == False:
             zapper.positions = ['top', 'mid-top','mid-bottom','bottom']
             while position == 'x':
                 position = random.choice(zapper.positions )
             zapper.positions = [p.replace(position, 'x') for p in zapper.positions]
             
             # reset the zapper positions
-            zapper.rect.y = RESET_X_POSITION[position]
+            zapper.rect.y = RESET_Y_POSITION[position]
             zapper.rect.x = random.randint (WIDTH, WIDTH+400)
             
         
 ''' This function update the animation for the zappers. '''
 def update_zappers(zappers):
     for zapper in zappers:
-        if zapper.style == 'along':
+        if zapper.style == 'vertical':
             zapper.update_vertical()
-        if zapper.style == 'across':
+        if zapper.style == 'horizontal':
             zapper.update_horizontal()

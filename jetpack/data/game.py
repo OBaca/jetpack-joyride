@@ -29,8 +29,8 @@ def game(coins_amount, player, screen):
     map = Map(GAME_BG)
     # obstacle creations
     zappers = []
-    zappers.append(Zappers(pygame.Rect(random.randint(WIDTH, WIDTH+200),random.randint(FIX_IMAGE_LIMIT, HEIGHT-140),40,140) ,  'along', OBS_IMG1)) 
-    zappers.append(Zappers(pygame.Rect(random.randint(WIDTH, WIDTH+200),random.randint(FIX_IMAGE_LIMIT, HEIGHT- FIX_IMAGE_LIMIT -40),140,40) , 'across', OBS_IMG2))  
+    zappers.append(Zappers(pygame.Rect(random.randint(WIDTH, WIDTH+200),random.randint(FIX_IMAGE_LIMIT, HEIGHT-140),40,140) ,  'vertical', OBS_IMG1)) 
+    zappers.append(Zappers(pygame.Rect(random.randint(WIDTH, WIDTH+200),random.randint(FIX_IMAGE_LIMIT, HEIGHT- FIX_IMAGE_LIMIT -40),140,40) , 'horizontal', OBS_IMG2))  
     lasers = [Lasers(), Lasers(), Lasers(), Lasers()]
     missiles = [Missile(player.rect.y), Missile(player.rect.y)]
     # coins creations
@@ -166,7 +166,7 @@ def game(coins_amount, player, screen):
 
                 # place missiles algorithm.
                 missile_movement(missiles, score, player, silent_music)
-
+                
                 # place zappers algorithm.
                 update_zappers(zappers)
                 zappers_placement(zappers, lasers, player.death, score)
