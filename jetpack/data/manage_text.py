@@ -4,26 +4,22 @@ NUMBERS_NAME = [init_animation('',i) for i in range(0,10)]
 
 ''' This function show on the screen the high score. '''
 def show_high_score(screen, high_score):
-    high_score_text = SCORE_FONT.render('HIGH SCORE: ' + str(high_score), 1, BLACK)
-    screen.blit(high_score_text, (10,50))
-
-def show_high_score_temp(screen, high_score):
     numbers = []
     for num in NUMBERS_NAME:
-        numbers.append(load_image(os.path.join("texts/numbers/", num)))
+        numbers.append(pygame.transform.scale(load_image(os.path.join("texts/numbers_score/", num)),(16,32)))
     high_score_str = str(high_score)
     score_surf = pygame.Surface((len(high_score_str) * numbers[0].get_width(), numbers[0].get_height()), pygame.SRCALPHA)
     for i, digit in enumerate(high_score_str):
         score_surf.blit(numbers[int(digit)], (i * numbers[0].get_width(), 0))
 
-    screen.blit(score_surf, (10, 50))
-    screen.blit(BEST_TEXT, ((len(high_score_str)* 28)+3,60))
+    screen.blit(score_surf, (10, 55))
+    screen.blit(BEST_TEXT, ((len(high_score_str)* 20)+3,55))
 
 ''' This function show on the screen the score. '''
 def show_score(screen, score):
     numbers = []
     for num in NUMBERS_NAME:
-        numbers.append(load_image(os.path.join("texts/numbers/", num)))
+        numbers.append(load_image(os.path.join("texts/numbers_score/", num)))
     score_str = str(score)
     score_surf = pygame.Surface((len(score_str) * numbers[0].get_width(), numbers[0].get_height()), pygame.SRCALPHA)
     for i, digit in enumerate(score_str):
@@ -35,20 +31,16 @@ def show_score(screen, score):
 
 ''' This function show on the screen the current game coin amount. '''
 def show_coins(screen, coins):
-    coin_text = SCORE_FONT.render('COINS: ' + str(coins), 1, (202,193,53))
-    screen.blit(coin_text, (10,90))
-
-def show_coins(screen, coins):
     numbers = []
     for num in NUMBERS_NAME:
-        numbers.append(load_image(os.path.join("texts/numbers/", num)))
+        numbers.append(load_image(os.path.join("texts/numbers_coin/", num)))
     coin_str = str(coins)
     coin_surf = pygame.Surface((len(coin_str) * numbers[0].get_width(), numbers[0].get_height()), pygame.SRCALPHA)
     for i, digit in enumerate(coin_str):
         coin_surf.blit(numbers[int(digit)], (i * numbers[0].get_width(), 0))
 
-    screen.blit(coin_surf, (10, 10))
-    screen.blit(M_TEXT, ((len(coin_str)*28)+3,10))
+    screen.blit(coin_surf, (10, 90))
+    screen.blit(COIN_IMG, ((len(coin_str)*22)+3,90))
     
 
 ''' This function show on the screen the total amount of coins the user have. '''
