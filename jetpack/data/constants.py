@@ -65,6 +65,9 @@ DEFAULT_FEMALE = pygame.transform.scale(load_image('skins/playerGirl.png'), (150
 SHREK_SKIN = pygame.transform.scale(load_image('skins/shrek.png'), (250,200))
     # text font
 M_TEXT = load_image('texts/ingame_text/M.png')
+BEST_TEXT = pygame.transform.scale(load_image('texts/ingame_text/best.png'), (80,30))
+COIN_IMG = load_image('coins/coin1.png')
+
 
 
 # buttons images

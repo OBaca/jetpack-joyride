@@ -180,9 +180,9 @@ def game(coins_amount, player, screen):
             # show texts on the screen.
             if player.death:
                 show_game_over_text(screen)
-            show_score_temp(screen, score)
+            show_score(screen, score)
             high_score = update_high_score(high_score, score)
-            show_high_score(screen, high_score)
+            show_high_score_temp(screen, high_score)
             current_coin_amount = coin_collect(player, coins, current_coin_amount)
             show_coins(screen, current_coin_amount)
             
