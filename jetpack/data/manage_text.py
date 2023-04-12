@@ -38,17 +38,17 @@ def show_coins(screen, coins):
     coin_text = SCORE_FONT.render('COINS: ' + str(coins), 1, (202,193,53))
     screen.blit(coin_text, (10,90))
 
-def show_coins(screen, coins):
+def show_coins_temp(screen, coins):
     numbers = []
     for num in NUMBERS_NAME:
-        numbers.append(load_image(os.path.join("texts/numbers/", num)))
+        numbers.append(pygame.transform.scale(load_image(os.path.join("texts/numbers/", num)),(20,36))) #(24,40)
     coin_str = str(coins)
     coin_surf = pygame.Surface((len(coin_str) * numbers[0].get_width(), numbers[0].get_height()), pygame.SRCALPHA)
     for i, digit in enumerate(coin_str):
         coin_surf.blit(numbers[int(digit)], (i * numbers[0].get_width(), 0))
 
-    screen.blit(coin_surf, (10, 10))
-    screen.blit(M_TEXT, ((len(coin_str)*28)+3,10))
+    screen.blit(coin_surf, (10, 90))
+    screen.blit(COIN_IMG, ((len(coin_str)*28)+3,90))
     
 
 ''' This function show on the screen the total amount of coins the user have. '''
