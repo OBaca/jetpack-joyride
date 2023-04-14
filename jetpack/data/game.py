@@ -184,7 +184,7 @@ def game(coins_amount, player, screen):
             high_score = update_high_score(high_score, score)
             show_high_score(screen, high_score)
             current_coin_amount = coin_collect(player, coins, current_coin_amount)
-            show_coins(screen, current_coin_amount)
+            show_coins(screen, current_coin_amount, 90)
             
             how_to_play(screen, score)
 

@@ -30,7 +30,7 @@ def show_score(screen, score):
 
 
 ''' This function show on the screen the current game coin amount. '''
-def show_coins(screen, coins):
+def show_coins(screen, coins, y_pos):
     numbers = []
     for num in NUMBERS_NAME:
         numbers.append(load_image(os.path.join("texts/numbers_coin/", num)))
@@ -39,8 +39,8 @@ def show_coins(screen, coins):
     for i, digit in enumerate(coin_str):
         coin_surf.blit(numbers[int(digit)], (i * numbers[0].get_width(), 0))
 
-    screen.blit(coin_surf, (10, 90))
-    screen.blit(COIN_IMG, ((len(coin_str)*22)+3,90))
+    screen.blit(coin_surf, (10, y_pos))
+    screen.blit(COIN_IMG, ((len(coin_str)*22)+3,y_pos))
     
 
 ''' This function show on the screen the total amount of coins the user have. '''

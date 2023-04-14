@@ -74,7 +74,7 @@ def main_menu():
         zombie_spawn_menu(zombies, SCREEN)
 
         # show coins on the screen.
-        show_menu_coins(SCREEN,coins_amount)
+        show_coins(SCREEN, coins_amount, 60)
 
         clock.tick(FPS)
         pygame.display.update()

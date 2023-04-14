@@ -1,10 +1,7 @@
-from anyio import current_time
 from data.constants import *
 
 # players type
 players_selection = {'default-male-player':0, 'default-female-player':1, 'shrek':2}
-
-
 
 # jetpack animation assets
 DEFAULT_MALE_ASSETS = [init_animation('jetpack',i) for i in range(1,5)]
