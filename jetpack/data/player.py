@@ -1,4 +1,5 @@
 from data.constants import *
+import math
 
 # players type
 players_selection = {'default-male-player':0, 'default-female-player':1, 'shrek':2}
@@ -27,7 +28,7 @@ class Player(object):
         self.vel = 7
         self.up_vel = 0
         self.down_vel = 0 
-        self.max_vel = 7
+        self.max_vel = 5
         self.gravity = 8
         self.image = image
         # death sprite index
@@ -76,7 +77,8 @@ class Player(object):
     ''' This function is increasing speed to the velocity of the player when the player jetpack is on. '''
     def player_up_velocity(self):
         self.up_vel += 0.5
-        return min(self.up_vel, self.max_vel)
+        '''return min(self.up_vel, self.max_vel)'''
+        return 50*math.sin(0.05*min(self.up_vel, self.max_vel))
     
 
     ''' This function is increasing speed to the velocity of the player when the player jetpack is off. '''
@@ -96,6 +98,7 @@ class Player(object):
         # space/W/up key - to jump and animate jetpack animation.
         if (pressed_key[pygame.K_SPACE] or pressed_key[pygame.K_w] or pressed_key[pygame.K_UP] ) and self.rect.y > 0 and self.death == False:
             self.rect.y -= self.player_up_velocity()
+            self.rect.x += 2
             self.update_jetpack()
             self.down_vel = 0
 
@@ -103,6 +106,7 @@ class Player(object):
         #elif pygame.time.get_ticks() - start_time > 110:
         if self.rect.y + self.rect.height < HEIGHT - FIX_IMAGE_LIMIT:
             self.rect.y += self.player_down_velocity()
+            self.rect.x +=1
 
         # fix the player image to the screen frame
         elif self.rect.y + self.rect.height + self.vel >= HEIGHT - FIX_IMAGE_LIMIT:
