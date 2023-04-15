@@ -44,7 +44,7 @@ class Zappers(object):
 
     ''' This function draws the zapper obstacle to the screen. '''
     def draw_zapper(self, screen):
-        screen.blit(self.image, (self.rect.x,self.rect.y))
+        screen.blit(self.image, (self.rect.x-10,self.rect.y-9))
 
 
     ''' This function set the animation for the zappers. '''

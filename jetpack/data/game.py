@@ -166,11 +166,11 @@ def game(coins_amount, player, screen):
 
                 # place missiles algorithm.
                 missile_movement(missiles, score, player, silent_music)
-                
+
                 # place zappers algorithm.
                 update_zappers(zappers)
                 zappers_placement(zappers, lasers, player.death, score)
-            
+                
             # place coins algorithm.
             update_coins_positions(coins, player.death, score)
 

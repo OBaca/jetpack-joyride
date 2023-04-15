@@ -19,7 +19,7 @@ class Missile():
 
     ''' This function reset all the missile variables.'''
     def reset(self, player_y, warning_cooldown=2000, warning_time=500):
-        self.rect = pygame.Rect(WIDTH+10,player_y, 100, 100)
+        self.rect = pygame.Rect(WIDTH,player_y+15, 60, 50)
         self.current_sprite = 0
         # set the missile to follow the play y position.
         self.homing = False
@@ -39,7 +39,7 @@ class Missile():
 
     ''' This function draw the missile images on the screen. '''
     def draw(self, screen):
-        screen.blit(self.missile_img, (self.rect.x,self.rect.y))
+        screen.blit(self.missile_img, (self.rect.x-5,self.rect.y-7))
         screen.blit(self.missile_warning_img, (self.warning[0],self.warning[1]))
         screen.blit(self.missile_launch_img, (self.launch[0],self.launch[1]))
 
@@ -89,7 +89,7 @@ class Missile():
     ''' This function set the missile animation. '''
     def missile_animation(self, missile_animation_asset):
         def _init_asset(asset_name: str):
-            return pygame.transform.scale(load_image(os.path.join("missile_animation", asset_name)), (self.rect.width+15, self.rect.height+15))
+            return pygame.transform.scale(load_image(os.path.join("missile_animation", asset_name)), (100, 60))
 
         self.smoke_sprites = [_init_asset(asset_name) for asset_name in missile_animation_asset]
 

@@ -16,14 +16,15 @@ class Lasers(object):
     ''' This function reset all the variables in the class Lasers. '''
     def reset(self):
         # initialize lasers positions
-        self.pre_rect = pygame.Rect(0, HIDDEN_LASERS_Y, 900, 50)
-        self.post_rect = pygame.Rect(0, HIDDEN_LASERS_Y, 900, 50)
+        self.pre_rect = pygame.Rect(0, HIDDEN_LASERS_Y, 900, 45)
+        self.post_rect = pygame.Rect(0, HIDDEN_LASERS_Y, 900, 45)
         # timers to turn on and off the lasers
         self.turn_on = sys.maxsize
         self.turn_off = sys.maxsize
         # laser cooldown
         self.cooldown = 4000
-        self.laser_timing = 150     # laser timing to start the lasers
+        # laser timing to start the lasers
+        self.laser_timing = 150
         # indicate which scenrio we activate
         self.scenrio = 1
         self.is_running = False
@@ -32,8 +33,8 @@ class Lasers(object):
 
     ''' This function draws the lasers to the screen'''
     def draw_laser(self, screen):
-        screen.blit(self.pre_lasers, (self.pre_rect.x,self.pre_rect.y))
-        screen.blit(self.post_lasers, (self.post_rect.x,self.post_rect.y))
+        screen.blit(self.pre_lasers, (self.pre_rect.x,self.pre_rect.y-5))
+        screen.blit(self.post_lasers, (self.post_rect.x,self.post_rect.y-5))
 
 
     ''' This function creates an animation for the post lasers. '''

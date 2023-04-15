@@ -54,7 +54,7 @@ PRE_LASERS = load_image('lasers_animation/pre_lasers.png')
     # default pictures for the players
 JETPACK_OFF_MALE = pygame.transform.scale(load_image('boy_animation_jetpack/player.png'), (60, 75))
 JETPACK_OFF_FEMALE = pygame.transform.scale(load_image('skins/playerGirl.png'), (75, 90))
-JETPACK_OFF_SHREK = pygame.transform.scale(load_image('skins/shrek.png'), (75,90))
+JETPACK_OFF_SHREK = pygame.transform.scale(load_image('skins/shrek.png'), (85,100))
     # backgrounds
 MENU_BG_IMG = pygame.transform.scale(load_image('backgrounds/main_menu_bg.png'), (WIDTH,HEIGHT))
 COSTUMES_BG_IMG = pygame.transform.scale(load_image('backgrounds/costumes_bg2.png'), (WIDTH,HEIGHT))

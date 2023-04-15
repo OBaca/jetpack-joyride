@@ -76,6 +76,8 @@ def costumes_menu(player, screen):
                 if click:
                     player.type = current_player
                     player.image = get_player_image_costumes(current_player)
+                    if player.type == 3:
+                        player.rect.height = 93
 
         # return to the main menu when you click the main-menu button.
         if main_menu_button.draw_button(screen, 'main-menu'):
