@@ -87,6 +87,11 @@ PLAY_MENU_NO_HOVER_BUTTON = pygame.transform.scale(load_image('buttons/play_butt
 PLAY_MENU_HOVER_BUTTON = pygame.transform.scale(load_image('buttons/play_button_hover.png'), (MENU_BUTTON_WIDTH,MENU_BUTTON_HEIGHT))
 COSTUMES_MENU_NO_HOVER_BUTTON = pygame.transform.scale(load_image('buttons/costumes_no_hover.png'), (MENU_BUTTON_WIDTH,MENU_BUTTON_HEIGHT))
 COSTUMES_MENU_HOVER_BUTTON = pygame.transform.scale(load_image('buttons/costumes_hover2.png'), (MENU_BUTTON_WIDTH,MENU_BUTTON_HEIGHT))
+        #boosts buttons
+RED_FIRE_BOOST_NO_HOVER_BUTTON = pygame.transform.scale(load_image('buttons/red_fire_menu_no_hover.png'), (70, 160))
+RED_FIRE_BOOST_HOVER_BUTTON = pygame.transform.scale(load_image('buttons/red_fire_menu_hover.png'), (70, 160))
+
+
     # game paused buttons
 SPEAKER_OFF_BUTTON = pygame.transform.scale(load_image('buttons/speakerOFF_button.png'), (60,60))
 SPEAKER_OFF_HOVER_BUTTON = pygame.transform.scale(load_image('buttons/speakerOFF_hover_button.png'), (60,60))

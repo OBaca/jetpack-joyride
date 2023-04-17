@@ -43,7 +43,7 @@ class Button():
         return active
 
     ''' This function change the button size in the costumes menu if the mouse on it. '''
-    def costumes_button_size_change(self,style):
+    def button_size_change(self,style):
         if style == 'buy' or style == 'select' or style == 'main-menu':
             self.rect.height = MENU_BUTTON_HEIGHT if self.hover else MENU_BUTTON_HEIGHT - 5
             self.rect.width - MENU_BUTTON_WIDTH if self.hover else MENU_BUTTON_WIDTH + 5
@@ -54,10 +54,12 @@ class Button():
 
             if style == 'main-menu':
                 self.rect.x = 20 if self.hover else 25
+        
+        
 
     ''' This function gets a style variable and choose the correct image with an hover effect or not. '''
     def button_hover_change(self, style):
-        self.costumes_button_size_change(style)
+        self.button_size_change(style)
         self.hover = not self.hover
         self.image = self.image_hover if self.hover else self.image_not_hover
         
