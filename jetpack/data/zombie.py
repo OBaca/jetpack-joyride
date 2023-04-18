@@ -42,7 +42,7 @@ class Zombie(object):
                 self.rect.x = self.rect.width*(-1)
                 self.speed = random.choice([0.4,0.7,1])
         else:
-            if self.rect.x < 0:
+            if self.rect.x < -60:
                 self.rect.x = WIDTH
                 self.speed = random.choice([0.4,0.7,1])
 

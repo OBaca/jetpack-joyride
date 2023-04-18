@@ -21,12 +21,12 @@ class Coins():
 
 
     ''' This function updates the speed of the coins and reset the coins pattern as soon as the coins disapear. '''
-    def update(self, death, score):
+    def update(self, death, score, score_timing_start):
         # Setting the coins speed that relies on the score progress.
         coins_speed_timing = 50
-        if score >= 300:
+        if score >= score_timing_start+300:
             coins_speed_timing = 80
-        if score >= 1300:
+        if score >= score_timing_start+1300:
             coins_speed_timing = 100
         
         # The coins are moving only if the player is alive.
@@ -47,7 +47,7 @@ class Coins():
 
             
     ''' This function draw the coins and update them to the screen  '''
-    def draw(self, screen):
+    def draw(self, screen, score_timing_start):
         for coin in self.pattern:
             coin.draw(screen)
             coin.update()
@@ -114,16 +114,23 @@ def reset_coin_positions(coins):
     coins.far_right_x = coins.pattern[0].rect.x + far_right_x_reset
 
 
+''' This function change coins speed'''
+def change_coin_speed(coins_list, speed):
+    for coins in coins_list:
+        for coin in coins.pattern:
+            coin.speed = speed
+
+
 ''' This function draw the coins pattern on the screen. '''
-def draw_coins(coins, screen):
+def draw_coins(coins, screen,score_timing_start):
     for coins_pattern in coins:
-        coins_pattern.draw(screen)
+        coins_pattern.draw(screen,score_timing_start)
 
 
 ''' This function update the coins position. '''
-def update_coins_positions(coins, death, score):
+def update_coins_positions(coins, death, score,score_timing_start):
     for coins_pattern in coins:
-        coins_pattern.update(death,score)
+        coins_pattern.update(death,score,score_timing_start)
         
 
 ''' This function collect the coins to the player. '''
