@@ -158,9 +158,13 @@ def game(coins_amount, player, screen, red_fire_boost):
                 speed_boost = 0
                 red_fire_boost.activate = False
                 # map reset speed
-                map.reset(map.image, 4)
+                map.speed=1.2
+                map.speed_increase=0
                 # coin reset speed
-                change_coin_speed(coins, 4)
+                change_coin_speed(coins, 2)
+                # zapper spawning
+                for zapper in zappers:
+                    zapper.reset()
 
                 print("STOP boost madness")
             
@@ -224,7 +228,7 @@ def game(coins_amount, player, screen, red_fire_boost):
 
                 # place zappers algorithm.
                 update_zappers(zappers)
-                zappers_placement(zappers, lasers, player.death, score)
+                zappers_placement(zappers, lasers, player.death, score,score_timing_start)
                 
             # place coins algorithm.
             update_coins_positions(coins, player.death, score,score_timing_start)

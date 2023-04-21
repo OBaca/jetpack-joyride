@@ -119,6 +119,7 @@ def change_coin_speed(coins_list, speed):
     for coins in coins_list:
         for coin in coins.pattern:
             coin.speed = speed
+            coin.increase_speed = 0
 
 
 ''' This function draw the coins pattern on the screen. '''

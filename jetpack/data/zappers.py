@@ -38,7 +38,7 @@ class Zappers(object):
     def reset(self):
         self.speed = 2
         y_spawner = FIX_IMAGE_LIMIT - 40 if self.style == 'vertical' else 140
-        self.rect.x = random.randint(WIDTH, WIDTH+200)
+        self.rect.x = 2000
         self.rect.y = random.randint(FIX_IMAGE_LIMIT, HEIGHT - y_spawner)
 
 
@@ -57,14 +57,14 @@ class Zappers(object):
         self.horizontal_sprite = [_init_asset(asset_name) for asset_name in horizontal_animation_asset]
 
 ''' This function spawn the different zappers on the screen. '''
-def zappers_placement(zappers, lasers, death, score):
+def zappers_placement(zappers, lasers, death, score,score_timing_start):
     position = 'x' 
     RESET_Y_POSITION = {'top': 10, 'mid-top': 150, 'mid-bottom': 300, 'bottom': 450}
     # setting the zappers speed difficulty
-    zappers_speed_timing = 50
-    if score >= 300:
+    zappers_speed_timing = score_timing_start+50
+    if score >=  score_timing_start+300:
         zappers_speed_timing = 80
-    if score >= 1300:
+    if score >= score_timing_start+1300:
         zappers_speed_timing = 100
 
     # small vertical and horizontal zappers that are spawned together.
