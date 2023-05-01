@@ -142,56 +142,22 @@ def game(coins_amount, player, screen, red_fire_boost):
         # game logic
         else:
             
-
-# ###################################################
-            # TEST TEST TEST TEST
-
             # Show boost list on the screen
             speed_boost = show_boost_list(screen, red_fire_boost, score) #need to add blue boost aswell
 
-            # Set a stop point when the boost need to be DEactivated
-            if red_fire_boost.activate and score == 240:
-                # make bright light
-                pass
-
+            # deactivate speed up boost
             if red_fire_boost.activate and score == 250:
                 speed_boost = 0
-                red_fire_boost.activate = False
-                # map reset speed
-                map.speed=1.2
-                map.speed_increase=0
-                # coin reset speed
-                change_coin_speed(coins, 2)
-                # zapper spawning
-                for zapper in zappers:
-                    zapper.reset()
+                deactivate_boost(red_fire_boost, map, coins, zappers)
 
-                print("STOP boost madness")
-            
-
-
-            # Set new timer for each obstacle, depend on the type of the boost.
-            # speed up activated
+            # speed up activated boost
             if speed_boost:
                 if red_fire_boost.activate:
                     score_timing_start = 250
-
-                # speed the map
-                map.speed = 8
-                # speed the coins
-                change_coin_speed(coins, 8)
+                activate_boost( map, coins, lasers, missiles, score_timing_start)
                 # speed the score
                 score_speed+=0.5
-                
 
-                for laser in lasers:
-                    laser.laser_timing = score_timing_start + 170
-                for missile in missiles:
-                    missile.missile_timing = score_timing_start + 70
-
-
-
-# ######################################################
 
 
             # start of map movement.
@@ -239,6 +205,7 @@ def game(coins_amount, player, screen, red_fire_boost):
             # show texts on the screen.
             if player.death:
                 show_game_over_text(screen)
+                
             show_score(screen, score)
             high_score = update_high_score(high_score, score)
             show_high_score(screen, high_score)

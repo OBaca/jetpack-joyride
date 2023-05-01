@@ -69,18 +69,19 @@ def main_menu():
 
 
 
-
-        # TEST TEST TEST TEST TEST TEST
         elif red_fire_boost_button.draw_button(SCREEN, 'red-fire'):
             if click:
                 coins_amount = boost_menu(red_fire_boost, SCREEN, coins_amount)
                 update_coins(coins_amount)
                 
+
+        '''
+        # incase I would like to add another speed boost.
         elif blue_fire_boost_button.draw_button(SCREEN, 'blue-fire'):
             if click:
                 coins_amount = boost_menu(blue_fire_boost, SCREEN, coins_amount)
                 update_coins(coins_amount)
-        
+        '''
 
 
 
@@ -106,10 +107,12 @@ def main_menu():
             # red boost price and amount
         show_coins(SCREEN, red_fire_boost.price, 20, 370, False) 
         show_text(SCREEN, red_fire_boost.amount, 12, 202, (255,255,255))
+
+        '''
             # blue boost price and amount
         show_coins(SCREEN, blue_fire_boost.price, 100, 370, False)
         show_text(SCREEN, blue_fire_boost.amount, 92, 202, (255,255,255))
-
+        '''
 
         clock.tick(FPS)
         pygame.display.update()
