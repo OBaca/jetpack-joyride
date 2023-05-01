@@ -5,18 +5,18 @@ BG_ANIMATION = [init_animation('map', i) for i in range(1,12)]
 class Map():
     ''' This class represent the map of the game. '''
     def __init__(self, background_image):
-        self.reset(background_image)
+        self.reset(background_image,1.2)
 
 
     ''' This function reset all the variables of the class Map'''
-    def reset(self, background_image):
+    def reset(self, background_image,speed):
         self.image = background_image
         self.image2 = background_image
         self.image_indx = 0
         self.image_indx2 = 1
         self.imageX = 0
         self.imageX2 = self.image.get_width()
-        self.speed = 1.2
+        self.speed = speed
         self.speed_increase = 0
         self.set_map_sprite(BG_ANIMATION)
 

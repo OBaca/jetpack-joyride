@@ -10,6 +10,7 @@ from data.coins import *
 from data.zappers import *
 from data.manage_files import *
 from data.manage_text import *
+from data.boost import *
 
 
 ''' This function returns the image by the type value that given. '''
@@ -24,7 +25,7 @@ def get_player_image_game(type):
 
 
 ''' This function manage the game loop. '''
-def game(coins_amount, player, screen):
+def game(coins_amount, player, screen, red_fire_boost):
     # map creation.
     map = Map(GAME_BG)
     # obstacle creations
@@ -61,6 +62,7 @@ def game(coins_amount, player, screen):
     game_startover = True
     run = True
     clock = pygame.time.Clock()
+    click = False
 
     while run:
         # music playback
@@ -78,12 +80,14 @@ def game(coins_amount, player, screen):
             silent_music = False
             death_end_time = 0
             start_time = 0
+            speed_boost = 0
+            score_timing_start=0
 
             # 1. reset lasers positions
             reset_lasers(lasers, score)
 
             # 2. reset map location
-            map.reset(GAME_BG)
+            map.reset(GAME_BG, 1.2)
 
             # 3. reset player location
             player.reset(get_player_image_game(player.type), player.type)
@@ -137,6 +141,25 @@ def game(coins_amount, player, screen):
 
         # game logic
         else:
+            
+            # Show boost list on the screen
+            speed_boost = show_boost_list(screen, red_fire_boost, score) #need to add blue boost aswell
+
+            # deactivate speed up boost
+            if red_fire_boost.activate and score == 250:
+                speed_boost = 0
+                deactivate_boost(red_fire_boost, map, coins, zappers)
+
+            # speed up activated boost
+            if speed_boost:
+                if red_fire_boost.activate:
+                    score_timing_start = 250
+                activate_boost( map, coins, lasers, missiles, score_timing_start)
+                # speed the score
+                score_speed+=0.5
+
+
+
             # start of map movement.
             map.update(player.death)
                         
@@ -156,11 +179,13 @@ def game(coins_amount, player, screen):
             
             # draw objects on the screen.
             player.draw(screen)
-            draw_coins(coins, screen)
-            draw_obstacles(zappers,lasers,missiles, screen)
+            draw_coins(coins, screen, score_timing_start)
+
+            if speed_boost == 0:
+                draw_obstacles(zappers,lasers,missiles, screen)
 
             # calling the obstacles only when the player is alive.
-            if player.death == False:
+            if player.death == False and speed_boost == 0:
                 # place lasers algorithm.
                 lasers_placement(score,lasers,silent_music)
 
@@ -169,10 +194,10 @@ def game(coins_amount, player, screen):
 
                 # place zappers algorithm.
                 update_zappers(zappers)
-                zappers_placement(zappers, lasers, player.death, score)
+                zappers_placement(zappers, lasers, player.death, score,score_timing_start)
                 
             # place coins algorithm.
-            update_coins_positions(coins, player.death, score)
+            update_coins_positions(coins, player.death, score,score_timing_start)
 
             # check for collision.
             check_hit_obstacles(player, zappers, lasers, missiles)
@@ -180,11 +205,12 @@ def game(coins_amount, player, screen):
             # show texts on the screen.
             if player.death:
                 show_game_over_text(screen)
+                
             show_score(screen, score)
             high_score = update_high_score(high_score, score)
             show_high_score(screen, high_score)
             current_coin_amount = coin_collect(player, coins, current_coin_amount)
-            show_coins(screen, current_coin_amount, 90)
+            show_coins(screen, current_coin_amount, 10, 90, True)
             
             how_to_play(screen, score)
 

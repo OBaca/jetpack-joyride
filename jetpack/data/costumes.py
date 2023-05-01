@@ -117,6 +117,6 @@ def costumes_menu(player, screen):
             display_message = False
 
         # show the coins the user have.
-        show_coins(screen, coins_amount, 60)
+        show_coins(screen, coins_amount, 10, 60, True)
         clock.tick(FPS)
         pygame.display.update()
