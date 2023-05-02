@@ -89,7 +89,7 @@ class Player(object):
 
     ''' This function is increasing speed to the velocity of the player when the player jetpack is on. '''
     def player_up_velocity(self):
-        self.up_vel += 0.5
+        self.up_vel += 0.1
         return 50*math.sin(0.05*min(self.up_vel, self.max_vel))
     
 
