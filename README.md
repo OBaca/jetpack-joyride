@@ -18,7 +18,7 @@
 
 ## Description
 
-Jetpack Joyride made with python on windows with the code editor VScode as a personal project.
+Introducing "Jetpack Joyride" - a Python project using the pygame library.
 
 [Back To The Top](#Jetpack-Joyride)
 
