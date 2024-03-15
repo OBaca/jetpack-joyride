@@ -19,6 +19,8 @@
 ## Description
 
 Introducing "Jetpack Joyride" - a Python project using the pygame library.
+Short video of the game:
+[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/SMSoJtUTyY4/0.jpg)](https://www.youtube.com/watch?v=SMSoJtUTyY4)
 
 [Back To The Top](#Jetpack-Joyride)
 
